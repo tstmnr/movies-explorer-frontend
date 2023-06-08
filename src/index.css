@@ -1,2 +1,7 @@
-@import url("./vendor/normalize.css");
-@import url("./vendor/fonts/fonts.css");
+@import url("./vendor/normalize.css"); /* подключение normalize */
+@import url("./vendor/fonts/fonts.css"); /* подключение fonts */
+* {
+    outline: .5px red solid;
+}
+@import url("./components/page/page.css"); 
+@import url("./components/container/container.css"); 
