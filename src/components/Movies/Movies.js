@@ -1,9 +1,9 @@
 import './Movies.css';
 
 function Movies() {
-    return (
-        <></>
-    );
-  }
-  
+  return (
+    <></>
+  );
+}
+
 export default Movies;
