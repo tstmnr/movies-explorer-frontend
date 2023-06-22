@@ -1,5 +1,5 @@
 .promo {
-  font-family: 'Inter', Arial, san-serif;
+  font-family: 'Inter', Arial, sans-serif;
   background-color: #DDDEE3;
   background-image: url('../../images/landing-logo.png');
   background-repeat: no-repeat;
@@ -12,7 +12,7 @@
 
 .promo__content {
   margin: 0px 70px;
-  padding: 184px 0 244px;
+  padding: 166px 0 244px;
 }
 
 .promo__title {

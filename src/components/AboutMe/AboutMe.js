@@ -17,21 +17,6 @@ function AboutMe() {
           </div>
           <img className='student__avatar' src={avatar} alt='Фотография студента'></img>
         </div>
-        <h4 className='student__portfolio'>Портфолио</h4>
-        <ul className='student__projects'>
-          <li className='student__project'>
-            <h5 className='student__project-title'>Статичный сайт</h5>
-            <a className='student__project-link' href='https://tstmnr.github.io/russian-travel/index'> </a>
-          </li>
-          <li className='student__project'>
-            <h5 className='student__project-title'>Адаптивный сайт</h5>
-            <a className='student__project-link' href='https://tstmnr.github.io/russian-travel/index'> </a>
-          </li>
-          <li className='student__project'>
-            <h5 className='student__project-title'>Одностраничное приложение</h5>
-            <a className='student__project-link' href='https://tstmnr.github.io/russian-travel/index'> </a>
-          </li>
-        </ul>
       </div>
     </section>
   );
