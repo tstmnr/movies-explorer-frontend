@@ -1,14 +1,14 @@
-import './Movies.css';
+import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import AddMoreCards from '../AddMoreCards/AddMoreCards';
 
-function Movies() {
+function SavedMovies() {
   return (
-    <section className='movies'>
-      <div className='movies__content'>
+    <section className='saved-movies'>
+      <div className='saved-movies__content'>
         <SearchForm />
-        <div className='movies__line'></div>
+        <div className='saved-movies__line'></div>
         <MoviesCardList />
         <AddMoreCards />
       </div>
@@ -16,4 +16,4 @@ function Movies() {
   );
 }
 
-export default Movies;
+export default SavedMovies;

@@ -30,7 +30,7 @@ function Header() {
           </div>
         </header>
       }
-      {location.pathname === '/movies' &&
+      {location.pathname === ('/movies', '/saved-movies') &&
         <header className='header header_background_login'>
           <div className='header__content'>
             <div className='header__wrapper'>
