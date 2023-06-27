@@ -28,17 +28,25 @@
   font-weight: 500;
   border-bottom: 1px solid #000;
   cursor: pointer;
+  transition: opacity .3s ease;
 }
 
 .navtab__nav-item:last-child {
   margin-right: 0px;
 }
 
-.navtab__nav-item_active {
-  text-shadow: 1px 1px 2px #000;
+.navtab__nav-item:hover {
+  opacity: .7;
 }
 
-.navtab__nav-link {
-  text-decoration: none;
-  color: #000;
+@media screen and (max-width: 512px) {
+  .navtab__content {
+    margin: 0 30px;
+    padding: 24px 0;
+  }
+
+  .navtab__nav-item {
+    margin-right: 24px;
+    font-size: 11px;
+  }
 }

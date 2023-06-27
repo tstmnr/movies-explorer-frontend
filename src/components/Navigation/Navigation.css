@@ -11,9 +11,6 @@
 }
 
 .navigation__links {
-  font-weight: 500;
-  font-size: 13px;
-  line-height: 18px;
   list-style: none;
   margin-right: 16px;
 }
@@ -25,4 +22,16 @@
 .navigation__link {
   text-decoration: none;
   color: #000;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  transition: opacity .3s ease;
+}
+
+.navigation__link:hover {
+  opacity: .7;
+}
+
+.navigation__link_active {
+  font-weight: 500;
 }

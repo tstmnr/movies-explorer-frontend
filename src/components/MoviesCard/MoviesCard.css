@@ -27,11 +27,7 @@
 }
 
 .movies-card__button {
-  width: 24px;
-  height: 24px;
-  background: #F4F4F4;
-  border: none;
-  border-radius: 36px;
+
 }
 
 .movies-card__line {
@@ -46,4 +42,21 @@
   font-size: 11px;
   line-height: 13px;
   color: #A0A0A0;
+}
+
+.movies-card__like {
+  width: 24px;
+  height: 24px;
+  background: #f4f4f4;
+  border: none;
+  border-radius: 36px;
+  background-image: url('../../images/like.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 8.5px;
+  cursor: pointer;
+}
+
+.movies-card__like_active {
+  background-image: url('../../images/like-active.svg');
 }

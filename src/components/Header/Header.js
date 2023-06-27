@@ -11,37 +11,37 @@ function Header() {
 
   return (
     <>
-      {location.pathname === '/' &&
-        <header className='header'>
-          <div className='header__content'>
-            <div className='header__wrapper'>
+      {location.pathname === '/'
+      ?
+      <header className='header'>
+        <div className='header__content'>
+          <div className='header__wrapper'>
+            <Logo />
+            <ul className='header__items'>
+              <li className='header__item'>
+                <Link className='header__register-link' to='/signup'>Регистрация</Link>
+              </li>
+              <li className='header__item'>
+                <Link className='header__login-link' to='/signin'>
+                  <button className='header__button' type='button'>Войти</button>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      :
+      <header className='header header_background_login'>
+        <div className='header__content'>
+          <div className='header__wrapper'>
+            <div className='header__navigation'>
               <Logo />
-              <ul className='header__items'>
-                <li className='header__item'>
-                  <Link className='header__register-link' to='/signup'>Регистрация</Link>
-                </li>
-                <li className='header__item'>
-                  <Link className='header__login-link' to='/signin'>
-                    <button className='header__button' type='button'>Войти</button>
-                  </Link>
-                </li>
-              </ul>
+              <Navigation />
             </div>
+            <Account />
           </div>
-        </header>
-      }
-      {location.pathname === ('/movies', '/saved-movies') &&
-        <header className='header header_background_login'>
-          <div className='header__content'>
-            <div className='header__wrapper'>
-              <div className='header__navigation'>
-                <Logo />
-                <Navigation />
-              </div>
-              <Account />
-            </div>
-          </div>
-        </header>
+        </div>
+      </header>
       }
     </>
   );

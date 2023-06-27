@@ -51,10 +51,20 @@
 .header__register-link {
   text-decoration: none;
   color: #000;
+  transition: opacity .3s ease;
+}
+
+.header__register-link:hover {
+  opacity: .7;
 }
 
 .header__login-link {
   text-decoration: none;
+  transition: opacity .3s ease;
+}
+
+.header__login-link:hover {
+  opacity: .8;
 }
 
 .header__button {
@@ -66,4 +76,26 @@
   padding: 0;
   cursor: pointer;
   border-radius: 3px;
+}
+
+@media screen and (max-width: 1024px) {
+  .header__content {
+    margin: 0px 30px;
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .header__content {
+    margin: 0px 14px;
+  }
+
+  .header__item {
+    margin-right: 14px;
+    font-size: 10px;
+  }
+
+  .header__button {
+    width: 54px;
+    height: 26px;
+  }
 }

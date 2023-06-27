@@ -64,6 +64,12 @@
   height: 45px;
   margin-top: 71px;
   padding: 0;
+  transition: opacity .3s ease;
+  cursor: pointer;
+}
+
+.register__button:hover {
+  opacity: .8;
 }
 
 .register__info {
@@ -78,4 +84,9 @@
 .register__signin {
   color: #3456F3;
   text-decoration: none;
+  transition: opacity .3s ease;
+}
+
+.register__signin:hover {
+  opacity: .7;
 }

@@ -21,7 +21,7 @@
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  margin: 40px 0 0;
+  margin: 37px 0 0;
 }
 
 .login__form {
@@ -64,6 +64,12 @@
   height: 45px;
   margin-top: 159px;
   padding: 0;
+  transition: opacity .3s ease;
+  cursor: pointer;
+}
+
+.login__button:hover {
+  opacity: .8;
 }
 
 .login__info {
@@ -78,4 +84,15 @@
 .login__signup {
   color: #3456F3;
   text-decoration: none;
+  transition: opacity .3s ease;
+}
+
+.login__signup:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 512px) {
+  .login__content {
+    margin: 0 30px;
+  }
 }

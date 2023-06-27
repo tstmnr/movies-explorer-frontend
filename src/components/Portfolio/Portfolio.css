@@ -68,4 +68,49 @@
   background-position: center;
   width: 29px;
   height: 50px;
+  transition: opacity .3s ease;
+}
+
+.portfolio__link:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 1024px) {
+  .portfolio__content {
+    margin: 0 50px 124px;
+  }
+
+  .portfolio__project {
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: -1.12px
+  }
+}
+
+@media screen and (max-width: 512px) {
+  .portfolio__content {
+    margin: 0 14px 105px;
+  }
+
+  .portfolio__title {
+    font-size: 14px;
+    line-height: 20px;
+    margin: 0 0 40px;
+  }
+
+  .portfolio__item::after {
+    top: 47px;
+  }
+
+  .portfolio__project {
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: -0.72px;
+  }
+
+  .portfolio__link {
+    width: 18px;
+    height: 28px;
+    background-size: 12px 12px;
+  }
 }
