@@ -5,45 +5,45 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import Account from '../Account/Account';
 
-function Header() {
+function Header({ onHamburgerClick, isOpenHamburgerMenu }) {
 
   const location = useLocation();
 
   return (
-    <>
-      {location.pathname === '/'
-      ?
-      <header className='header'>
-        <div className='header__content'>
-          <div className='header__wrapper'>
-            <Logo />
-            <ul className='header__items'>
-              <li className='header__item'>
-                <Link className='header__register-link' to='/signup'>Регистрация</Link>
-              </li>
-              <li className='header__item'>
-                <Link className='header__login-link' to='/signin'>
-                  <button className='header__button' type='button'>Войти</button>
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </header>
-      :
-      <header className='header header_background_login'>
-        <div className='header__content'>
-          <div className='header__wrapper'>
-            <div className='header__navigation'>
-              <Logo />
-              <Navigation />
-            </div>
+    <header className={`header ${location.pathname !== '/' ? 'header_background_login' : ''}`}>
+      <div className='header__content'>
+        {location.pathname !== '/'
+        ?
+        <>
+          <Logo />
+          <div className='header__navigation'>
+            <Navigation />
             <Account />
           </div>
-        </div>
-      </header>
-      }
-    </>
+          <button
+            className='header__button-menu'
+            type='button'
+            onClick={onHamburgerClick}
+            aria-label='Меню сайта'
+          ></button>
+        </>
+        :
+        <>
+          <Logo />
+          <ul className='header__items'>
+            <li className='header__item'>
+              <Link className='header__register-link' to='/signup'>Регистрация</Link>
+            </li>
+            <li className='header__item'>
+              <Link className='header__login-link' to='/signin'>
+                <button className='header__button' type='button'>Войти</button>
+              </Link>
+            </li>
+          </ul>
+        </>
+        }
+      </div>
+    </header>
   );
 }
 

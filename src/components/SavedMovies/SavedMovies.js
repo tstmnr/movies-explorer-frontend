@@ -1,7 +1,6 @@
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import AddMoreCards from '../AddMoreCards/AddMoreCards';
 
 function SavedMovies() {
   return (
@@ -10,7 +9,8 @@ function SavedMovies() {
         <SearchForm />
         <div className='saved-movies__line'></div>
         <MoviesCardList />
-        <AddMoreCards />
+        <div className='saved-movies__gap'>
+        </div>
       </div>
     </section>
   );

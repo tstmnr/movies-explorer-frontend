@@ -38,12 +38,13 @@
 }
 
 .techs__description {
-  margin: 26px 0 100px;
+  margin: 26px auto 100px;
+  width: 460px;
   text-align: center;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  letter-spacing: -.6px
+  letter-spacing: -.6px;
 }
 
 .techs__items {
@@ -87,9 +88,11 @@
   }
 
   .techs__description {
-    margin: 22px 0 82px;
+    margin: 22px auto 82px;
     font-size: 12px;
     line-height: 18px;
+    width: 430px;
+    letter-spacing: -.5px;
   }
 
   .techs__items {

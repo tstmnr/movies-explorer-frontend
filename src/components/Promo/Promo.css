@@ -29,12 +29,12 @@
 
 @media screen and (max-width: 1024px) {
   .promo {
-    background-position: center 223px;
+    background-position: center 227px;
   }
 
   .promo__content {
     margin: 0px 30px;
-    padding: 305px 0 362px;
+    padding: 309px 0 362px;
   }
 }
 

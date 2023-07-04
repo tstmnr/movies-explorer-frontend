@@ -23,7 +23,7 @@
 
 .not-found__error {
   font-size: 140px;
-  line-height: 169px;
+  line-height: 179px;
 }
 
 .not-found__link {
@@ -36,4 +36,15 @@
   border: none;
   background-color: #fff;
   cursor: pointer;
+}
+
+@media screen and (max-width:512px) {
+  .not-found__title {
+    font-size: 12px;
+  }
+
+  .not-found__error {
+    font-size: 80px;
+    line-height: 110px;
+  }
 }

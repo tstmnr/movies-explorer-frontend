@@ -77,7 +77,7 @@
 
 @media screen and (max-width: 1024px) {
   .portfolio__content {
-    margin: 0 50px 124px;
+    margin: 0 50px 90px;
   }
 
   .portfolio__project {
@@ -89,7 +89,7 @@
 
 @media screen and (max-width: 512px) {
   .portfolio__content {
-    margin: 0 14px 105px;
+    margin: 0 14px 70px;
   }
 
   .portfolio__title {

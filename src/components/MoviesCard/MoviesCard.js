@@ -1,28 +1,21 @@
-import { useContext}  from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { React, useState } from 'react';
+import { useLocation} from 'react-router-dom';
 
 import './MoviesCard.css';
 import cardImage from '../../images/card-image.png';
 
-function MoviesCard({ card, onCardLike, onCardDelete }) {
+function MoviesCard() {
 
-  const currentUser = useContext(CurrentUserContext);
-/*
-  const isOwn = card.owner === currentUser._id;
-  const isLiked = card.likes.some((item) => item === currentUser._id);
-  const cardLikeButtonClassName = (`card__favourites ${isLiked && 'card__favourities_active'}`);
+  const location = useLocation();
 
-  function handleClick() {
-    onCardClick(card);
+  const [isLiked, setIsLiked] = useState(false);
+  const movieCardLikeButtonClassName = (`movies-card__like ${isLiked && 'movies-card__like_active'}`);
+
+  const handleToggleLike = () => setIsLiked(!isLiked);
+
+  function handleDeleteCard(e) {
+    console.log(e.target.closest('.movies-card').remove());
   }
-
-  function handleLikeClick() {
-    onCardLike(card);
-  }
-
-  function handleDeleteClick() {
-    onCardDelete(card);
-  }*/
 
   return (
     <li className='movies-card'>
@@ -30,11 +23,17 @@ function MoviesCard({ card, onCardLike, onCardDelete }) {
       <div className='movies-card__info'>
         <div className='movies-card__wrapper'>
           <h2 className='movies-card__title'>33 слова о дизайне</h2>
-          <button className='movies-card__like' type='button' aria-label='Добавить в сохраненные фильмы'>
+          {location.pathname === '/movies'
+          ?
+          <button className={movieCardLikeButtonClassName} onClick={handleToggleLike} type='button' aria-label='Добавить в сохраненные фильмы'>
           </button>
+          :
+          <button className='movies-card__button-delete' onClick={handleDeleteCard} type='button' aria-label='Удалить фильм из сохраненных'>
+          </button>
+          }
         </div>
         <div className='movies-card__line'></div>
-        <small className='movies-card__duration'>1ч42м</small>
+        <p className='movies-card__duration'>1ч42м</p>
       </div>
     </li>
   );

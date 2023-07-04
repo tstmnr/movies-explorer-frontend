@@ -14,19 +14,17 @@
 .header__content {
   margin: 0px 70px;
   padding: 18px 0;
-}
-
-.header__wrapper {
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
 
 .header__navigation {
+  width: 100%;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  margin-left: 44px;
+  justify-content: space-between;
 }
 
 .header__items {
@@ -39,9 +37,9 @@
 
 .header__item {
   list-style: none;
-  margin-right: 30px;
   font-size: 12px;
   line-height: 16px;
+  margin-right: 30px;
 }
 
 .header__item:last-child {
@@ -78,15 +76,50 @@
   border-radius: 3px;
 }
 
+.header__button-menu {
+  display: none;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  background-image: url('../../images/hamburger-button.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: none;
+  cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.header__button-menu:hover {
+  opacity: .8;
+}
+
 @media screen and (max-width: 1024px) {
   .header__content {
     margin: 0px 30px;
   }
 }
 
+@media screen and (max-width: 768px) {
+  .header__navigation {
+    display: none;
+  }
+
+  .header__content {
+    justify-content: space-between;
+    padding: 15px 0;
+  }
+
+  .header__button-menu {
+    display: block;
+    margin-right: 8px;
+  }
+}
+
 @media screen and (max-width: 512px) {
   .header__content {
-    margin: 0px 14px;
+    padding: 18px 0;
+    margin: 0px 14px 0px 14px;
   }
 
   .header__item {
@@ -97,5 +130,10 @@
   .header__button {
     width: 54px;
     height: 26px;
+  }
+
+  .header__button-menu {
+    width: 22px;
+    height: 39px;
   }
 }
