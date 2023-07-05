@@ -1,4 +1,5 @@
 .saved-movies {
+  flex: 1;
   font-family: 'Inter', Arial, sans-serif;
   display: flex;
   margin: 0 auto;
@@ -9,7 +10,7 @@
 
 .saved-movies__content {
   width: 100%;
-  margin: 0 70px 231px;
+  margin: 0 70px 10px;
 }
 
 .saved-movies__line {
@@ -19,17 +20,9 @@
   margin: 0;
 }
 
-.saved-movies__gap {
-  margin-top: 10px;
-}
-
 @media screen and (max-width: 1024px) {
   .saved-movies__content {
     margin: 0 30px;
-  }
-
-  .saved-movies__gap {
-    margin-top: 150px;
   }
 }
 

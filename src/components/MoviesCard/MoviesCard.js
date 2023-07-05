@@ -22,7 +22,7 @@ function MoviesCard() {
       <img className='movies-card__image' alt={`Заставка фильма 33 слова о дизайне`} src={cardImage} />
       <div className='movies-card__info'>
         <div className='movies-card__wrapper'>
-          <h2 className='movies-card__title'>33 слова о дизайне</h2>
+          <h2 className='movies-card__title'>33 коровы </h2>
           {location.pathname === '/movies'
           ?
           <button className={movieCardLikeButtonClassName} onClick={handleToggleLike} type='button' aria-label='Добавить в сохраненные фильмы'>

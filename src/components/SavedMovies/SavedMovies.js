@@ -4,15 +4,13 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function SavedMovies() {
   return (
-    <section className='saved-movies'>
+    <main className='saved-movies'>
       <div className='saved-movies__content'>
         <SearchForm />
         <div className='saved-movies__line'></div>
         <MoviesCardList />
-        <div className='saved-movies__gap'>
-        </div>
       </div>
-    </section>
+    </main>
   );
 }
 

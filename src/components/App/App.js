@@ -2,6 +2,7 @@ import { React, useState, useEffect }from 'react';
 import { Routes, Route, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
+import './App.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
@@ -67,53 +68,55 @@ function App() {
 
 
   return (
-    <CurrentUserContext.Provider value={currentUser} >
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <Header loggedIn={loggedIn} onHamburgerClick={onHamburgerClick} isOpenHamburgerMenu={isOpenHamburgerMenu} />
-              <Outlet />
-              {location.pathname !== '/profile' && <Footer />}
-            </>
-          }
-        >
+    <div className='page'>
+      <CurrentUserContext.Provider value={currentUser} >
+        <Routes>
           <Route
-            index
+            path='/'
             element={
-              <Main />
+              <>
+                <Header loggedIn={loggedIn} onHamburgerClick={onHamburgerClick} isOpenHamburgerMenu={isOpenHamburgerMenu} />
+                <Outlet />
+                {location.pathname !== '/profile' && <Footer />}
+              </>
             }
-          />
-          <Route
-            path='movies'
-            element={
-              <Movies />
-            }
-          />
-          <Route
-            path='saved-movies'
-            element={
-              <SavedMovies />
-            }
-          />
-          <Route
-            path='profile'
-            element={
-              <Profile handleLogout={handleLogout} />
-            }
-          />
-        </Route>
-        <Route path='/signin' element={<Login handleLogin={handleLogin} />} />
-        <Route path='/signup' element={<Register handleRegister={handleRegister} />} />
-        <Route path='*' element={<PageNotFound />} />
-      </Routes>
-      <HamburgerMenu
-        isHamburgerMenu={true}
-        isOpenHamburgerMenu={isOpenHamburgerMenu}
-        onClose={handleCloseHamburgerMenu}
-      />
-    </CurrentUserContext.Provider>
+          >
+            <Route
+              index
+              element={
+                <Main />
+              }
+            />
+            <Route
+              path='movies'
+              element={
+                <Movies />
+              }
+            />
+            <Route
+              path='saved-movies'
+              element={
+                <SavedMovies />
+              }
+            />
+            <Route
+              path='profile'
+              element={
+                <Profile handleLogout={handleLogout} />
+              }
+            />
+          </Route>
+          <Route path='/signin' element={<Login handleLogin={handleLogin} />} />
+          <Route path='/signup' element={<Register handleRegister={handleRegister} />} />
+          <Route path='*' element={<PageNotFound />} />
+        </Routes>
+        <HamburgerMenu
+          isHamburgerMenu={true}
+          isOpenHamburgerMenu={isOpenHamburgerMenu}
+          onClose={handleCloseHamburgerMenu}
+        />
+      </CurrentUserContext.Provider>
+    </div>
   );
 }
 

@@ -9,10 +9,7 @@ function SearchForm() {
       <input className='search-form__input' type='text' name='title' placeholder='Фильм' />
       <button className='search-form__button' type='submit'></button>
       <div className='search-form__line'></div>
-      <div className='search-form__wrapper'>
-        <FilterCheckbox />
-        <p className='search-form__filter-name'>Короткометражки</p>
-      </div>
+      <FilterCheckbox />
     </form>
   );
 }

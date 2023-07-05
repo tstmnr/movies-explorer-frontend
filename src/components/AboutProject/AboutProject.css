@@ -3,7 +3,6 @@
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
-  max-width: 1280px;
   margin: 0 auto;
   box-sizing: border-box;
   width: 100%;
@@ -141,20 +140,20 @@
     grid-gap: 17px;
   }
 
-  .grid-box1 {
+  .about__description-title_type_stage {
     grid-row: 1;
   }
 
-  .grid-box2 {
+  .about__description-title_type_time {
     grid-row: 3;
     margin-top: 39px;
   }
 
-  .grid-box3 {
+  .about__description-title_type_work {
     grid-row: 2;
   }
 
-  .grid-box4 {
+  .about__description-title_type_deadline {
     grid-row: 4;
   }
 

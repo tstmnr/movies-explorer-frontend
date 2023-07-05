@@ -1,14 +1,21 @@
 .register {
+  font-family: 'Inter', Arial, sans-serif;
+  max-width: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-family: 'Inter', Arial, sans-serif;
+  box-sizing: border-box;
+  flex: 1;
 }
 
 .register__content {
-  margin: 70px 0;
+  padding: 70px 30px 75px;
   max-width: 396px;
   width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .register__title {

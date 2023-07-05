@@ -1,13 +1,15 @@
 .filter-checkbox {
-  display: inline-block;
+  display: inline-flex;
   position: relative;
   max-width: 36px;
   width: 100%;
   height: 20px;
+  align-items: center;
   font-family: 'Inter', Arial, sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: 13px;
   line-height: 18px;
+  gap: 49px;
 }
 
 .filter-checkbox__input {
@@ -49,4 +51,21 @@
 .filter-checkbox__input:checked + .filter-checkbox__slider::before {
   background-color: #fff;
   transform: translateX(16px);
+}
+
+@media screen and (max-width: 768px) {
+  .filter-checkbox {
+    gap: 52px;
+  }
+}
+
+@media screen and (max-width: 612px) {
+  .filter-checkbox {
+    position: absolute;
+    font-size: 11px;
+    left: 50%;
+    top: 272px;
+    transform: translateX(-204%);
+    gap: 50px;
+  }
 }

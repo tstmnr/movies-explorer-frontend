@@ -9,6 +9,7 @@ function FilterCheckbox() {
         type='checkbox'
       />
       <span className='filter-checkbox__slider'></span>
+      Короткометражки
     </label>
   );
 }

@@ -44,8 +44,8 @@
 }
 
 .movies-card__like {
-  width: 24px;
-  height: 24px;
+  min-width: 24px;
+  min-height: 24px;
   border: none;
   border-radius: 36px;
   background-image: url('../../images/button-like.svg');

@@ -45,7 +45,7 @@
   }
 
   .navigation__links:last-child {
-    margin: 0 0 250px;
+    margin: 0;
   }
 
   .navigation__link {

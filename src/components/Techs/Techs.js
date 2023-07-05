@@ -10,25 +10,25 @@ function Techs({ techsRef }) {
           <p className='techs__description'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
           <ul className='techs__items'>
             <li className='techs__item'>
-              <div className='techs__technology'>HTML</div>
+              HTML
             </li>
             <li className='techs__item'>
-              <div className='techs__technology'>CSS</div>
+              CSS
             </li>
             <li className='techs__item'>
-              <div className='techs__technology'>JS</div>
+              JS
             </li>
             <li className='techs__item'>
-              <div className='techs__technology'>React</div>
+              React
             </li>
             <li className='techs__item'>
-              <div className='techs__technology'>Git</div>
+              Git
             </li>
             <li className='techs__item'>
-              <div className='techs__technology'>Express.js</div>
+              Express.js
             </li>
             <li className='techs__item'>
-              <div className='techs__technology'>mongoDB</div>
+              mongoDB
             </li>
           </ul>
       </div>

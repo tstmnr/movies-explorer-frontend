@@ -22,7 +22,7 @@ function Main() {
   }
 
   return (
-    <>
+    <main className='main'>
       <Promo />
       <NavTab
         focusOnRef={focusOnRef}
@@ -40,7 +40,7 @@ function Main() {
         studentRef={studentRef}
       />
       <Portfolio />
-    </>
+    </main>
   );
 }
 
