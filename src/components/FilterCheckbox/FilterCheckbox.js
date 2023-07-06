@@ -7,6 +7,7 @@ function FilterCheckbox() {
         className='filter-checkbox__input'
         name='slider'
         type='checkbox'
+        placeholder='Чекбокс'
       />
       <span className='filter-checkbox__slider'></span>
       Короткометражки

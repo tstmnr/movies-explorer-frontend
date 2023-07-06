@@ -19,6 +19,7 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
+  const [isEditable, setIsEditable] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -56,6 +57,20 @@ function App() {
   function handleLogout() {
     //отправка запроса на затирку куков
     setLoggedIn(false);
+  }
+
+  function handleEditProfile() {
+    setIsEditable(!isEditable);
+  }
+
+  function handleChangeProfileData(e, userData) {
+    e.preventDefault();
+    //отправка запроса на изменение данных пользователя
+    setCurrentUser({
+      name: userData.name,
+      email: userData.email
+    });
+    setIsEditable(!isEditable);
   }
 
   function onHamburgerClick() {
@@ -102,7 +117,7 @@ function App() {
             <Route
               path='profile'
               element={
-                <Profile handleLogout={handleLogout} />
+                <Profile isEditable={isEditable} handleLogout={handleLogout} handleEditProfile={handleEditProfile} handleChangeProfileData={handleChangeProfileData} />
               }
             />
           </Route>

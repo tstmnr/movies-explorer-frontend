@@ -38,6 +38,7 @@ function Login({ handleLogin }) {
             name='email'
             value={changeEmail || ''}
             onChange={handleChangeEmail}
+            placeholder='E-mail'
             />
           </label>
           <label className='login__label'>
@@ -48,6 +49,7 @@ function Login({ handleLogin }) {
               name='password'
               value={changePassword || ''}
               onChange={handleChangePassword}
+              placeholder='Пароль'
             />
           </label>
           <button className='login__button' type='submit'>Войти</button>

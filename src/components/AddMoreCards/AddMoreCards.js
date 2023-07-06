@@ -2,7 +2,7 @@ import './AddMoreCards.css';
 
 function AddMoreCards() {
   return (
-    <button className='add-more'>Ещё</button>
+    <button className='add-more' type='button'>Ещё</button>
   );
 }
 

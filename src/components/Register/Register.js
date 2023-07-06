@@ -56,6 +56,7 @@ function Register({ handleRegister }) {
               name='email'
               value={changeEmail || ''}
               onChange={handleChangeEmail}
+              placeholder='E-mail'
             />
           </label>
           <label className='register__label'>
@@ -67,6 +68,7 @@ function Register({ handleRegister }) {
               name='password'
               value={changePassword || ''}
               onChange={handleChangePassword}
+              placeholder='Пароль'
             />
           </label>
           <button className='register__button' type='submit'>Зарегистрироваться</button>
