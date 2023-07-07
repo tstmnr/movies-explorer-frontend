@@ -25,33 +25,36 @@ function Login({ handleLogin }) {
   }
 
   return (
-    <section className='login'>
+    <div className='login'>
       <div className='login__content'>
         <Logo />
-        <h2 className='login__title'>Рады видеть!</h2>
+        <h1 className='login__title'>Рады видеть!</h1>
         <form className='login__form' onSubmit={handleSubmit}>
-          <label className='login__label'>
-            E-mail
-            <input
-            className='login__input'
-            type='email'
-            name='email'
-            value={changeEmail || ''}
-            onChange={handleChangeEmail}
-            placeholder='E-mail'
-            />
-          </label>
-          <label className='login__label'>
-            Пароль
-            <input
+          <div className='login__form-wrapper'>
+            <label className='login__label'>
+              E-mail
+              <input
               className='login__input'
-              type='password'
-              name='password'
-              value={changePassword || ''}
-              onChange={handleChangePassword}
-              placeholder='Пароль'
-            />
-          </label>
+              type='email'
+              name='email'
+              value={changeEmail || ''}
+              onChange={handleChangeEmail}
+              placeholder='E-mail'
+              />
+            </label>
+            <label className='login__label'>
+              Пароль
+              <input
+                className='login__input'
+                type='password'
+                name='password'
+                value={changePassword || ''}
+                onChange={handleChangePassword}
+                placeholder='Пароль'
+              />
+            </label>
+            <p className='login__error'>Что-то пошло не так...</p>
+          </div>
           <button className='login__button' type='submit'>Войти</button>
         </form>
         <p className='login__info'>
@@ -61,7 +64,7 @@ function Login({ handleLogin }) {
           </Link>
         </p>
       </div>
-    </section>
+    </div>
   );
 }
 

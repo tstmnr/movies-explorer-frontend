@@ -38,7 +38,7 @@
 
 .techs__description {
   margin: 26px auto 100px;
-  width: 460px;
+  max-width: 460px;
   text-align: center;
   font-weight: 400;
   font-size: 14px;
@@ -85,7 +85,7 @@
     margin: 22px auto 82px;
     font-size: 12px;
     line-height: 18px;
-    width: 430px;
+    max-width: 430px;
     letter-spacing: -.5px;
   }
 

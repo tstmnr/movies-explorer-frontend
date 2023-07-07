@@ -53,6 +53,11 @@
   background-position: center;
   background-size: cover;
   cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.movies-card__like:hover {
+  opacity: .8;
 }
 
 .movies-card__like_active {
@@ -69,4 +74,9 @@
   background-position: center;
   background-size: cover;
   cursor: pointer;
+  transition: opacity .3s ease;
+}
+
+.movies-card__button-delete:hover {
+  opacity: .8;
 }

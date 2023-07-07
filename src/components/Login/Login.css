@@ -1,35 +1,41 @@
 .login {
   font-family: 'Inter', Arial, sans-serif;
   max-width: 100%;
-  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login__content {
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
-  flex: 1;
-}
-
-.login__content {
-  padding: 70px 30px 75px;
   max-width: 396px;
+  min-height: 482px;
   width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
 }
 
 .login__title {
   font-weight: 500;
   font-size: 24px;
   line-height: 29px;
-  margin: 37px 0 0;
+  margin: 40px 0 0;
 }
 
 .login__form {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 35px;
+  min-height: 385px;
+}
+
+.login__form-wrapper {
+  width: 100%;
 }
 
 .login__label {
@@ -37,14 +43,13 @@
   font-size: 10px;
   line-height: 12px;
   color: #a0a0a0;
-  margin-bottom: 20px;
 }
 
 .login__input {
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
-  margin-top: 10px;
+  margin: 8px 0 16px;
   background: #F4F4F4;
   border-radius: 8px;
   border: none;
@@ -58,6 +63,16 @@
   outline: 2px solid #3456F3;
 }
 
+.login__error {
+  color: #EE3465;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 12px;
+  visibility: hidden;
+  margin: 0;
+  margin-top: -8px;
+}
+
 .login__button {
   font-weight: 500;
   font-size: 14px;
@@ -68,7 +83,6 @@
   background: #3456F3;
   border-radius: 3px;
   height: 45px;
-  margin-top: 159px;
   padding: 0;
   transition: opacity .3s ease;
   cursor: pointer;
@@ -99,11 +113,7 @@
 
 @media screen and (max-width: 512px) {
   .login__content {
-    margin: 0 30px;
-    box-sizing: border-box;
-    padding-top: 56px;
-    display: flex;
-    flex-direction: column;
+    padding: 26px 30px 0;
     align-items: center;
   }
 
@@ -112,13 +122,13 @@
   }
 
   .login__form {
-    margin-top: 80px;
+    margin-top: 76px;
+    min-height: 472px;
   }
 
   .login__button {
     font-size: 12px;
     line-height: 15px;
-    margin-top: 247px;
   }
 
   .login__info {

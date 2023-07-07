@@ -71,7 +71,7 @@ function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProf
                   onChange={handleChangeEmail}
                 />
               </label>
-            </div>
+            </div>2
             {isEditable &&
               <button className='profile__button' type='submit'>{buttonText}</button>
             }

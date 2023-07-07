@@ -34,43 +34,46 @@ function Register({ handleRegister }) {
     <section className='register'>
       <div className='register__content'>
         <Logo />
-        <h2 className='register__title'>Добро пожаловать!</h2>
+        <h1 className='register__title'>Добро пожаловать!</h1>
         <form className='register__form' onSubmit={handleSubmit}>
-          <label className='register__label'>
-            Имя
-            <br />
-            <input
-              className='register__input'
-              type='text'
-              name='username'
-              value={changeName || ''}
-              onChange={handleChangeName}
-            />
-          </label>
-          <label className='register__label'>
-            E-mail
-            <br />
-            <input
-              className='register__input'
-              type='email'
-              name='email'
-              value={changeEmail || ''}
-              onChange={handleChangeEmail}
-              placeholder='E-mail'
-            />
-          </label>
-          <label className='register__label'>
-            Пароль
-            <br />
-            <input
-              className='register__input'
-              type='password'
-              name='password'
-              value={changePassword || ''}
-              onChange={handleChangePassword}
-              placeholder='Пароль'
-            />
-          </label>
+          <div className='register__form-wrapper'>
+            <label className='register__label'>
+              Имя
+              <br />
+              <input
+                className='register__input'
+                type='text'
+                name='username'
+                value={changeName || ''}
+                onChange={handleChangeName}
+                placeholder='Имя'
+              />
+            </label>
+            <label className='register__label'>
+              E-mail
+              <br />
+              <input
+                className='register__input'
+                type='email'
+                name='email'
+                value={changeEmail || ''}
+                onChange={handleChangeEmail}
+                placeholder='E-mail'
+              />
+            </label>
+            <label className='register__label'>
+              Пароль
+              <br />
+              <input
+                className='register__input'
+                type='password'
+                name='password'
+                value={changePassword || ''}
+                onChange={handleChangePassword}
+                placeholder='Пароль'
+              />
+            </label>
+          </div>
           <button className='register__button' type='submit'>Зарегистрироваться</button>
         </form>
         <p className='register__info'>
