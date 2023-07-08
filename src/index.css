@@ -1,0 +1,5 @@
+@import url("./vendor/normalize.css"); /* подключение normalize */
+@import url("./vendor/fonts/fonts.css"); /* подключение fonts */
+/** {
+  outline: .5px red solid;
+}*/
