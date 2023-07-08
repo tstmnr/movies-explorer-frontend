@@ -149,11 +149,11 @@
     margin-top: 39px;
   }
 
-  .about__description-title_type_work {
+  .about__description_type_work {
     grid-row: 2;
   }
 
-  .about__description-title_type_deadline {
+  .about__description_type_deadline {
     grid-row: 4;
   }
 

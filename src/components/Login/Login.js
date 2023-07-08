@@ -1,20 +1,63 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import './Login.css';
 import Logo from '../Logo/Logo';
-import './Login.css'
 
 function Login({ handleLogin }) {
 
   const [changeEmail, setChangeEmail] = useState('');
   const [changePassword, setChangePassword] = useState('');
+  const [emailDirty, setEmailDirty] = useState(false);
+  const [passwordDirty, setPasswordDirty] = useState(false);
+  const [emailError, setEmailError] = useState('Поле "E-mail" должно быть заполнено');
+  const [passwordError, setPasswordError] = useState('Поле "Пароль" должно быть заполнено');
+  const [formValid, setFormValid] = useState(false);
+
+  useEffect(() => {
+    if (emailError || passwordError) {
+      setFormValid(false);
+    } else {
+      setFormValid(true);
+    }
+  }, [emailError, passwordError]);
 
   const handleChangeEmail = (e) => {
     setChangeEmail(e.target.value);
+
+    if (!e.target.value) {
+      return setEmailError('Поле "E-mail" должно быть заполнено');
+    }
+
+    const regExp = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
+    if(!regExp.test(String(e.target.value).toLowerCase())) {
+      setEmailError('Поле "E-mail" некорректно заполнено');
+    } else {
+      setEmailError('');
+    }
   }
 
   const handleChangePassword = (e) => {
     setChangePassword(e.target.value);
+
+    if (!e.target.value) {
+      setPasswordError('Поле "Пароль" должно быть заполнено');
+    } else {
+      setPasswordError('');
+    }
+  }
+
+  const blurHandler = (e) => {
+    switch (e.target.name) {
+      case 'email':
+        setEmailDirty(true)
+        break
+      case 'password':
+        setPasswordDirty(true)
+        break
+      default:
+        break
+    }
   }
 
   const handleSubmit = (e) => {
@@ -25,46 +68,53 @@ function Login({ handleLogin }) {
   }
 
   return (
-    <div className='login'>
+    <section className='login'>
       <div className='login__content'>
-        <Logo />
+        <div className='login__logo'>
+          <Logo />
+        </div>
         <h1 className='login__title'>Рады видеть!</h1>
         <form className='login__form' onSubmit={handleSubmit}>
           <div className='login__form-wrapper'>
             <label className='login__label'>
               E-mail
+              <br />
               <input
-              className='login__input'
-              type='email'
-              name='email'
-              value={changeEmail || ''}
-              onChange={handleChangeEmail}
-              placeholder='E-mail'
+                className={`login__input ${emailError ? 'login__input_error_active' : ''}`}
+                type='text'
+                name='email'
+                value={changeEmail || ''}
+                onChange={handleChangeEmail}
+                placeholder='E-mail'
+                onBlur={(e) => blurHandler(e)}
               />
             </label>
+            <span className={`login__error ${emailDirty && emailError ? 'login__error_active' : ''}`}>{`${emailDirty && emailError ? emailError : ''}`}</span>
             <label className='login__label'>
               Пароль
+              <br />
               <input
-                className='login__input'
+                className={`login__input ${passwordError ? 'login__input_error_active' : ''}`}
                 type='password'
                 name='password'
                 value={changePassword || ''}
                 onChange={handleChangePassword}
                 placeholder='Пароль'
+                onBlur={(e) => blurHandler(e)}
               />
             </label>
-            <p className='login__error'>Что-то пошло не так...</p>
+            <span className={`login__error ${passwordDirty && passwordError ? 'login__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
-          <button className='login__button' type='submit'>Войти</button>
+          <button disabled={!formValid} className='login__button' type='submit'>Войти</button>
         </form>
         <p className='login__info'>
-          Ещё не зарегистрированы?
+          Ещё не зарегистрированы?{' '}
           <Link className='login__signup' to='/signup'>
             Регистрация
           </Link>
         </p>
       </div>
-    </div>
+    </section>
   );
 }
 

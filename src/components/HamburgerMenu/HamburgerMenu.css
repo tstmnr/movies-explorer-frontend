@@ -12,7 +12,7 @@
   z-index: 3;
 }
 
-.hamburger-menu_active {
+.hamburger-menu_visible {
   right: 0;
   transition: .4s;
 }

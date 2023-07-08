@@ -7,7 +7,7 @@ function  HamburgerMenu({ isHamburgerMenu, isOpenHamburgerMenu, onClose }) {
 
   return (
     <Overlay isOpenHamburgerMenu={isOpenHamburgerMenu}>
-      <div className={`hamburger-menu ${isOpenHamburgerMenu ? 'hamburger-menu_active' : ''}`}>
+      <div className={`hamburger-menu ${isOpenHamburgerMenu ? 'hamburger-menu_visible' : ''}`}>
         <div className='hamburger-menu__content'>
           <button
             className='hamburger-menu__button-close'

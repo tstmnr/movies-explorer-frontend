@@ -10,16 +10,18 @@ function Header({ onHamburgerClick, isOpenHamburgerMenu }) {
   const location = useLocation();
 
   return (
-    <header className={`header ${location.pathname !== '/' ? 'header_background_login' : ''}`}>
+    <header className={`header ${location.pathname !== '/' ? 'header_background_white' : ''}`}>
       <div className='header__content'>
         {location.pathname !== '/'
         ?
         <>
           <Logo />
-          <div className='header__navigation'>
-            <Navigation />
-            <Account />
-          </div>
+          {!isOpenHamburgerMenu &&
+            <div className='header__navigation'>
+              <Navigation />
+              <Account />
+            </div>
+          }
           <button
             className='header__button-menu'
             type='button'

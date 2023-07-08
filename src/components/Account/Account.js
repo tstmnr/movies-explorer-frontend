@@ -5,8 +5,9 @@ import './Account.css';
 function Account() {
   return (
     <div className='account'>
-      <span className='account__text'>Аккаунт</span>
       <Link className='account__link' to='/profile'>
+        Аккаунт
+        <div className='account__icon'></div>
       </Link>
     </div>
   );
