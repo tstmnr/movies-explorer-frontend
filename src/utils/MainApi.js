@@ -55,7 +55,7 @@ class MainApi {
 }
 
 const options = {
-  baseUrl: 'https://tstmnr.diploma.nomoredomains.rocks',
+  baseUrl: 'https://api.tstmnr.diploma.nomoredomains.rocks',
   headers: {
     'Content-Type': 'application/json'
   },
