@@ -3,7 +3,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import AddMoreCards from '../AddMoreCards/AddMoreCards';
 
-function Movies() {
+function Movies({ moviesCard }) {
   return (
     <main className='movies'>
       <div className='movies__content'>

@@ -100,7 +100,7 @@ function Register({ handleRegister }) {
               Имя
               <br />
               <input
-                className={`register__input ${nameError ? 'register__input_error_active' : ''}`}
+                className={`register__input ${nameDirty && nameError ? 'register__input_error_active' : ''}`}
                 type='text'
                 name='username'
                 value={changeName || ''}
@@ -114,7 +114,7 @@ function Register({ handleRegister }) {
               E-mail
               <br />
               <input
-                className={`register__input ${emailError ? 'register__input_error_active' : ''}`}
+                className={`register__input ${emailDirty && emailError ? 'register__input_error_active' : ''}`}
                 type='text'
                 name='email'
                 value={changeEmail || ''}
@@ -128,7 +128,7 @@ function Register({ handleRegister }) {
               Пароль
               <br />
               <input
-                className={`register__input ${passwordError ? 'register__input_error_active' : ''}`}
+                className={`register__input ${passwordDirty && passwordError ? 'register__input_error_active' : ''}`}
                 type='password'
                 name='password'
                 value={changePassword || ''}

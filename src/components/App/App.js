@@ -13,6 +13,9 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile'
 import PageNotFound from '../PageNotFound/PageNotFound';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
+import api from '../../utils/MoviesApi';
+import auth from '../../utils/MainApi';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
 
@@ -20,38 +23,55 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
+  const [movieCards, setMovieCards] = useState([]);
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
     loggedIn &&
-    //отправляем запрос на получение данных пользователя и загрузки карточек фильмов
-    setCurrentUser({
-      name: 'Виталий',
-      email: 'pochta@yandex.ru',
-      _id: '12345678976543456788'
-    });
+    Promise.all([auth.getUserInfo(), /*api.getMoviesCards()*/])
+      .then(([userData/*, movieCardsData*/]) => {
+        setCurrentUser({
+          name: userData.name,
+          email: userData.email,
+          _id: userData._id
+        });
+        //setMovieCards(movieCardsData);
+        //console.log(movieCardsData);
+      })
+      .finally(() => {
+        console.log('block finally')
+      })
   }, [loggedIn]);
 
   function handleRegister(e, data) {
     e.preventDefault();
-    //создание запроса на регистрацию, если успешно -переходим на страницу /signin
-    console.log(data);
-    navigate('/signin', { replace: true });
+    auth.registration(data)
+      .then((res) => {
+        console.log(res);
+        navigate('/signin', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function handleLogin(e, data) {
     e.preventDefault();
-    //создание запроса на логин, если успешно - логинимся и переходим на страницу /movies
-    console.log(data);
-    setCurrentUser({
-      name: 'Виталий',
-      email: 'pochta@yandex.ru',
-      _id: '12345678976543456788'
-    });
-    setLoggedIn(true);
-    navigate('/movies', { replace: true });
+    auth.authentication(data)
+      .then((res) => {
+        setCurrentUser({
+          name: res.name,
+          email: res.email,
+          _id: res._id
+        });
+        setLoggedIn(true);
+        navigate('/movies', { replace: true });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function handleLogout() {
