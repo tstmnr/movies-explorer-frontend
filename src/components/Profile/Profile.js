@@ -76,7 +76,7 @@ function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProf
     <main className='profile'>
       <div className='profile__content'>
         <div className='profile__wrapper'>
-          <h1 className='profile__title'>Привет, {currentUser.name || 'Виталий'}!</h1>
+          <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
           <form className='profile__form' onSubmit={submitForm}>
             <div className='profile__form-wrapper'>
               <label className='profile__label'>

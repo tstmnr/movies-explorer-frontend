@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 class MainApi {
   constructor(options) {
     this._baseUrl = options.baseUrl;
@@ -20,6 +21,7 @@ class MainApi {
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
+      credentials: "include",
     });
   }
 
@@ -27,6 +29,7 @@ class MainApi {
     return this._request(`${this._baseUrl}/signup`, {
       method: 'POST',
       headers: this._headers,
+      credentials: "include",
       body: JSON.stringify({
         name: data.name,
         email: data.email,
@@ -39,6 +42,7 @@ class MainApi {
     return this._request(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
+      credentials: "include",
       body: JSON.stringify({
         email: data.email,
         password: data.password
@@ -47,9 +51,10 @@ class MainApi {
   }
 
   logout() {
-    return this._request(`${this._baseUrl}/profile`, {
-      method: 'DELETE',
+    return this._request(`${this._baseUrl}/signout`, {
+      method: 'POST',
       headers: this._headers,
+      credentials: "include",
     })
   }
 }

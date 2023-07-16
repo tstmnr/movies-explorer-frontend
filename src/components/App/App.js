@@ -29,16 +29,17 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(loggedIn);
     loggedIn &&
-    Promise.all([auth.getUserInfo(), /*api.getMoviesCards()*/])
-      .then(([userData/*, movieCardsData*/]) => {
+    Promise.all([auth.getUserInfo(), api.getMoviesCards()])
+      .then(([userData, movieCardsData]) => {
         setCurrentUser({
           name: userData.name,
           email: userData.email,
           _id: userData._id
         });
-        //setMovieCards(movieCardsData);
-        //console.log(movieCardsData);
+        setMovieCards(movieCardsData);
+        console.log(movieCardsData);
       })
       .finally(() => {
         console.log('block finally')
@@ -61,11 +62,7 @@ function App() {
     e.preventDefault();
     auth.authentication(data)
       .then((res) => {
-        setCurrentUser({
-          name: res.name,
-          email: res.email,
-          _id: res._id
-        });
+        console.log(loggedIn);
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
@@ -75,8 +72,14 @@ function App() {
   }
 
   function handleLogout() {
-    //отправка запроса на затирку куков
-    setLoggedIn(false);
+    auth.logout()
+    .then(() => {
+      setLoggedIn(false)
+      navigate('/', { replace: true })
+    })
+    .catch((err) =>
+      console.log(err)
+    )
   }
 
   function handleEditProfile() {
