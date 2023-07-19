@@ -1,14 +1,18 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList() {
+function MoviesCardList({ moviesCard }) {
+
   return (
     <ul className='movies-list'>
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
+      {
+        moviesCard.map((card) => (
+          <MoviesCard
+            key={card.id}
+            card={card}
+          />
+        ))
+      }
     </ul>
   );
 }

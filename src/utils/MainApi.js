@@ -17,12 +17,45 @@ class MainApi {
     return fetch(url, options).then(this._checkResponse)
   }
 
+  /*saveMovie(data) {
+    return this._request(`${this._baseUrl}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      credentials: "include",
+      body: JSON.stringify({
+        country: ,
+        director: ,
+        duration: ,
+        year: ,
+        description: ,
+        image: ,
+        trailerLink: ,
+        thumbnail: ,
+        movieId: ,
+        nameRU: ,
+        nameEN: ,
+      })
+    });
+  }*/
+
   getUserInfo() {
     return this._request(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
       credentials: "include",
     });
+  }
+
+  updateUserData(data) {
+    return this._request(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      credentials: "include",
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+      }),
+    })
   }
 
   registration(data) {

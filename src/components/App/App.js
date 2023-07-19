@@ -1,4 +1,4 @@
-import { React, useState, useEffect }from 'react';
+import { React, useEffect, useState/* useEffect*/ }from 'react';
 import { Routes, Route, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -13,56 +13,54 @@ import Login from '../Login/Login';
 import Profile from '../Profile/Profile'
 import PageNotFound from '../PageNotFound/PageNotFound';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
-import api from '../../utils/MoviesApi';
-import auth from '../../utils/MainApi';
-import Preloader from '../Preloader/Preloader';
+import ProtectedRouterElement from '../ProtectedRouteElement/ProtectedRouteElement';
+import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loginData, setLoginData] = useState({});
   const [currentUser, setCurrentUser] = useState({});
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
-  const [movieCards, setMovieCards] = useState([]);
-
+  const [moviesCard, setMovieCards] = useState([]);
+  const [keyword, setKeyword] = useState('');
+  const [isEmptySearchBar, setIsEmptySearchBar] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(loggedIn);
-    loggedIn &&
-    Promise.all([auth.getUserInfo(), api.getMoviesCards()])
-      .then(([userData, movieCardsData]) => {
-        setCurrentUser({
-          name: userData.name,
-          email: userData.email,
-          _id: userData._id
-        });
-        setMovieCards(movieCardsData);
-        console.log(movieCardsData);
-      })
-      .finally(() => {
-        console.log('block finally')
-      })
-  }, [loggedIn]);
+    setMovieCards(JSON.parse(localStorage.getItem('movies')));
+    setKeyword(localStorage.getItem('keyword'));
+  }, []);
 
   function handleRegister(e, data) {
     e.preventDefault();
-    auth.registration(data)
+    mainApi.registration(data)
       .then((res) => {
-        console.log(res);
-        navigate('/signin', { replace: true });
+        setLoginData({
+          email: data.email,
+          password: data.password,
+        });
+        handleLogin(e, loginData);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoginData({});
       })
   }
 
   function handleLogin(e, data) {
     e.preventDefault();
-    auth.authentication(data)
+    mainApi.authentication(data)
       .then((res) => {
-        console.log(loggedIn);
+        setCurrentUser({//добавление на ВРЕМЯ
+          name: res.name,
+          email: res.email,
+        });
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
@@ -72,7 +70,7 @@ function App() {
   }
 
   function handleLogout() {
-    auth.logout()
+    mainApi.logout()
     .then(() => {
       setLoggedIn(false)
       navigate('/', { replace: true })
@@ -86,14 +84,42 @@ function App() {
     setIsEditable(!isEditable);
   }
 
-  function handleChangeProfileData(e, userData) {
+  function handleChangeProfileData(e, data) {
     e.preventDefault();
-    //отправка запроса на изменение данных пользователя
-    setCurrentUser({
-      name: userData.name,
-      email: userData.email
-    });
-    setIsEditable(!isEditable);
+    mainApi.updateUserData(data)
+      .then((res) => {
+        setCurrentUser({
+          name: res.name,
+          email: res.email
+        });
+        setIsEditable(!isEditable);
+      })
+      .catch((err) =>
+        console.log(err)
+      )
+  }
+
+  function searchMoviesByKeyword(e, keyword) {
+    e.preventDefault();
+    if (keyword) {
+      setIsEmptySearchBar(false);
+      moviesApi.getMoviesCards()
+      .then((res) => {
+        localStorage.setItem('movies', JSON.stringify(searchAndfilterMoviesCards(res, keyword)));
+        setMovieCards(JSON.parse(localStorage.getItem('movies')));
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+    } else {
+      setIsEmptySearchBar(true);
+    }
+  }
+
+  function searchAndfilterMoviesCards(moviesArray, keyword) {
+    return moviesArray.filter((movie) => {
+      return (movie.nameRU + movie.nameEN).includes(keyword)
+    })
   }
 
   function onHamburgerClick() {
@@ -128,25 +154,65 @@ function App() {
             <Route
               path='movies'
               element={
-                <Movies />
+                <ProtectedRouterElement
+                  path='movies'
+                  loggedIn={loggedIn}
+                  component={Movies}
+                  searchMoviesByKeyword={searchMoviesByKeyword}
+                  moviesCard={moviesCard}
+                  keyword={keyword}
+                  setKeyword={setKeyword}
+                  isEmptySearchBar={isEmptySearchBar}
+                />
               }
             />
             <Route
               path='saved-movies'
               element={
-                <SavedMovies />
+                <ProtectedRouterElement
+                  path='saved-movies'
+                  loggedIn={loggedIn}
+                  component={SavedMovies}
+                />
               }
             />
             <Route
               path='profile'
               element={
-                <Profile isEditable={isEditable} handleLogout={handleLogout} handleEditProfile={handleEditProfile} handleChangeProfileData={handleChangeProfileData} />
+                <ProtectedRouterElement
+                  path='profile'
+                  loggedIn={loggedIn}
+                  component={Profile}
+                  isEditable={isEditable}
+                  handleLogout={handleLogout}
+                  handleEditProfile={handleEditProfile}
+                  handleChangeProfileData={handleChangeProfileData}
+                />
               }
             />
           </Route>
-          <Route path='/signin' element={<Login handleLogin={handleLogin} />} />
-          <Route path='/signup' element={<Register handleRegister={handleRegister} />} />
-          <Route path='*' element={<PageNotFound />} />
+          <Route
+            path='/signin'
+            element={
+              <Login
+                handleLogin={handleLogin}
+              />
+            }
+          />
+          <Route
+            path='/signup'
+            element={
+              <Register
+                handleRegister={handleRegister}
+              />
+            }
+          />
+          <Route
+            path='*'
+            element={
+              <PageNotFound />
+            }
+          />
         </Routes>
         <HamburgerMenu
           isHamburgerMenu={true}

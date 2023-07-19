@@ -20,6 +20,12 @@
   margin: 0;
 }
 
+.movies__empty {
+  text-align: center;
+  margin: 100px 0 0;
+  font-size: 14px;
+}
+
 @media screen and (max-width: 1024px) {
   .movies__content {
     margin: 0 30px;
@@ -29,5 +35,9 @@
 @media screen and (max-width: 512px) {
   .movies__content {
     margin: 0 10px;
+  }
+
+  .movies__empty {
+    font-size: 12px;
   }
 }
