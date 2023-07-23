@@ -31,7 +31,7 @@ class MainApi {
         image: card.image,
         trailerLink: card.trailerLink,
         thumbnail: card.thumbnail,
-        movieId: card.movieId,
+        movieId: card.id,
         nameRU: card.nameRU,
         nameEN: card.nameEN,
       })

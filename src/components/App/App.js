@@ -145,6 +145,7 @@ function App() {
 
   function handleCardLike(card) {
     //const isLiked = card.likes.some((item) => item === currentUser._id);
+    console.log(card);
     mainApi.saveMovie(card)
       .then((savedMoviesCards) => {
         localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCards));
