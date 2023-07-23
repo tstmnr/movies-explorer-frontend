@@ -30,7 +30,7 @@ class MainApi {
         description: card.description,
         image: card.image.url,
         trailerLink: card.trailerLink,
-        thumbnail: card.thumbnail,
+        thumbnail: card.image.formats.thumbnail.url,
         movieId: card.id,
         nameRU: card.nameRU,
         nameEN: card.nameEN,
