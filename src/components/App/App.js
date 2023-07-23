@@ -18,7 +18,6 @@ import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 
 function App() {
-
   const [loggedIn, setLoggedIn] = useState(false);
   const [loginData, setLoginData] = useState({});
   const [currentUser, setCurrentUser] = useState({});
@@ -26,14 +25,23 @@ function App() {
   const [isEditable, setIsEditable] = useState(false);
   const [moviesCard, setMovieCards] = useState([]);
   const [keyword, setKeyword] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
   const [isEmptySearchBar, setIsEmptySearchBar] = useState(true);
+  const [isLiked, setIsLiked] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    setMovieCards(JSON.parse(localStorage.getItem('movies')));
-    setKeyword(localStorage.getItem('keyword'));
-  }, []);
+    localStorage.setItem('movies', JSON.stringify(moviesCard));
+    localStorage.setItem('isChecked', isChecked);
+    if (JSON.parse(localStorage.getItem('movies')).length > 0) {
+      setMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('movies'))));
+    }
+  }, [])
+
+  useEffect(() => {
+    setMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('movies'))));
+  }, [isChecked])
 
   function handleRegister(e, data) {
     e.preventDefault();
@@ -57,11 +65,11 @@ function App() {
     e.preventDefault();
     mainApi.authentication(data)
       .then((res) => {
+        setLoggedIn(true);
         setCurrentUser({//добавление на ВРЕМЯ
           name: res.name,
           email: res.email,
         });
-        setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
@@ -72,8 +80,11 @@ function App() {
   function handleLogout() {
     mainApi.logout()
     .then(() => {
-      setLoggedIn(false)
-      navigate('/', { replace: true })
+      setLoggedIn(false);
+      navigate('/', { replace: true });
+      localStorage.clear();
+      setKeyword('');
+      setIsChecked(false);
     })
     .catch((err) =>
       console.log(err)
@@ -99,13 +110,13 @@ function App() {
       )
   }
 
-  function searchMoviesByKeyword(e, keyword) {
+  function searchMoviesByKeyword(e) {
     e.preventDefault();
     if (keyword) {
       setIsEmptySearchBar(false);
       moviesApi.getMoviesCards()
       .then((res) => {
-        localStorage.setItem('movies', JSON.stringify(searchAndfilterMoviesCards(res, keyword)));
+        localStorage.setItem('movies', JSON.stringify(searchAndFilterMoviesCards(res)));
         setMovieCards(JSON.parse(localStorage.getItem('movies')));
       })
       .catch((err) => {
@@ -116,10 +127,12 @@ function App() {
     }
   }
 
-  function searchAndfilterMoviesCards(moviesArray, keyword) {
-    return moviesArray.filter((movie) => {
-      return (movie.nameRU + movie.nameEN).includes(keyword)
-    })
+  function searchAndFilterMoviesCards(moviesArray) {
+    if (isChecked) {
+      return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).includes(keyword) && (movie.duration < 40)));
+    } else {
+      return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).includes(keyword));
+    }
   }
 
   function onHamburgerClick() {
@@ -130,6 +143,14 @@ function App() {
     setIsOpenHamburgerMenu(false);
   }
 
+  function handleCardLike(card) {
+    //const isLiked = card.likes.some((item) => item === currentUser._id);
+    mainApi.saveMovie(card)
+      .then((savedMoviesCards) => {
+        localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCards));
+      })
+      .catch((err) => console.log(err));
+  }
 
   return (
     <div className='page'>
@@ -163,6 +184,9 @@ function App() {
                   keyword={keyword}
                   setKeyword={setKeyword}
                   isEmptySearchBar={isEmptySearchBar}
+                  isChecked={isChecked}
+                  setIsChecked={setIsChecked}
+                  onCardLike={handleCardLike}
                 />
               }
             />

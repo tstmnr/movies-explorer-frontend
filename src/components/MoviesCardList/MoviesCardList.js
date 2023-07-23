@@ -1,7 +1,7 @@
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ moviesCard }) {
+function MoviesCardList({ moviesCard, onCardLike }) {
 
   return (
     <ul className='movies-list'>
@@ -10,6 +10,7 @@ function MoviesCardList({ moviesCard }) {
           <MoviesCard
             key={card.id}
             card={card}
+            onCardLike={onCardLike}
           />
         ))
       }

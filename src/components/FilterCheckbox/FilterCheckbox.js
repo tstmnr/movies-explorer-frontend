@@ -1,6 +1,12 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox() {
+function FilterCheckbox({ isChecked, setIsChecked }) {
+
+  function handleChangeCheckbox() {
+    setIsChecked(!isChecked);
+    localStorage.setItem('isChecked', isChecked);
+  }
+
   return (
     <label className='filter-checkbox'>
       <input
@@ -8,6 +14,8 @@ function FilterCheckbox() {
         name='slider'
         type='checkbox'
         placeholder='Чекбокс'
+        checked={isChecked}
+        onChange={handleChangeCheckbox}
       />
       <span className='filter-checkbox__slider'></span>
       Короткометражки

@@ -17,26 +17,26 @@ class MainApi {
     return fetch(url, options).then(this._checkResponse)
   }
 
-  /*saveMovie(data) {
+  saveMovie(card) {
     return this._request(`${this._baseUrl}/movies`, {
       method: 'POST',
       headers: this._headers,
       credentials: "include",
       body: JSON.stringify({
-        country: ,
-        director: ,
-        duration: ,
-        year: ,
-        description: ,
-        image: ,
-        trailerLink: ,
-        thumbnail: ,
-        movieId: ,
-        nameRU: ,
-        nameEN: ,
+        country: card.country,
+        director: card.director,
+        duration: card.duration,
+        year: card.year,
+        description: card.description,
+        image: card.image,
+        trailerLink: card.trailerLink,
+        thumbnail: card.thumbnail,
+        movieId: card.movieId,
+        nameRU: card.nameRU,
+        nameEN: card.nameEN,
       })
     });
-  }*/
+  }
 
   getUserInfo() {
     return this._request(`${this._baseUrl}/users/me`, {

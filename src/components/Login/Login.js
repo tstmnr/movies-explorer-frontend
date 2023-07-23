@@ -80,7 +80,7 @@ function Login({ handleLogin }) {
               E-mail
               <br />
               <input
-                className={`login__input ${emailError ? 'login__input_error_active' : ''}`}
+                className={`login__input ${emailDirty && emailError ? 'login__input_error_active' : ''}`}
                 type='text'
                 name='email'
                 value={changeEmail || ''}
@@ -94,7 +94,7 @@ function Login({ handleLogin }) {
               Пароль
               <br />
               <input
-                className={`login__input ${passwordError ? 'login__input_error_active' : ''}`}
+                className={`login__input ${passwordDirty && passwordError ? 'login__input_error_active' : ''}`}
                 type='password'
                 name='password'
                 value={changePassword || ''}

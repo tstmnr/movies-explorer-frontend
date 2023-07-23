@@ -1,16 +1,18 @@
-import { React, useState } from 'react';
+import { React } from 'react';
 import { useLocation} from 'react-router-dom';
 
 import './MoviesCard.css';
 
-function MoviesCard({ card }) {
+function MoviesCard({ card, onCardLike }) {
 
   const location = useLocation();
 
-  const [isLiked, setIsLiked] = useState(false);
-  const movieCardLikeButtonClassName = (`movies-card__like ${isLiked && 'movies-card__like_active'}`);
 
-  const handleToggleLike = () => setIsLiked(!isLiked);
+  const movieCardLikeButtonClassName = (`movies-card__like ${'movies-card__like_active'}`);
+
+  function handleToggleLike() {
+    onCardLike(card);
+  }
 
   function handleDeleteCard(e) {
     console.log(e.target.closest('.movies-card').remove());
