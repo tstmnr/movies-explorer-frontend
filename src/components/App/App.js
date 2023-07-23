@@ -148,7 +148,7 @@ function App() {
     if (!card.owner) {
       mainApi.saveMovie(card)
         .then((savedCard) => {
-          setSavedMovieCards([card, ...savedCard]);
+          setSavedMovieCards(card, ...savedCard);
           localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard));
         })
     } else {
