@@ -211,7 +211,7 @@ function App() {
                   path='saved-movies'
                   loggedIn={loggedIn}
                   component={SavedMovies}
-                  savedmoviesCard={savedMoviesCard}
+                  savedMoviesCard={savedMoviesCard}
                   onCardLike={handleCardLike}
                 />
               }

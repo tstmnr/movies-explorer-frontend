@@ -9,7 +9,7 @@ function MoviesCardList({ moviesCard, savedmoviesCard, onCardLike }) {
 
   return (
     <ul className='movies-list'>
-      {location.pathname !== '/movies'
+      {location.pathname === '/movies'
         ?
           moviesCard.map((card) => (
             <MoviesCard
