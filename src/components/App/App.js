@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { React, useEffect, useState/* useEffect*/ }from 'react';
+import { React, useEffect, useState }from 'react';
 import { Routes, Route, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -148,7 +148,10 @@ function App() {
     if (!card.owner) {
       mainApi.saveMovie(card)
         .then((savedCard) => {
-          setSavedMovieCards(card, ...savedCard);
+          console.log(savedMoviesCard);
+          console.log(savedCard);
+          setSavedMovieCards(savedMoviesCard.concat(savedCard));
+          setSavedMovieCards([...savedMoviesCard, savedCard]);
           localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard));
         })
     } else {
@@ -209,6 +212,7 @@ function App() {
                   loggedIn={loggedIn}
                   component={SavedMovies}
                   savedmoviesCard={savedMoviesCard}
+                  onCardLike={handleCardLike}
                 />
               }
             />
