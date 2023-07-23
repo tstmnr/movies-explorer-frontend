@@ -8,7 +8,7 @@ function MoviesCard({ card, onCardLike }) {
   const location = useLocation();
 
 
-  const movieCardLikeButtonClassName = (`movies-card__like ${'movies-card__like_active'}`);
+  const movieCardLikeButtonClassName = (`movies-card__like ${card.owner && 'movies-card__like_active'}`);
 
   function handleToggleLike() {
     onCardLike(card);

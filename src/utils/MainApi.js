@@ -17,6 +17,14 @@ class MainApi {
     return fetch(url, options).then(this._checkResponse)
   }
 
+  deleteMovie(id) {
+    return fetch(`${this._baseUrl}/movies/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+      credentials: "include",
+    });
+  }
+
   saveMovie(card) {
     return this._request(`${this._baseUrl}/movies`, {
       method: 'POST',

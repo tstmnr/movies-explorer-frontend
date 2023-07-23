@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { React, useEffect, useState/* useEffect*/ }from 'react';
 import { Routes, Route, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -24,10 +25,10 @@ function App() {
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
   const [moviesCard, setMovieCards] = useState([]);
+  const [savedMoviesCard, setSavedMovieCards] = useState([]);
   const [keyword, setKeyword] = useState('');
   const [isChecked, setIsChecked] = useState(false);
   const [isEmptySearchBar, setIsEmptySearchBar] = useState(true);
-  const [isLiked, setIsLiked] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -144,15 +145,22 @@ function App() {
   }
 
   function handleCardLike(card) {
-    //const isLiked = card.likes.some((item) => item === currentUser._id);
-    console.log(card);
-    mainApi.saveMovie(card)
-      .then((savedMoviesCards) => {
-        localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCards));
+    if (!card.owner) {
+      mainApi.saveMovie(card)
+        .then((savedCard) => {
+          setSavedMovieCards([card, ...savedCard]);
+          localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard));
+        })
+    } else {
+      console.log(card, card.owner);
+      mainApi.deleteMovie(card._id)
+      .then((deletedCard) => {
+        console.log('film ydalen => ', deletedCard);
       })
       .catch((err) => {
         console.log(err);
       })
+    }
   }
 
   return (
@@ -200,6 +208,7 @@ function App() {
                   path='saved-movies'
                   loggedIn={loggedIn}
                   component={SavedMovies}
+                  savedmoviesCard={savedMoviesCard}
                 />
               }
             />
