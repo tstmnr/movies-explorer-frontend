@@ -28,7 +28,7 @@ class MainApi {
         duration: card.duration,
         year: card.year,
         description: card.description,
-        image: card.image,
+        image: card.image.url,
         trailerLink: card.trailerLink,
         thumbnail: card.thumbnail,
         movieId: card.id,

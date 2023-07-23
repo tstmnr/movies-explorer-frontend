@@ -150,7 +150,9 @@ function App() {
       .then((savedMoviesCards) => {
         localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCards));
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   return (
