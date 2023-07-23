@@ -1,7 +1,7 @@
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ searchMoviesByKeyword, keyword, setKeyword }) {
+function SearchForm({ searchMoviesByKeyword, keyword, setKeyword, isChecked, setIsChecked }) {
 
   const handleChangeKeyword = (e) => {
     setKeyword(e.target.value);
@@ -10,7 +10,7 @@ function SearchForm({ searchMoviesByKeyword, keyword, setKeyword }) {
   const handleSubmit = (e) => {
     localStorage.setItem('movies', []);
     localStorage.setItem('keyword', keyword);
-    searchMoviesByKeyword(e, keyword);
+    searchMoviesByKeyword(e);
   }
 
   return (
@@ -27,7 +27,10 @@ function SearchForm({ searchMoviesByKeyword, keyword, setKeyword }) {
       />
       <button className='search-form__button' type='submit'></button>
       <div className='search-form__line'></div>
-      <FilterCheckbox />
+      <FilterCheckbox
+        isChecked={isChecked}
+        setIsChecked={setIsChecked}
+      />
     </form>
   );
 }
