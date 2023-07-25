@@ -35,6 +35,7 @@ function App() {
   useEffect(() => {
     mainApi.getUserInfo()
       .then((res) => {
+        console.log(res);
         if (!res) {
           navigate('/signin', { replace: true });
         }
@@ -85,6 +86,7 @@ function App() {
     e.preventDefault();
     mainApi.authentication(data)
       .then((res) => {
+        localStorage.setItem('loggedIn', true);
         setLoggedIn(true);
         setCurrentUser({//добавление на ВРЕМЯ
           name: res.name,
@@ -164,17 +166,12 @@ function App() {
   }
 
   function handleCardLike(card) {
-    setSavedMovieCards([...savedMoviesCard, card]);
-    localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard))
-    console.log(savedMoviesCard);
-    /*if (!card.owner) {
+    if (!card.owner) {
       mainApi.saveMovie(card)
         .then((savedCard) => {
-          console.log(savedMoviesCard);
-          console.log(savedCard);
-          setSavedMovieCards(savedMoviesCard.concat(savedCard));
           setSavedMovieCards([...savedMoviesCard, savedCard]);
-          localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard));
+          localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard))
+          console.log(savedMoviesCard);
         })
     } else {
       console.log(card, card.owner);
@@ -185,7 +182,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-    }*/
+    }
   }
 
   return (
