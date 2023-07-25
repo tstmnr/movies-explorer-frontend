@@ -62,7 +62,7 @@ function App() {
   useEffect(() => {
     setMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('movies'))));
     setSavedMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('saved-movies'))));
-  }, [isChecked])
+  }, [isChecked, savedMoviesCard, moviesCard])
 
   function handleRegister(e, data) {
     e.preventDefault();
@@ -190,7 +190,7 @@ function App() {
   }
 
   function findAndDeleteSavedMovie(deletedCard) {
-      return savedMoviesCard.filter((card) => card.id !== deletedCard.id);
+      return savedMoviesCard.filter((card) => card.moviesId !== deletedCard.moviesId);
   }
 
   return (
