@@ -57,7 +57,7 @@ function App() {
     if (JSON.parse(localStorage.getItem('saved-movies')).length > 0) {
       setSavedMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('saved-movies'))));
     }
-  }, [savedMoviesCard, moviesCard])
+  }, [])
 
   useEffect(() => {
     setMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('movies'))));
