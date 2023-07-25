@@ -144,6 +144,9 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
+      .finally(() => {
+        setKeyword('');
+      })
     } else {
       setIsEmptySearchBar(true);
     }
@@ -177,12 +180,17 @@ function App() {
       console.log(card, card.owner);
       mainApi.deleteMovie(card._id)
       .then((deletedCard) => {
-        console.log('film ydalen => ', deletedCard);
+        setSavedMovieCards(findAndDeleteSavedMovie(deletedCard));
+        localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard));
       })
       .catch((err) => {
         console.log(err);
       })
     }
+  }
+
+  function findAndDeleteSavedMovie(deletedCard) {
+      return savedMoviesCard.filter((card) => card.id !== deletedCard.id);
   }
 
   return (
