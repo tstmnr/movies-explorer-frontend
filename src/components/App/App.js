@@ -33,15 +33,34 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    mainApi.getUserInfo()
+      .then((res) => {
+        if (!res) {
+          navigate('/signin', { replace: true });
+        }
+        setLoggedIn(true);
+        navigate('/movies', { replace: true });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [navigate]);
+
+  useEffect(() => {
     localStorage.setItem('movies', JSON.stringify(moviesCard));
+    localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard));
     localStorage.setItem('isChecked', isChecked);
     if (JSON.parse(localStorage.getItem('movies')).length > 0) {
       setMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('movies'))));
+    }
+    if (JSON.parse(localStorage.getItem('saved-movies')).length > 0) {
+      setSavedMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('saved-movies'))));
     }
   }, [])
 
   useEffect(() => {
     setMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('movies'))));
+    setSavedMovieCards(searchAndFilterMoviesCards(JSON.parse(localStorage.getItem('saved-movies'))));
   }, [isChecked])
 
   function handleRegister(e, data) {
@@ -145,7 +164,10 @@ function App() {
   }
 
   function handleCardLike(card) {
-    if (!card.owner) {
+    setSavedMovieCards([...savedMoviesCard, card]);
+    localStorage.setItem('saved-movies', JSON.stringify(savedMoviesCard))
+    console.log(savedMoviesCard);
+    /*if (!card.owner) {
       mainApi.saveMovie(card)
         .then((savedCard) => {
           console.log(savedMoviesCard);
@@ -163,7 +185,7 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-    }
+    }*/
   }
 
   return (
