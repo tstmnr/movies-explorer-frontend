@@ -62,12 +62,11 @@ function App() {
           email: userData.email,
         });
         setLoggedIn(true);
-        navigate(1);
       })
       .catch(err => {
         console.log(err);
       })
-  }, [navigate]);
+  }, []);
 
   useEffect(() => {
     if (location.pathname === '/movies' && JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
