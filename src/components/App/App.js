@@ -99,7 +99,7 @@ function App() {
     mainApi.authentication(data)
       .then((res) => {
         localStorage.setItem('isChecked', isChecked);
-        localStorage.setitem('isLogged', 'true')
+        localStorage.setItem('isLogged', true);
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
