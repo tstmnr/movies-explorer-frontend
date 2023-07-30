@@ -153,7 +153,9 @@ function App() {
   }
 
   function handleLikeCard(card, isSaved) {
+    console.log(card, isSaved);
     if (isSaved) {
+      console.log(card._id);
       handleCardDelete(card)
     } else {
       mainApi.saveMovie(card)
