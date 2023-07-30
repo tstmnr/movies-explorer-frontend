@@ -45,6 +45,8 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
+    } else {
+
     }
   }, [loggedIn])
 
@@ -60,7 +62,6 @@ function App() {
           email: userData.email,
         });
         setLoggedIn(true);
-        navigate('/movies', { replace: true });
       })
       .catch(err => {
         console.log(err);
