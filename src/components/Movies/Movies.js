@@ -3,7 +3,7 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import AddMoreCards from '../AddMoreCards/AddMoreCards';
 
-function Movies({ moviesList, onCardLike, searchMovies, keyword, setKeyword, isChecked, setIsChecked }) {
+function Movies({ moviesList, onCardLike, searchMovies, keyword, setKeyword, isChecked, setIsChecked, savedMoviesList }) {
 
   return (
     <main className='movies'>
@@ -19,6 +19,7 @@ function Movies({ moviesList, onCardLike, searchMovies, keyword, setKeyword, isC
         <MoviesCardList
           moviesList={moviesList}
           onCardLike={onCardLike}
+          savedMoviesList={savedMoviesList}
         />
         <AddMoreCards />
       </div>

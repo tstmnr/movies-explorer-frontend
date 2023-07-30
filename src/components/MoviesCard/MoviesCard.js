@@ -10,7 +10,7 @@ function MoviesCard({ card, onCardLike, savedMoviesRoute, savedMoviesList, onCar
   const [isSaved, setIsSaved] = useState(
     savedMoviesRoute
       ? true
-      : false//savedMoviesList.some((savedMovie) => savedMovie.movieId === card.id)
+      : savedMoviesList.some((savedMovie) => savedMovie.movieId === card.id)
   );
 
   const movieCardLikeButtonClassName = (`movies-card__like ${isSaved ? 'movies-card__like_active' : ''}`);

@@ -16,6 +16,7 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
               key={movie.id}
               card={movie}
               onCardLike={onCardLike}
+              savedMoviesList={savedMoviesList}
             />
           ))
       }

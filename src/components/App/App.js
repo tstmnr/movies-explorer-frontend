@@ -206,6 +206,7 @@ function App() {
                   setKeyword={setKeyword}
                   isChecked={isChecked}
                   setIsChecked={setIsChecked}
+                  savedMoviesList={savedMoviesList}
                 />
               }
             />
