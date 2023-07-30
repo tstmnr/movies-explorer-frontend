@@ -62,7 +62,7 @@ function App() {
           email: userData.email,
         });
         setLoggedIn(true);
-        navigate(0);
+        navigate(1);
       })
       .catch(err => {
         console.log(err);
