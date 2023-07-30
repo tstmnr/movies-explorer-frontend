@@ -22,12 +22,11 @@ function MoviesCard({ card, onCardLike, savedMoviesRoute, savedMoviesList, onCar
   }, [card, savedMoviesList]);
 
   function handleToggleLike() {
-    onCardLike(card);
-    console.log('like/dislike');
+    onCardLike(card, isSaved);
   }
 
-  function handleDeleteCard(e) {
-    onCardDelete(e, card);
+  function handleDeleteCard() {
+    onCardDelete(card);
   }
 
   function getTimeFromMins(mins) {
@@ -63,7 +62,7 @@ function MoviesCard({ card, onCardLike, savedMoviesRoute, savedMoviesList, onCar
           :
           <button
             className='movies-card__button-delete'
-            onClick={(e) => handleDeleteCard(e)}
+            onClick={handleDeleteCard}
             type='button'
             aria-label='Удалить фильм из сохраненных'>
           </button>

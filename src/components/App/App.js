@@ -152,17 +152,19 @@ function App() {
     }
   }
 
-  function handleLikeCard(card) {
-    mainApi.saveMovie(card)
+  function handleLikeCard(card, isSaved) {
+    if (isSaved) {
+      handleCardDelete(card)
+    } else {
+      mainApi.saveMovie(card)
       .then((savedMovie) => {
         localStorage.setItem('saved-movies', JSON.stringify([savedMovie, ...savedMoviesList]));
         setSavedMoviesList(JSON.parse(localStorage.getItem('saved-movies')));
       })
+    }
   }
 
-  function handleCardDelete(e, card) {
-    console.log(e.target);
-    console.log(card);
+  function handleCardDelete(card) {
     mainApi.deleteMovie(card._id)
       .then(() => {
         setSavedMoviesList((state) =>
