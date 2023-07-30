@@ -48,6 +48,24 @@ function App() {
     }
   }, [loggedIn])
 
+  useEffect(() => {
+    localStorage.getItem('isLogged') &&
+    mainApi.getUserInfo()
+      .then((userData) => {
+        if (!userData) {
+          navigate('/signin', { replace: true });
+        }
+        setCurrentUser({
+          name: userData.name,
+          email: userData.email,
+        });
+        setLoggedIn(true);
+        navigate('/movies', { replace: true });
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, [navigate]);
 
   useEffect(() => {
     if (location.pathname === '/movies' && JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
@@ -81,6 +99,7 @@ function App() {
     mainApi.authentication(data)
       .then((res) => {
         localStorage.setItem('isChecked', isChecked);
+        localStorage.setitem('isLogged', true)
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
@@ -153,7 +172,6 @@ function App() {
   }
 
   function handleLikeCard(card, isSaved) {
-    console.log(card, isSaved);
     if (isSaved) {
       const movie = savedMoviesList.find((savedMovie) => savedMovie.movieId === card.id || savedMovie.movieId === card.movieId);
       handleCardDelete(movie)
@@ -172,7 +190,7 @@ function App() {
         setSavedMoviesList((state) =>
           state.filter((movie) => movie._id !== card._id)
         );
-        localStorage.setItem('saved-movies', savedMoviesList);
+        localStorage.setItem('saved-movies', JSON.stringify(savedMoviesList));
       })
   }
 
