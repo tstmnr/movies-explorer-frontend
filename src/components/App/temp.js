@@ -55,20 +55,7 @@
 
 
   /*
-  useEffect(() => {
-    mainApi.getUserInfo()
-      .then((res) => {
-        console.log(res);
-        if (!res) {
-          navigate('/signin', { replace: true });
-        }
-        setLoggedIn(true);
-        navigate('/movies', { replace: true });
-      })
-      .catch(err => {
-        console.log(err);
-      })
-  }, [navigate]);
+
 
   useEffect(() => {
     localStorage.setItem('movies', JSON.stringify(moviesCard));
