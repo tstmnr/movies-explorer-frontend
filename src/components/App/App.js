@@ -69,6 +69,7 @@ function App() {
           email: userData.email,
         });
         setLoggedIn(true);
+        navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
       })
       .catch(err => {
         console.log(err);
