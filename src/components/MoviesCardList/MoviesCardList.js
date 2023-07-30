@@ -25,6 +25,8 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
             <MoviesCard
               key={savedMovie.id}
               card={savedMovie}
+              savedMoviesRoute={true}
+              savedMoviesList={savedMoviesList}
               onCardDelete={onCardDelete}
             />
           ))

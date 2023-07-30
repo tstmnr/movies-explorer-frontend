@@ -1,13 +1,25 @@
-import { React } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation} from 'react-router-dom';
 
 import './MoviesCard.css';
 
-function MoviesCard({ card, onCardLike, onCardDelete }) {
+function MoviesCard({ card, onCardLike, savedMoviesRoute, savedMoviesList, onCardDelete }) {
 
   const location = useLocation();
 
-  const movieCardLikeButtonClassName = (`movies-card__like ${card.owner ? 'movies-card__like_active' : ''}`);
+  const [isSaved, setIsSaved] = useState(
+    savedMoviesRoute
+      ? true
+      : savedMoviesList.some((savedMovie) => savedMovie.movieId === card.id)
+  );
+
+  const movieCardLikeButtonClassName = (`movies-card__like ${isSaved ? 'movies-card__like_active' : ''}`);
+
+  useEffect(() => {
+    setIsSaved(
+      savedMoviesList?.some((savedMovie) => savedMovie.movieId === card.id)
+    );
+  }, [card, savedMoviesList]);
 
   function handleToggleLike() {
     onCardLike(card);
@@ -27,7 +39,15 @@ function MoviesCard({ card, onCardLike, onCardDelete }) {
   return (
     <li className='movies-card'>
       <a className='movies-card__link' href={card.trailerLink} target='_blank' rel='noreferrer'>
-        <img className='movies-card__image' alt={card.nameRu} src={`https://api.nomoreparties.co/${card.image.url}`} />
+        <img
+        className='movies-card__image'
+        alt={card.nameRu}
+        src={
+          savedMoviesRoute
+          ? `${card.image}`
+          : `https://api.nomoreparties.co/${card.image.url}`
+        }
+          />
       </a>
       <div className='movies-card__info'>
         <div className='movies-card__wrapper'>
