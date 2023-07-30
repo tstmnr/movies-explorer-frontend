@@ -62,6 +62,7 @@ function App() {
           email: userData.email,
         });
         setLoggedIn(true);
+        navigate(0);
       })
       .catch(err => {
         console.log(err);
