@@ -31,4 +31,6 @@ const options = {
   },
 }
 
-export default new MoviesApi(options);
+const movieApi = new MoviesApi(options);
+
+export default movieApi;

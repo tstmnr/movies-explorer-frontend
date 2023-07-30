@@ -3,8 +3,8 @@ import './FilterCheckbox.css';
 function FilterCheckbox({ isChecked, setIsChecked }) {
 
   function handleChangeCheckbox() {
+    localStorage.setItem('isChecked', !isChecked);
     setIsChecked(!isChecked);
-    localStorage.setItem('isChecked', isChecked);
   }
 
   return (

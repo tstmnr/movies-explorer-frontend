@@ -3,19 +3,19 @@ import { useLocation} from 'react-router-dom';
 
 import './MoviesCard.css';
 
-function MoviesCard({ card, onCardLike }) {
+function MoviesCard({ card, onCardLike, onCardDelete }) {
 
   const location = useLocation();
 
-
-  const movieCardLikeButtonClassName = (`movies-card__like ${card.owner && 'movies-card__like_active'}`);
+  const movieCardLikeButtonClassName = (`movies-card__like ${card.owner ? 'movies-card__like_active' : ''}`);
 
   function handleToggleLike() {
     onCardLike(card);
+    console.log('like/dislike');
   }
 
   function handleDeleteCard(e) {
-    console.log(e.target.closest('.movies-card').remove());
+    onCardDelete(e, card);
   }
 
   function getTimeFromMins(mins) {
@@ -34,10 +34,18 @@ function MoviesCard({ card, onCardLike }) {
           <h2 className='movies-card__title'>{card.nameRU}</h2>
           {location.pathname === '/movies'
           ?
-          <button className={movieCardLikeButtonClassName} onClick={handleToggleLike} type='button' aria-label='Добавить в сохраненные фильмы'>
+          <button
+            className={movieCardLikeButtonClassName}
+            onClick={handleToggleLike}
+            type='button'
+            aria-label='Добавить в сохраненные фильмы'>
           </button>
           :
-          <button className='movies-card__button-delete' onClick={handleDeleteCard} type='button' aria-label='Удалить фильм из сохраненных'>
+          <button
+            className='movies-card__button-delete'
+            onClick={(e) => handleDeleteCard(e)}
+            type='button'
+            aria-label='Удалить фильм из сохраненных'>
           </button>
           }
         </div>

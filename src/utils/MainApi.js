@@ -22,6 +22,9 @@ class MainApi {
       method: 'DELETE',
       headers: this._headers,
       credentials: "include",
+      body: JSON.stringify({
+        _id: id,
+      }),
     });
   }
 
@@ -115,4 +118,6 @@ const options = {
   },
 }
 
-export default new MainApi(options);
+const mainApi = new MainApi(options);
+
+export default mainApi;

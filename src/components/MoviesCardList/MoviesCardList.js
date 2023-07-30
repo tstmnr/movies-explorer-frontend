@@ -3,7 +3,7 @@ import { useLocation} from 'react-router-dom';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ moviesCard,/*savedMoviesCard,*/ onCardLike }) {
+function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete }) {
 
   const location = useLocation();
 
@@ -11,21 +11,21 @@ function MoviesCardList({ moviesCard,/*savedMoviesCard,*/ onCardLike }) {
     <ul className='movies-list'>
       {
         (location.pathname === '/movies') &&
-          moviesCard?.map((card) => (
+        moviesList?.map((movie) => (
             <MoviesCard
-              key={card.id}
-              card={card}
+              key={movie.id}
+              card={movie}
               onCardLike={onCardLike}
             />
           ))
       }
       {
         (location.pathname === '/saved-movies') &&
-        JSON.parse(localStorage.getItem('saved-movies'))?.map((card) => (
+        savedMoviesList?.map((savedMovie) => (
             <MoviesCard
-              key={card.id}
-              card={card}
-              onCardLike={onCardLike}
+              key={savedMovie.id}
+              card={savedMovie}
+              onCardDelete={onCardDelete}
             />
           ))
       }
