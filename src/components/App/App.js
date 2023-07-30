@@ -166,8 +166,8 @@ function App() {
     mainApi.deleteMovie(card._id)
       .then((res) => {
         console.log(res);
-        localStorage.setItem('saved-movies', JSON.stringify(JSON.parse(localStorage.getItem('saved-movies')).filter((card) => {
-          return card._id !== card._id;
+        localStorage.setItem('saved-movies', JSON.stringify(JSON.parse(localStorage.getItem('saved-movies')).filter((movie) => {
+          return movie._id !== card._id;
         })));
         setSavedMoviesList(JSON.parse(localStorage.getItem('saved-movies')));
       })
