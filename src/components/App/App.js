@@ -169,6 +169,7 @@ function App() {
   }
 
   function handleCardLike(card) {
+    /*console.log(card);
     if (!card.owner) {
       mainApi.saveMovie(card)
         .then((savedCard) => {
@@ -186,7 +187,14 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-    }
+    }*/
+    mainApi.getMovies()
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
   function findAndDeleteSavedMovie(deletedCard) {
