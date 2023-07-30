@@ -32,6 +32,13 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'))
+    window.onbeforeunload = () => {
+        window.sessionStorage.setItem('lastRoute', JSON.stringify(window.location.pathname))
+    }
+  }, [])
+
+  useEffect(() => {
     if (loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
       .then(([userData, savedMovies]) => {
