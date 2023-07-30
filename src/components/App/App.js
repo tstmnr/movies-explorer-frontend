@@ -155,8 +155,8 @@ function App() {
   function handleLikeCard(card, isSaved) {
     console.log(card, isSaved);
     if (isSaved) {
-      console.log(card._id);
-      handleCardDelete(card)
+      const movie = savedMoviesList.find((savedMovie) => savedMovie.movieId === card.id || savedMovie.movieId === card.movieId);
+      handleCardDelete(movie)
     } else {
       mainApi.saveMovie(card)
       .then((savedMovie) => {
