@@ -164,12 +164,11 @@ function App() {
     console.log(e.target);
     console.log(card);
     mainApi.deleteMovie(card._id)
-      .then((res) => {
-        console.log(res);
-        localStorage.setItem('saved-movies', JSON.stringify(JSON.parse(localStorage.getItem('saved-movies')).filter((movie) => {
-          return movie._id !== card._id;
-        })));
-        setSavedMoviesList(JSON.parse(localStorage.getItem('saved-movies')));
+      .then(() => {
+        setSavedMoviesList((state) =>
+          state.filter((movie) => movie._id !== card._id)
+        );
+        localStorage.setItem('saved-movies', savedMoviesList);
       })
   }
 
