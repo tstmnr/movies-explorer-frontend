@@ -39,8 +39,8 @@ function App() {
           name: userData.name,
           email: userData.email,
         });
-        localStorage.setItem('saved-movies', JSON.stringify(savedMovies));
         setSavedMoviesList(savedMovies);
+        localStorage.setItem('saved-movies', JSON.stringify(savedMovies));
       })
       .catch((err) => {
         console.log(err);
@@ -163,6 +163,14 @@ function App() {
   function handleCardDelete(e, card) {
     console.log(e.target);
     console.log(card);
+    mainApi.deleteMovieMovie(card._id)
+      .then((res) => {
+        console.log(res);
+        localStorage.setItem('saved-movies', JSON.stringify(JSON.parse(localStorage.getItem('saved-movies')).filter((card) => {
+          return card._id !== card._id;
+        })));
+        setSavedMoviesList(JSON.parse(localStorage.getItem('saved-movies')));
+      })
   }
 
   return (
