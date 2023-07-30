@@ -163,7 +163,7 @@ function App() {
   function handleCardDelete(e, card) {
     console.log(e.target);
     console.log(card);
-    mainApi.deleteMovieMovie(card._id)
+    mainApi.deleteMovie(card._id)
       .then((res) => {
         console.log(res);
         localStorage.setItem('saved-movies', JSON.stringify(JSON.parse(localStorage.getItem('saved-movies')).filter((card) => {
