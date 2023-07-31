@@ -15,7 +15,7 @@ function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMovi
       console.log('меня изменили в movies, сейчас я ', isChecked);
       console.log(JSON.parse(localStorage.getItem('movies')));
       console.log(localStorage.getItem('moviesSearchQuery'));
-      setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies'))), localStorage.getItem('moviesSearchQuery'), isChecked);
+      setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), localStorage.getItem('moviesSearchQuery'), isChecked));
     }
   }, [isChecked]);
 
