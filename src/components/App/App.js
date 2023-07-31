@@ -72,15 +72,6 @@ function App() {
         console.log(err);
       })
   }, []);
-/*
-  useEffect(() => {
-    if (location.pathname === '/movies' && JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
-      setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies'))));
-    }
-    if (location.pathname === '/saved-movies' && JSON.parse(localStorage.getItem('saved-movies')) !== null && JSON.parse(localStorage.getItem('saved-movies')).length > 0) {
-      setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies'))));
-    }
-  }, [isChecked]);*/
 
   function handleRegister(e, data) {
     e.preventDefault();
