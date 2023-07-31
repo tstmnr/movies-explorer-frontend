@@ -1,4 +1,5 @@
 import { React, useEffect, useState }from 'react';
+import { useLocation } from 'react-router-dom';
 
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
@@ -8,12 +9,13 @@ import filterMoviesByKeyword from '../../utils/constants';
 function SavedMovies({ savedMoviesList, setSavedMoviesList, searchMovies, onCardDelete }) {
 
   const [isChecked, setIsChecked] = useState(JSON.parse(localStorage.getItem('isSavedMoviesShort')) || false);
+  const location = useLocation();
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('saved-movies')) !== null && JSON.parse(localStorage.getItem('saved-movies')).length > 0) {
       setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies')), localStorage.getItem('savedMoviesSearchQuery'), isChecked));
     }
-  }, [isChecked]);
+  }, [isChecked, location.pathname]);
 
   return (
     <main className='saved-movies'>

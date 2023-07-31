@@ -46,7 +46,7 @@ function App() {
           email: userData.email,
         });
         localStorage.setItem('saved-movies', JSON.stringify(savedMovies));
-        setSavedMoviesList(savedMovies);
+        setSavedMoviesList(JSON.parse(localStorage.getItem('saved-movies')));
       })
       .catch((err) => {
         console.log(err);
