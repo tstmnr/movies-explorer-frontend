@@ -98,6 +98,8 @@ function App() {
         localStorage.setItem('isLogged', true);
         localStorage.setItem('isSavedMoviesShort', false);
         localStorage.setItem('isMoviesShort', false);
+        localStorage.setItem('moviesSearchQuery', '');
+        localStorage.setItem('savedMoviesSearchQuery', '');
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })
