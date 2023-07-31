@@ -26,7 +26,7 @@ function App() {
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
   const [moviesList, setMoviesList] = useState([]);
-  const [savedMoviesList, setSavedMoviesList] = useState();
+  const [savedMoviesList, setSavedMoviesList] = useState([]);
   const location = useLocation();
   const navigate = useNavigate();
 
