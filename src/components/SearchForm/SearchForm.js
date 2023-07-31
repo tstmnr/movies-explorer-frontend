@@ -7,7 +7,12 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 function SearchForm({ searchMovies, isChecked, setIsChecked }) {
 
   const location = useLocation();
-  const [keyword, setKeyword] = useState('');
+
+  const [keyword, setKeyword] = useState(
+    location.pathname === '/movies'
+    ? localStorage.getItem('moviesSearchQuery') || ''
+    : localStorage.getItem('savedMoviesSearchQuery') || ''
+  );
 
   function handleChangeKeyword(e) {
     setKeyword(e.target.value);

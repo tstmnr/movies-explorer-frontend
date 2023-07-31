@@ -45,14 +45,12 @@ function App() {
           name: userData.name,
           email: userData.email,
         });
-        setSavedMoviesList(savedMovies);
         localStorage.setItem('saved-movies', JSON.stringify(savedMovies));
+        setSavedMoviesList(savedMovies);
       })
       .catch((err) => {
         console.log(err);
       })
-    } else {
-
     }
   }, [loggedIn])
 
@@ -174,8 +172,7 @@ function App() {
 
     if (location.pathname === '/saved-movies') {
       const keyword = localStorage.getItem('savedMoviesSearchQuery');
-      console.log(keyword);
-      setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies')), localStorage.getItem('savedMoviesSearchQuery'), isChecked));
+      setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies')), keyword, isChecked));
     }
   }
 
