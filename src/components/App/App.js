@@ -162,7 +162,9 @@ function App() {
       moviesApi.getMoviesCards()
       .then((movies) => {
         localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies)));
-        setMoviesList(filterMoviesByKeyword(movies, localStorage.getItem('moviesSearchQuery'), isChecked));
+        const keyword = localStorage.getItem('moviesSearchQuery');
+        console.log(keyword);
+        setMoviesList(filterMoviesByKeyword(movies, keyword, isChecked));
       })
       .catch((err) => {
         console.log(err);
@@ -172,6 +174,8 @@ function App() {
     }
 
     if (location.pathname === '/saved-movies') {
+      const keyword = localStorage.getItem('savedMoviesSearchQuery');
+      console.log(keyword);
       setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies')), localStorage.getItem('savedMoviesSearchQuery'), isChecked));
     }
   }
