@@ -3,8 +3,14 @@ import './FilterCheckbox.css';
 function FilterCheckbox({ isChecked, setIsChecked }) {
 
   function handleChangeCheckbox() {
-    localStorage.setItem('isChecked', !isChecked);
-    setIsChecked(!isChecked);
+    if (location.pathname === '/movies') {
+      localStorage.setItem('isMoviesShort', !isChecked);
+      setIsChecked(!isChecked);
+    }
+    if (location.pathname === '/saved-movies') {
+      localStorage.setItem('isSavedMoviesShort', !isChecked);
+      setIsChecked(!isChecked);
+    }
   }
 
   return (

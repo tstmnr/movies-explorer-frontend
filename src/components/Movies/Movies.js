@@ -1,17 +1,26 @@
+import { React, useEffect, useState }from 'react';
+
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import AddMoreCards from '../AddMoreCards/AddMoreCards';
+import filterMoviesByKeyword from '../../utils/constants';
 
-function Movies({ moviesList, onCardLike, searchMovies, keyword, setKeyword, isChecked, setIsChecked, savedMoviesList }) {
+function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMoviesList }) {
+
+  const [isChecked, setIsChecked] = useState(localStorage.getItem('isMoviesShort') || false);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
+      setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies'))), localStorage.getItem('moviesSearchQuery'), isChecked);
+    }
+  }, [isChecked]);
 
   return (
     <main className='movies'>
       <div className='movies__content'>
         <SearchForm
           searchMovies={searchMovies}
-          keyword={keyword}
-          setKeyword={setKeyword}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
         />

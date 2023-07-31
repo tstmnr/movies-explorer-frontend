@@ -1,15 +1,27 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ searchMovies, keyword, setKeyword, isChecked, setIsChecked }) {
+function SearchForm({ searchMovies, isChecked, setIsChecked }) {
+
+  const location = useLocation();
+  const [keyword, setKeyword] = useState('');
 
   function handleChangeKeyword(e) {
     setKeyword(e.target.value);
   }
 
   function handleSubmit(e) {
-    localStorage.setItem('keyword', keyword);
-    searchMovies(e);
+    if (location.pathname === '/movies') {
+      localStorage.setItem('moviesSearchQuery', keyword);
+      searchMovies(e);
+    }
+    if (location.pathname === '/saved-movies') {
+      localStorage.setItem('savedMoviesSearchQuery', keyword);
+      searchMovies(e);
+    }
   }
 
   return (
