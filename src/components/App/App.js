@@ -161,9 +161,8 @@ function App() {
     if (location.pathname === '/movies') {
       moviesApi.getMoviesCards()
       .then((movies) => {
-        localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies)));
         const keyword = localStorage.getItem('moviesSearchQuery');
-        console.log(keyword);
+        localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies, keyword, isChecked)));
         setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), keyword, isChecked));
       })
       .catch((err) => {
