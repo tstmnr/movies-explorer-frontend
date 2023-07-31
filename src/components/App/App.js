@@ -37,7 +37,7 @@ function App() {
     }
   }, [])
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (loggedIn) {
       Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
       .then(([userData, savedMovies]) => {
@@ -52,7 +52,7 @@ function App() {
         console.log(err);
       })
     }
-  }, [loggedIn])
+  }, [loggedIn])*/
 
   useEffect(() => {
     localStorage.getItem('isLogged') &&
