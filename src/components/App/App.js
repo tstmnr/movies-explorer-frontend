@@ -74,7 +74,7 @@ function App() {
         console.log(err);
       })
   }, []);
-
+/*
   useEffect(() => {
     if (location.pathname === '/movies' && JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
       setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies'))));
@@ -82,7 +82,7 @@ function App() {
     if (location.pathname === '/saved-movies' && JSON.parse(localStorage.getItem('saved-movies')) !== null && JSON.parse(localStorage.getItem('saved-movies')).length > 0) {
       setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies'))));
     }
-  }, [isChecked]);//заменить
+  }, [isChecked]);*/
 
   function handleRegister(e, data) {
     e.preventDefault();
@@ -240,6 +240,8 @@ function App() {
                   loggedIn={loggedIn}
                   component={SavedMovies}
                   savedMoviesList={savedMoviesList}
+                  setSavedMoviesList={setSavedMoviesList}
+                  searchMovies={handleSearchMovies}
                   onCardDelete={handleCardDelete}
                 />
               }
