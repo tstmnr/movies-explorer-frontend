@@ -107,6 +107,8 @@ function App() {
     mainApi.authentication(data)
       .then((res) => {
         localStorage.setItem('isLogged', true);
+        localStorage.setItem('isSavedMoviesShort', false);
+        localStorage.setItem('isMoviesShort', false);
         setLoggedIn(true);
         navigate('/movies', { replace: true });
       })

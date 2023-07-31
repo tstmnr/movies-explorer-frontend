@@ -12,6 +12,9 @@ function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMovi
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
+      console.log('меня изменили в saved-movies, сейчас я ', isChecked);
+      console.log(JSON.parse(localStorage.getItem('movies')));
+      console.log(localStorage.getItem('moviesSearchQuery'));
       setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies'))), localStorage.getItem('moviesSearchQuery'), isChecked);
     }
   }, [isChecked]);
