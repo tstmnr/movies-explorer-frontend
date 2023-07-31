@@ -16,11 +16,11 @@ function SearchForm({ searchMovies, isChecked, setIsChecked }) {
   function handleSubmit(e) {
     if (location.pathname === '/movies') {
       localStorage.setItem('moviesSearchQuery', keyword);
-      searchMovies(e);
+      searchMovies(e, isChecked);
     }
     if (location.pathname === '/saved-movies') {
       localStorage.setItem('savedMoviesSearchQuery', keyword);
-      searchMovies(e);
+      searchMovies(e, isChecked);
     }
   }
 

@@ -164,7 +164,7 @@ function App() {
         localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies)));
         const keyword = localStorage.getItem('moviesSearchQuery');
         console.log(keyword);
-        setMoviesList(filterMoviesByKeyword(movies, keyword, isChecked));
+        setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), keyword, isChecked));
       })
       .catch((err) => {
         console.log(err);
