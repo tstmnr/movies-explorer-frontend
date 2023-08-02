@@ -1,8 +1,8 @@
 import './AddMoreCards.css';
 
-function AddMoreCards() {
+function AddMoreCards({ addMoreCardsButtonClass, onClick }) {
   return (
-    <button className='add-more' type='button'>Ещё</button>
+    <button className={addMoreCardsButtonClass} type='button' onClick={onClick}>Ещё</button>
   );
 }
 

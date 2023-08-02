@@ -16,3 +16,7 @@
 .add-more:hover {
   opacity: .8;
 }
+
+.add-more__button_hidden {
+  display: none;
+}

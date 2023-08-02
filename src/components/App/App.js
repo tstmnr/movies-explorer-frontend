@@ -17,7 +17,7 @@ import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 import ProtectedRouterElement from '../ProtectedRouteElement/ProtectedRouteElement';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
-import filterMoviesByKeyword from '../../utils/constants';
+import { filterMoviesByKeyword } from '../../utils/constants';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); //проверяет залогинен пользователь или нет

@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { React, useEffect, useState }from 'react';
 
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import filterMoviesByKeyword from '../../utils/constants';
+import { filterMoviesByKeyword } from '../../utils/constants';
 import mainApi from '../../utils/MainApi';
 
 function SavedMovies({ savedMoviesList, setSavedMoviesList, searchMovies, onCardDelete }) {

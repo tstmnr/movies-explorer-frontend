@@ -1,10 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { React, useEffect, useState }from 'react';
 
 import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import AddMoreCards from '../AddMoreCards/AddMoreCards';
-import filterMoviesByKeyword from '../../utils/constants';
+import { filterMoviesByKeyword } from '../../utils/constants';
 
 function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMoviesList }) {
 
@@ -12,9 +12,6 @@ function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMovi
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
-      console.log('меня изменили в movies, сейчас я ', isChecked);
-      console.log(JSON.parse(localStorage.getItem('movies')));
-      console.log(localStorage.getItem('moviesSearchQuery'));
       setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), localStorage.getItem('moviesSearchQuery'), isChecked));
     }
   }, [isChecked]);
@@ -33,7 +30,6 @@ function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMovi
           onCardLike={onCardLike}
           savedMoviesList={savedMoviesList}
         />
-        <AddMoreCards />
       </div>
     </main>
   );
