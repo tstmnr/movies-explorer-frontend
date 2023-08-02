@@ -54,7 +54,9 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
   }, [windowSize]);
 
   useEffect(() => {
-    setDisplayedCards(moviesList.slice(0, numberOfDisplayedCards));
+    if (location.pathname === '/movies') {
+      setDisplayedCards(moviesList.slice(0, numberOfDisplayedCards));
+    }
   }, [moviesList, numberOfDisplayedCards]);
 
   return (
