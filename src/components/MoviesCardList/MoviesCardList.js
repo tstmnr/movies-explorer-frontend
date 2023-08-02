@@ -51,10 +51,6 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
       }
     };
     countMoviesOnDisplay();
-    console.log('window width', windowSize.width)
-    console.log('numberOfDisplayedCards', numberOfDisplayedCards)
-    console.log('numberOfAddedCards', numberOfAddedCards)
-    console.log('displayedCards', displayedCards);
   }, [windowSize]);
 
   useEffect(() => {

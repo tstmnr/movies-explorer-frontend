@@ -108,13 +108,13 @@
 }
 
 @media screen and (max-width: 768px) {
-  .movies-card__image {
+  .movies-card__link {
     height: 190px;
   }
 }
 
 @media screen and (max-width: 320px) {
-  .movies-card__image {
+  .movies-card__link {
     height: 168px;
   }
 }
