@@ -6,18 +6,17 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import AddMoreCards from '../AddMoreCards/AddMoreCards';
 import useResize from '../../hooks/useResize';
 import {
-  SCREEN_WIDTH_1280,
-  SCREEN_WIDTH_1024,
-  SCREEN_WIDTH_768,
-  SCREEN_WIDTH_568,
-  INITIAL_NUMBER_OF_CARDS_DISPLAYED_1280,
-  ADDING_CARDS_1280,
-  INITIAL_NUMBER_OF_CARDS_DISPLAYED_1024,
-  ADDING_CARDS_1024,
-  INITIAL_NUMBER_OF_CARDS_DISPLAYED_768,
-  ADDING_CARDS_768,
-  INITIAL_NUMBER_OF_CARDS_DISPLAYED_568,
-  ADDING_CARDS_568
+  LAPTOP_SCREEN_WIDTH,
+  TABLET_SCREEN_WIDTH,
+  MOBILE_SCREEN_WIDTH,
+  INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_LAPTOP,
+  ADDING_CARDS_ON_LAPTOP,
+  INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_LARGE_TABLET,
+  ADDING_CARDS_ON_LARGE_TABLET,
+  INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_TABLET,
+  ADDING_CARDS_ON_TABLET,
+  INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_MOBILE,
+  ADDING_CARDS_ON_MOBILE
 } from '../../utils/constants'
 
 function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete }) {
@@ -37,18 +36,18 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
 
   useEffect(() => {
     const countMoviesOnDisplay = () => {
-      if (windowSize.width >= SCREEN_WIDTH_1280) {
-        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_1280);
-        setNumberOfAddedCards(ADDING_CARDS_1280);
-      } else if (windowSize.width >= SCREEN_WIDTH_1024) {
-        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_1024);
-        setNumberOfAddedCards(ADDING_CARDS_1024);
-      } else if (windowSize.width >= SCREEN_WIDTH_768) {
-        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_768);
-        setNumberOfAddedCards(ADDING_CARDS_768);
-      } else if (windowSize.width >= SCREEN_WIDTH_568) {
-        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_568);
-        setNumberOfAddedCards(ADDING_CARDS_568);
+      if (windowSize.width > LAPTOP_SCREEN_WIDTH) {
+        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_LAPTOP);
+        setNumberOfAddedCards(ADDING_CARDS_ON_LAPTOP);
+      } else if (windowSize.width > TABLET_SCREEN_WIDTH) {
+        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_LARGE_TABLET);
+        setNumberOfAddedCards(ADDING_CARDS_ON_LARGE_TABLET);
+      } else if (windowSize.width > MOBILE_SCREEN_WIDTH) {
+        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_TABLET);
+        setNumberOfAddedCards(ADDING_CARDS_ON_TABLET);
+      } else if (windowSize.width <= MOBILE_SCREEN_WIDTH) {
+        setNumberOfDisplayedCards(INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_MOBILE);
+        setNumberOfAddedCards(ADDING_CARDS_ON_MOBILE);
       }
     };
     countMoviesOnDisplay();
