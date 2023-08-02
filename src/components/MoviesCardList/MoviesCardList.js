@@ -32,7 +32,7 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
     setNumberOfDisplayedCards(numberOfDisplayedCards + numberOfAddedCards);
   };
 
-  const addMoreCardsButtonClass = `add-more ${moviesList.length <= numberOfDisplayedCards && 'add-more__button_hidden'}`;
+  const addMoreCardsButtonClass = `add-more ${moviesList?.length <= numberOfDisplayedCards && 'add-more__button_hidden'}`;
 
   useEffect(() => {
     const countMoviesOnDisplay = () => {
