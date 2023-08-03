@@ -34,7 +34,7 @@ function App() {
 
   useEffect(() => {
     navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'))
-    window.onbeforeunload = () => {
+    window.onafterload = () => {
         window.sessionStorage.setItem('lastRoute', JSON.stringify(window.location.pathname))
     }
   }, [])
