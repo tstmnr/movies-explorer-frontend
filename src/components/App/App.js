@@ -28,7 +28,7 @@ function App() {
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
   const [moviesList, setMoviesList] = useState([]);
   const [savedMoviesList, setSavedMoviesList] = useState([]);
-  const [isPreloaderActive, setPreloaderClass] = useState(true);
+  const [isPreloaderActive, setPreloaderClass] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -71,8 +71,6 @@ function App() {
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
-      })
   }
 
   function handleLogin(e, data) {
@@ -92,7 +90,6 @@ function App() {
       })
       .finally(() => {
         setLoginData({});
-        setPreloaderClass(false);
       })
   }
 
@@ -137,6 +134,7 @@ function App() {
 
   function handleSearchMovies(e, isChecked) {
     e.preventDefault();
+    setPreloaderClass(true);
     if (location.pathname === '/movies') {
       moviesApi.getMoviesCards()
       .then((movies) => {
@@ -148,12 +146,14 @@ function App() {
         console.log(err);
       })
       .finally(() => {
+        setPreloaderClass(false);
       })
     }
 
     if (location.pathname === '/saved-movies') {
       const keyword = localStorage.getItem('savedMoviesSearchQuery');
       setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies')), keyword, isChecked));
+      setPreloaderClass(false);
     }
   }
 
