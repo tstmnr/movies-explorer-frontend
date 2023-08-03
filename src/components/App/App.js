@@ -153,7 +153,11 @@ function App() {
     if (location.pathname === '/saved-movies') {
       const keyword = localStorage.getItem('savedMoviesSearchQuery');
       setSavedMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('saved-movies')), keyword, isChecked));
-      setPreloaderClass(false);
+      setTimeout(() => {
+        console.log('Начался поиск')
+        setPreloaderClass(false);
+        console.log('Поиск окончен')
+      }, 2000);
     }
   }
 

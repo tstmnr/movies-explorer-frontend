@@ -5,7 +5,7 @@ import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import Account from '../Account/Account';
 
-function Header({ onHamburgerClick, isOpenHamburgerMenu }) {
+function Header({ loggedIn, onHamburgerClick, isOpenHamburgerMenu }) {
 
   const location = useLocation();
 
@@ -32,18 +32,23 @@ function Header({ onHamburgerClick, isOpenHamburgerMenu }) {
         :
         <>
           <Logo />
-          <nav className='header__menu'>
-            <ul className='header__items'>
-              <li className='header__item'>
-                <Link className='header__register-link' to='/signup'>Регистрация</Link>
-              </li>
-              <li className='header__item'>
-                <Link className='header__login-link' to='/signin'>
-                  <button className='header__button' type='button'>Войти</button>
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          {loggedIn
+          ?
+            <Account />
+          :
+            <nav className='header__menu'>
+              <ul className='header__items'>
+                <li className='header__item'>
+                  <Link className='header__register-link' to='/signup'>Регистрация</Link>
+                </li>
+                <li className='header__item'>
+                  <Link className='header__login-link' to='/signin'>
+                    <button className='header__button' type='button'>Войти</button>
+                  </Link>
+                </li>
+              </ul>
+            </nav>
+          }
         </>
         }
       </div>
