@@ -37,23 +37,6 @@ function App() {
     }
   }, [])
 
-  /*useEffect(() => {
-    if (loggedIn) {
-      Promise.all([mainApi.getUserInfo(), mainApi.getMovies()])
-      .then(([userData, savedMovies]) => {
-        setCurrentUser({
-          name: userData.name,
-          email: userData.email,
-        });
-        localStorage.setItem('saved-movies', JSON.stringify(savedMovies));
-        setSavedMoviesList(JSON.parse(localStorage.getItem('saved-movies')));
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-    }
-  }, [loggedIn])*/
-
   useEffect(() => {
     localStorage.getItem('isLogged') &&
     mainApi.getUserInfo()
