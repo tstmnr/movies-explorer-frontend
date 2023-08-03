@@ -33,7 +33,6 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
   };
 
   const addMoreCardsButtonClass = `add-more ${moviesList?.length <= numberOfDisplayedCards && 'add-more__button_hidden'}`;
-  const movieListClass = `movies-list ${location.pathname === '/movies' && (moviesList?.length <= numberOfDisplayedCards && 'movies-list_margin_bottom')}`;
 
   useEffect(() => {
     const countMoviesOnDisplay = () => {
@@ -62,7 +61,7 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
 
   return (
     <>
-      <ul className={movieListClass}>
+      <ul className='movies-list'>
         {
           (location.pathname === '/movies') &&
           displayedCards?.map((movie) => (

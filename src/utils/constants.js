@@ -12,14 +12,12 @@ const INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_TABLET = 8;
 const ADDING_CARDS_ON_TABLET = 2;
 
 const INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_MOBILE = 5;
-const ADDING_CARDS_ON_MOBILE = 1;
+const ADDING_CARDS_ON_MOBILE = 2;
 
 function filterMoviesByKeyword(moviesArray, keyword, isChecked) {
   if (isChecked) {
-    console.log('Фильтрация при true')
     return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).includes(keyword) && (movie.duration < 40)));
   } else {
-    console.log('Фильтрация при false')
     return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).includes(keyword));
   }
 }

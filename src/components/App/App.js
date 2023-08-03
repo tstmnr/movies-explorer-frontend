@@ -15,6 +15,7 @@ import Profile from '../Profile/Profile'
 import PageNotFound from '../PageNotFound/PageNotFound';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 import ProtectedRouterElement from '../ProtectedRouteElement/ProtectedRouteElement';
+import Preloader from '../Preloader/Preloader';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import { filterMoviesByKeyword } from '../../utils/constants';
@@ -27,6 +28,7 @@ function App() {
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
   const [moviesList, setMoviesList] = useState([]);
   const [savedMoviesList, setSavedMoviesList] = useState([]);
+  const [isPreloaderActive, setPreloaderClass] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -70,7 +72,6 @@ function App() {
         console.log(err);
       })
       .finally(() => {
-        setLoginData({});
       })
   }
 
@@ -88,6 +89,10 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoginData({});
+        setPreloaderClass(false);
       })
   }
 
@@ -177,97 +182,103 @@ function App() {
 
   return (
     <div className='page'>
-      <CurrentUserContext.Provider value={currentUser} >
-        <Routes>
-          <Route
-            path='/'
-            element={
-              <>
-                <Header loggedIn={loggedIn} onHamburgerClick={onHamburgerClick} isOpenHamburgerMenu={isOpenHamburgerMenu} />
-                <Outlet />
-                {location.pathname !== '/profile' && <Footer />}
-              </>
-            }
-          >
+      {isPreloaderActive
+      ? (
+          <Preloader />
+        )
+      : (
+        <CurrentUserContext.Provider value={currentUser} >
+          <Routes>
             <Route
-              index
+              path='/'
               element={
-                <Main />
+                <>
+                  <Header loggedIn={loggedIn} onHamburgerClick={onHamburgerClick} isOpenHamburgerMenu={isOpenHamburgerMenu} />
+                  <Outlet />
+                  {location.pathname !== '/profile' && <Footer />}
+                </>
               }
-            />
-            <Route
-              path='movies'
-              element={
-                <ProtectedRouterElement
-                  path='movies'
-                  loggedIn={loggedIn}
-                  component={Movies}
-                  moviesList={moviesList}
-                  setMoviesList={setMoviesList}
-                  onCardLike={handleLikeCard}
-                  searchMovies={handleSearchMovies}
-                  savedMoviesList={savedMoviesList}
-                />
-              }
-            />
-            <Route
-              path='saved-movies'
-              element={
-                <ProtectedRouterElement
-                  path='saved-movies'
-                  loggedIn={loggedIn}
-                  component={SavedMovies}
-                  savedMoviesList={savedMoviesList}
-                  setSavedMoviesList={setSavedMoviesList}
-                  searchMovies={handleSearchMovies}
-                  onCardDelete={handleCardDelete}
-                />
-              }
-            />
-            <Route
-              path='profile'
-              element={
-                <ProtectedRouterElement
-                  path='profile'
-                  loggedIn={loggedIn}
-                  component={Profile}
-                  isEditable={isEditable}
-                  handleLogout={handleLogout}
-                  handleEditProfile={handleEditProfile}
-                  handleChangeProfileData={handleChangeProfileData}
-                />
-              }
-            />
-          </Route>
-          <Route
-            path='/signin'
-            element={
-              <Login
-                handleLogin={handleLogin}
+            >
+              <Route
+                index
+                element={
+                  <Main />
+                }
               />
-            }
-          />
-          <Route
-            path='/signup'
-            element={
-              <Register
-                handleRegister={handleRegister}
+              <Route
+                path='movies'
+                element={
+                  <ProtectedRouterElement
+                    path='movies'
+                    loggedIn={loggedIn}
+                    component={Movies}
+                    moviesList={moviesList}
+                    setMoviesList={setMoviesList}
+                    onCardLike={handleLikeCard}
+                    searchMovies={handleSearchMovies}
+                    savedMoviesList={savedMoviesList}
+                  />
+                }
               />
-            }
+              <Route
+                path='saved-movies'
+                element={
+                  <ProtectedRouterElement
+                    path='saved-movies'
+                    loggedIn={loggedIn}
+                    component={SavedMovies}
+                    savedMoviesList={savedMoviesList}
+                    setSavedMoviesList={setSavedMoviesList}
+                    searchMovies={handleSearchMovies}
+                    onCardDelete={handleCardDelete}
+                  />
+                }
+              />
+              <Route
+                path='profile'
+                element={
+                  <ProtectedRouterElement
+                    path='profile'
+                    loggedIn={loggedIn}
+                    component={Profile}
+                    isEditable={isEditable}
+                    handleLogout={handleLogout}
+                    handleEditProfile={handleEditProfile}
+                    handleChangeProfileData={handleChangeProfileData}
+                  />
+                }
+              />
+            </Route>
+            <Route
+              path='/signin'
+              element={
+                <Login
+                  handleLogin={handleLogin}
+                />
+              }
+            />
+            <Route
+              path='/signup'
+              element={
+                <Register
+                  handleRegister={handleRegister}
+                />
+              }
+            />
+            <Route
+              path='*'
+              element={
+                <PageNotFound />
+              }
+            />
+          </Routes>
+          <HamburgerMenu
+            isHamburgerMenu={true}
+            isOpenHamburgerMenu={isOpenHamburgerMenu}
+            onClose={handleCloseHamburgerMenu}
           />
-          <Route
-            path='*'
-            element={
-              <PageNotFound />
-            }
-          />
-        </Routes>
-        <HamburgerMenu
-          isHamburgerMenu={true}
-          isOpenHamburgerMenu={isOpenHamburgerMenu}
-          onClose={handleCloseHamburgerMenu}
-        />
-      </CurrentUserContext.Provider>
+        </CurrentUserContext.Provider>
+      )}
     </div>
   );
 }
