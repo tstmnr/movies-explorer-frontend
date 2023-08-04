@@ -29,6 +29,10 @@
   min-height: 30px;
 }
 
+.account__icon_background_grey {
+  background-color: #DDDEE3;
+}
+
 .account__link:hover {
   opacity: .8;
 }

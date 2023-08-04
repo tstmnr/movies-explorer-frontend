@@ -9,6 +9,8 @@ function Header({ loggedIn, onHamburgerClick, isOpenHamburgerMenu }) {
 
   const location = useLocation();
 
+  const hamburgerMenuButtonClassName = `header__button-menu ${location.pathname === '/' ? 'header__button-menu_background_grey' : ''}`;
+
   return (
     <header className={`header ${location.pathname !== '/' ? 'header_background_white' : ''}`}>
       <div className='header__content'>
@@ -23,7 +25,7 @@ function Header({ loggedIn, onHamburgerClick, isOpenHamburgerMenu }) {
                 </div>
               }
               <button
-                className='header__button-menu'
+                className={hamburgerMenuButtonClassName}
                 type='button'
                 onClick={onHamburgerClick}
                 aria-label='Меню сайта'

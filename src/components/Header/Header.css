@@ -85,10 +85,13 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background: transparent;
   border: none;
   cursor: pointer;
   transition: opacity .3s ease;
+}
+
+.header__button-menu_background_grey {
+  background-color: #DDDEE3;
 }
 
 .header__button-menu:hover {
