@@ -81,17 +81,12 @@
   padding: 0;
   width: 44px;
   height: 44px;
-  background-image: url('../../images/hamburger-button.svg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border: none;
   cursor: pointer;
   transition: opacity .3s ease;
-}
-
-.header__button-menu_background_grey {
-  background-color: #DDDEE3;
 }
 
 .header__button-menu:hover {

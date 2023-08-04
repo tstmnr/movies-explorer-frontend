@@ -2,11 +2,11 @@ import { Link, useLocation } from 'react-router-dom';
 
 import './Account.css';
 
-function Account() {
+function Account({ isOpenHamburgerMenu }) {
 
   const location = useLocation();
 
-  const accountIconClassName = `account__icon ${location.pathname === '/' ? 'account__icon_background_grey' : ''}`;
+  const accountIconClassName = `account__icon ${location.pathname === '/' ? (!isOpenHamburgerMenu && 'account__icon_background_grey') : ''}`;
 
   return (
     <div className='account'>

@@ -21,7 +21,7 @@ function Header({ loggedIn, onHamburgerClick, isOpenHamburgerMenu }) {
               {!isOpenHamburgerMenu &&
                 <div className='header__navigation'>
                   <Navigation />
-                  <Account />
+                  <Account isOpenHamburgerMenu={isOpenHamburgerMenu} />
                 </div>
               }
               <button
