@@ -14,6 +14,7 @@
   flex-direction: row;
   align-items: center;
   transition: opacity .3s ease;
+  background: transparent;
 }
 
 .account__icon {
