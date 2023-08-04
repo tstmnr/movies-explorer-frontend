@@ -28,7 +28,7 @@ function App() {
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
   const [moviesList, setMoviesList] = useState([]);
   const [savedMoviesList, setSavedMoviesList] = useState([]);
-  const [isPreloaderActive, setPreloaderClass] = useState(true);
+  const [isPreloaderActive, setPreloaderClass] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
