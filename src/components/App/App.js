@@ -60,13 +60,14 @@ function App() {
   }, []);
 
   function handleRegister(e, data) {
+    setSubmitError('');
     e.preventDefault();
     mainApi.registration(data)
       .then((res) => {
         handleLogin(e, data);
       })
       .catch((err) => {
-        console.log(err);
+        setSubmitError(err.message);
       })
   }
 
