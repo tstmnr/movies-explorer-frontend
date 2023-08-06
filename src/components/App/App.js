@@ -68,6 +68,7 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
+        console.log(err.status)
         setSubmitError(err.message);
         console.log(submitError);
       })
