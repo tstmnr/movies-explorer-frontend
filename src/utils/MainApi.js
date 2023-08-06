@@ -5,16 +5,16 @@ class MainApi {
     this._headers = options.headers;
   }
 
-  _checkResponse(res) {
+  /*_checkResponse(res) {
     if (res.ok) {
       return res.json();
     }
     console.log(res);
     return Promise.reject(`${res.message}`);
-  }
+  }*/
 
   _request(url, options) {
-    return fetch(url, options).then(this._checkResponse)
+    return fetch(url, options)//.then(this._checkResponse)
   }
 
   deleteMovie(id) {
