@@ -28,7 +28,8 @@ function App() {
   const [moviesList, setMoviesList] = useState([]);
   const [savedMoviesList, setSavedMoviesList] = useState([]);
   const [isPreloaderActive, setPreloaderClass] = useState(false);
-  const [searchMoviesError, setSearchMoviesError] = useState("");
+  const [searchMoviesError, setSearchMoviesError] = useState('');
+  const [submitError, setSubmitError] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -249,6 +250,7 @@ function App() {
                     handleLogout={handleLogout}
                     handleEditProfile={handleEditProfile}
                     handleChangeProfileData={handleChangeProfileData}
+                    submitError={submitError}
                   />
                 }
               />
@@ -258,6 +260,7 @@ function App() {
               element={
                 <Login
                   handleLogin={handleLogin}
+                  submitError={submitError}
                 />
               }
             />
@@ -266,6 +269,7 @@ function App() {
               element={
                 <Register
                   handleRegister={handleRegister}
+                  submitError={submitError}
                 />
               }
             />
