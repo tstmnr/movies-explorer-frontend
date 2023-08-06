@@ -12,10 +12,11 @@ function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMovi
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('movies')) !== null && JSON.parse(localStorage.getItem('movies')).length > 0) {
-      setSearchError('');
       setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), localStorage.getItem('moviesSearchQuery'), isChecked));
-    } else {
-      setSearchError('Загрузка');
+
+      if (moviesList.length === 0) {
+        setSearchError('По Вашему запросу совпадений не найдено');
+      }
     }
   }, [isChecked]);
 
