@@ -61,7 +61,7 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete,
 
   return (
     <>
-      {searchError
+      {searchError.length !== 0
       ?
         <p className='movies-list__error'>{searchError}</p>
       :
