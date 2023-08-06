@@ -22,7 +22,6 @@ import { filterMoviesByKeyword } from '../../utils/constants';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); //проверяет залогинен пользователь или нет
-  const [loginData, setLoginData] = useState({}); //записывает эмейл и пароль, чтобы сразу после регистрации залогиниться
   const [currentUser, setCurrentUser] = useState({}); // устанавливаем значения для текущего пользователя
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false);
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
@@ -63,13 +62,7 @@ function App() {
     e.preventDefault();
     mainApi.registration(data)
       .then((res) => {
-        console.log('data', data);
-        setLoginData({
-          email: data.email,
-          password: data.password,
-        });
-        console.log('loginData', loginData);
-        handleLogin(e, loginData);
+        handleLogin(e, data);
       })
       .catch((err) => {
         console.log(err);
@@ -90,9 +83,6 @@ function App() {
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        setLoginData({});
       })
   }
 
