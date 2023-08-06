@@ -167,7 +167,6 @@ function App() {
     e.preventDefault();
     setPreloaderClass(true);
     if (location.pathname === '/movies') {
-      setSearchMoviesError('');
       moviesApi.getMoviesCards()
       .then((movies) => {
         if (movies.length !== 0) {

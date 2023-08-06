@@ -22,6 +22,7 @@ function SearchForm({ searchMovies, isChecked, setIsChecked, setSearchError }) {
     if (keyword.length > 0 || keyword !== undefined || keyword !== null) {
       if (location.pathname === '/movies') {
         localStorage.setItem('moviesSearchQuery', keyword);
+        setSearchError('');
         searchMovies(e, isChecked);
       }
 
@@ -29,9 +30,6 @@ function SearchForm({ searchMovies, isChecked, setIsChecked, setSearchError }) {
         localStorage.setItem('savedMoviesSearchQuery', keyword);
         searchMovies(e, isChecked);
       }
-    }
-    else {
-      setSearchError('Пожалуйста, введите ключевое слово для поиска.')
     }
   }
 
