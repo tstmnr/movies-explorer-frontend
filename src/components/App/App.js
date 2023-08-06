@@ -132,7 +132,7 @@ function App() {
     if (location.pathname === '/movies') {
       moviesApi.getMoviesCards()
       .then((movies) => {
-        if (!movies.length === 0) {
+        if (movies.length !== 0) {
           const keyword = localStorage.getItem('moviesSearchQuery');
           localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies, keyword, isChecked)));
           setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), keyword, isChecked));
