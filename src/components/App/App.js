@@ -285,6 +285,7 @@ function App() {
                     handleEditProfile={handleEditProfile}
                     handleChangeProfileData={handleChangeProfileData}
                     submitError={submitError}
+                    setSubmitError={setSubmitError}
                   />
                 }
               />
@@ -304,6 +305,7 @@ function App() {
                 <Register
                   handleRegister={handleRegister}
                   submitError={submitError}
+                  setSubmitError={setSubmitError}
                 />
               }
             />

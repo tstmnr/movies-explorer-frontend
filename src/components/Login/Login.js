@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './Login.css';
 import Logo from '../Logo/Logo';
 
-function Login({ handleLogin }) {
+function Login({ handleLogin, submitError }) {
 
   const [changeEmail, setChangeEmail] = useState('');
   const [changePassword, setChangePassword] = useState('');
@@ -105,6 +105,7 @@ function Login({ handleLogin }) {
             </label>
             <span className={`login__error ${passwordDirty && passwordError ? 'login__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
+          <span className='login__submit-error'>{submitError ? `${submitError}` : ''}</span>
           <button disabled={!formValid} className='login__button' type='submit'>Войти</button>
         </form>
         <p className='login__info'>

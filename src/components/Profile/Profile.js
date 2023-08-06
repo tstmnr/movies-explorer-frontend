@@ -3,7 +3,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 import './Profile.css';
 
-function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProfileData }) {
+function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProfileData, submitError, setSubmitError }) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -42,6 +42,7 @@ function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProf
   }
 
   const handleChangeEmail = (e) => {
+    setSubmitError('');
     setChangeEmail(e.target.value);
 
     if (!e.target.value) {
@@ -113,6 +114,7 @@ function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProf
               : ''
               }
             </div>
+            <span className='profile__submit-error'>{submitError ? `${submitError}` : ''}</span>
             {isEditable &&
               <button disabled={!formValid} className='profile__button' type='submit'>{buttonText}</button>
             }

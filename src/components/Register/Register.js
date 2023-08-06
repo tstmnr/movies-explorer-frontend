@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 
-function Register({ handleRegister, submitError }) {
+function Register({ handleRegister, submitError, setSubmitError }) {
 
   const [changeName, setChangeName] = useState('');
   const [changeEmail, setChangeEmail] = useState('');
@@ -39,6 +39,7 @@ function Register({ handleRegister, submitError }) {
   }
 
   const handleChangeEmail = (e) => {
+    setSubmitError('');
     setChangeEmail(e.target.value);
 
     if (!e.target.value) {
@@ -139,7 +140,7 @@ function Register({ handleRegister, submitError }) {
             </label>
             <span className={`register__error ${passwordDirty && passwordError ? 'register__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
-          <p>{submitError ? `${submitError}` : ''}</p>
+          <span className='register__submit-error'>{submitError ? `${submitError}` : ''}</span>
           <button disabled={!formValid} className='register__button' type='submit'>Зарегистрироваться</button>
         </form>
         <p className='register__info'>

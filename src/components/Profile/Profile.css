@@ -89,6 +89,14 @@
   margin-top: 5px;
 }
 
+.profile__submit-error {
+  color: #EE3465;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14px;
+  text-align: center;
+}
+
 .profile__button {
   font-weight: 500;
   font-size: 14px;
