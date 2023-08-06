@@ -18,7 +18,16 @@ import ProtectedRouterElement from '../ProtectedRouteElement/ProtectedRouteEleme
 import Preloader from '../Preloader/Preloader';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
-import { filterMoviesByKeyword } from '../../utils/constants';
+import {
+  filterMoviesByKeyword,
+  USER_BAD_DATA_MESSAGE,
+  SIGNIN_BAD_DATA_MESSAGE,
+  SIGNIN_DEFAULT_ERROR,
+  SIGNUP_CONFLICT_MESSAGE,
+  SIGNUP_BAD_DATA_MESSAGE,
+  SIGNUP_DEFAULT_ERROR,
+  UPDATE_DEFAULT_ERROR,
+} from '../../utils/constants';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false); //проверяет залогинен пользователь или нет
@@ -41,6 +50,7 @@ function App() {
   }, [])
 
   useEffect(() => {
+    setSubmitError('');
     localStorage.getItem('isLogged') &&
     mainApi.getUserInfo()
       .then((userData) => {
@@ -54,8 +64,8 @@ function App() {
         setLoggedIn(true);
         navigate(JSON.parse(window.sessionStorage.getItem('lastRoute') || '{}'));
       })
-      .catch(err => {
-        console.log(err);
+      .catch((err) => {
+        console.error(`${err}`);
       })
   }, []);
 
@@ -67,14 +77,20 @@ function App() {
         handleLogin(e, data);
       })
       .catch((err) => {
-        console.log(err);
-        console.log(err.status)
-        setSubmitError(err.message);
-        console.log(submitError);
+        if (err.status === 400) {
+          setSubmitError(SIGNUP_BAD_DATA_MESSAGE);
+        };
+
+        if (err.status === 409) {
+          setSubmitError(SIGNUP_CONFLICT_MESSAGE);
+        } else {
+          setSubmitError(SIGNUP_DEFAULT_ERROR);
+        }
       })
   }
 
   function handleLogin(e, data) {
+    setSubmitError('');
     e.preventDefault();
     mainApi.authentication(data)
       .then((res) => {
@@ -87,7 +103,11 @@ function App() {
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
-        console.log(err);
+        if (err.status === 400) {
+          setSubmitError(SIGNIN_BAD_DATA_MESSAGE);
+        } else {
+          setSubmitError(SIGNIN_DEFAULT_ERROR);
+        }
       })
   }
 
@@ -108,6 +128,7 @@ function App() {
   }
 
   function handleChangeProfileData(e, data) {
+    setSubmitError('');
     e.preventDefault();
     mainApi.updateUserData(data)
       .then((res) => {
@@ -117,9 +138,17 @@ function App() {
         });
         setIsEditable(!isEditable);
       })
-      .catch((err) =>
-        console.log(err)
-      )
+      .catch((err) => {
+        if (err.status === 400) {
+          setSubmitError(USER_BAD_DATA_MESSAGE);
+        };
+
+        if (err.status === 409) {
+          setSubmitError(SIGNUP_CONFLICT_MESSAGE);
+        } else {
+          setSubmitError(UPDATE_DEFAULT_ERROR);
+        }
+      })
   }
 
   function onHamburgerClick() {
@@ -150,6 +179,7 @@ function App() {
       })
       .finally(() => {
         setPreloaderClass(false);
+        console.log(searchMoviesError);
       })
     }
 

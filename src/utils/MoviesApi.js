@@ -8,8 +8,8 @@ class MoviesApi {
     if (res.ok) {
       return res.json();
     }
-
-    return Promise.reject(`${res.message}`);
+    console.log(res);
+    return Promise.reject(res);
   }
 
   _request(url, options) {
