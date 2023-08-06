@@ -174,7 +174,9 @@ function App() {
           const keyword = localStorage.getItem('moviesSearchQuery');
           localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies, keyword, isChecked)));
           setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), keyword, isChecked));
-        } else {
+        }
+
+        if (moviesList.length === 0) {
           setSearchMoviesError('По Вашему запросу совпадений не найдено');
         }
       })

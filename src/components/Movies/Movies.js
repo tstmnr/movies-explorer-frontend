@@ -18,7 +18,7 @@ function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMovi
         setSearchError('По Вашему запросу совпадений не найдено');
       }
     }
-  }, [isChecked]);
+  }, [setIsChecked]);
 
   return (
     <main className='movies'>
