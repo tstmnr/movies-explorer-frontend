@@ -139,7 +139,7 @@ function Register({ handleRegister, submitError }) {
             </label>
             <span className={`register__error ${passwordDirty && passwordError ? 'register__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
-          <p>{submitError && `${submitError}`}</p>
+          <p>{submitError ? `${submitError}` : ''}</p>
           <button disabled={!formValid} className='register__button' type='submit'>Зарегистрироваться</button>
         </form>
         <p className='register__info'>
