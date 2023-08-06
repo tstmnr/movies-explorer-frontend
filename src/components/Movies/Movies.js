@@ -15,7 +15,7 @@ function Movies({ moviesList, setMoviesList, onCardLike, searchMovies, savedMovi
       setSearchError('');
       setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), localStorage.getItem('moviesSearchQuery'), isChecked));
     } else {
-      setSearchError('По Вашему запросу совпадений не найдено');
+      setSearchError('Загрузка');
     }
   }, [isChecked]);
 

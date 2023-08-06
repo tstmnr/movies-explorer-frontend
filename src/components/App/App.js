@@ -51,6 +51,10 @@ function App() {
 
   useEffect(() => {
     setSubmitError('');
+  }, navigate)
+
+  useEffect(() => {
+    setSubmitError('');
     localStorage.getItem('isLogged') &&
     mainApi.getUserInfo()
       .then((userData) => {
@@ -103,7 +107,7 @@ function App() {
         navigate('/movies', { replace: true });
       })
       .catch((err) => {
-        if (err.status === 400) {
+        if (err.status === 401) {
           setSubmitError(SIGNIN_BAD_DATA_MESSAGE);
         } else {
           setSubmitError(SIGNIN_DEFAULT_ERROR);
@@ -162,8 +166,8 @@ function App() {
   function handleSearchMovies(e, isChecked) {
     e.preventDefault();
     setPreloaderClass(true);
-    setSearchMoviesError('');
     if (location.pathname === '/movies') {
+      setSearchMoviesError('');
       moviesApi.getMoviesCards()
       .then((movies) => {
         if (movies.length !== 0) {
