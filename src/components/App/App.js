@@ -174,10 +174,6 @@ function App() {
           localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies, keyword, isChecked)));
           setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), keyword, isChecked));
         }
-
-        if (moviesList.length === 0) {
-          setSearchMoviesError('По Вашему запросу совпадений не найдено');
-        }
       })
       .catch((err) => {
         setSearchMoviesError('На сервере произошла ошибка. Пожалуйста, повторите попытку позже.');

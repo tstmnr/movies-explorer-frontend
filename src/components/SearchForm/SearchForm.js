@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ searchMovies, isChecked, setIsChecked, setSearchError }) {
+function SearchForm({ searchMovies, isChecked, setIsChecked }) {
 
   const location = useLocation();
 
@@ -22,7 +22,6 @@ function SearchForm({ searchMovies, isChecked, setIsChecked, setSearchError }) {
     if (keyword.length > 0 || keyword !== undefined || keyword !== null) {
       if (location.pathname === '/movies') {
         localStorage.setItem('moviesSearchQuery', keyword);
-        setSearchError('');
         searchMovies(e, isChecked);
       }
 

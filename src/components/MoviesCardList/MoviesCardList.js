@@ -61,10 +61,6 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete,
 
   return (
     <>
-      {searchError.length !== 0
-      ?
-        <p className='movies-list__error'>{searchError}</p>
-      :
         <ul className='movies-list'>
           {
             (location.pathname === '/movies') &&
@@ -90,7 +86,6 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete,
               ))
           }
         </ul>
-      }
         {
           (location.pathname === '/movies') &&
           <AddMoreCards
