@@ -19,7 +19,7 @@ import {
   ADDING_CARDS_ON_MOBILE
 } from '../../utils/constants'
 
-function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete }) {
+function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete, searchError }) {
 
   const location = useLocation();
   const windowSize = useResize();
@@ -61,38 +61,43 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete 
 
   return (
     <>
-      <ul className='movies-list'>
+      {searchError
+      ?
+        <p className='movies-list__error'>{searchError}</p>
+      :
+        <ul className='movies-list'>
+          {
+            (location.pathname === '/movies') &&
+            displayedCards?.map((movie) => (
+                <MoviesCard
+                  key={movie.id}
+                  card={movie}
+                  onCardLike={onCardLike}
+                  savedMoviesList={savedMoviesList}
+                />
+              ))
+          }
+          {
+            (location.pathname === '/saved-movies') &&
+            savedMoviesList?.map((savedMovie) => (
+                <MoviesCard
+                  key={savedMovie.id}
+                  card={savedMovie}
+                  savedMoviesRoute={true}
+                  savedMoviesList={savedMoviesList}
+                  onCardDelete={onCardDelete}
+                />
+              ))
+          }
+        </ul>
+      }
         {
           (location.pathname === '/movies') &&
-          displayedCards?.map((movie) => (
-              <MoviesCard
-                key={movie.id}
-                card={movie}
-                onCardLike={onCardLike}
-                savedMoviesList={savedMoviesList}
-              />
-            ))
+          <AddMoreCards
+            addMoreCardsButtonClass={addMoreCardsButtonClass}
+            onClick={handleMoreCards}
+          />
         }
-        {
-          (location.pathname === '/saved-movies') &&
-          savedMoviesList?.map((savedMovie) => (
-              <MoviesCard
-                key={savedMovie.id}
-                card={savedMovie}
-                savedMoviesRoute={true}
-                savedMoviesList={savedMoviesList}
-                onCardDelete={onCardDelete}
-              />
-            ))
-        }
-      </ul>
-      {
-        (location.pathname === '/movies') &&
-        <AddMoreCards
-          addMoreCardsButtonClass={addMoreCardsButtonClass}
-          onClick={handleMoreCards}
-        />
-      }
     </>
   );
 }

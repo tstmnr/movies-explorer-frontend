@@ -29,6 +29,7 @@ function App() {
   const [moviesList, setMoviesList] = useState([]);
   const [savedMoviesList, setSavedMoviesList] = useState([]);
   const [isPreloaderActive, setPreloaderClass] = useState(false);
+  const [searchMoviesError, setSearchMoviesError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -62,10 +63,12 @@ function App() {
     e.preventDefault();
     mainApi.registration(data)
       .then((res) => {
+        console.log('data', data);
         setLoginData({
           email: data.email,
           password: data.password,
         });
+        console.log('loginData', loginData);
         handleLogin(e, loginData);
       })
       .catch((err) => {
@@ -135,15 +138,20 @@ function App() {
   function handleSearchMovies(e, isChecked) {
     e.preventDefault();
     setPreloaderClass(true);
+    setSearchMoviesError('');
     if (location.pathname === '/movies') {
       moviesApi.getMoviesCards()
       .then((movies) => {
-        const keyword = localStorage.getItem('moviesSearchQuery');
-        localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies, keyword, isChecked)));
-        setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), keyword, isChecked));
+        if (!movies.length === 0) {
+          const keyword = localStorage.getItem('moviesSearchQuery');
+          localStorage.setItem('movies', JSON.stringify(filterMoviesByKeyword(movies, keyword, isChecked)));
+          setMoviesList(filterMoviesByKeyword(JSON.parse(localStorage.getItem('movies')), keyword, isChecked));
+        } else {
+          setSearchMoviesError('По Вашему запросу совпадений не найдено');
+        }
       })
       .catch((err) => {
-        console.log(err);
+        setSearchMoviesError('На сервере произошла ошибка. Пожалуйста, повторите попытку позже.');
       })
       .finally(() => {
         setPreloaderClass(false);
@@ -221,6 +229,8 @@ function App() {
                     onCardLike={handleLikeCard}
                     searchMovies={handleSearchMovies}
                     savedMoviesList={savedMoviesList}
+                    searchError={searchMoviesError}
+                    setSearchError={setSearchMoviesError}
                   />
                 }
               />

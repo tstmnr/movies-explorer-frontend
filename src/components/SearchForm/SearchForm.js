@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ searchMovies, isChecked, setIsChecked }) {
+function SearchForm({ searchMovies, isChecked, setIsChecked, setSearchError }) {
 
   const location = useLocation();
 
@@ -19,13 +19,19 @@ function SearchForm({ searchMovies, isChecked, setIsChecked }) {
   }
 
   function handleSubmit(e) {
-    if (location.pathname === '/movies') {
-      localStorage.setItem('moviesSearchQuery', keyword);
-      searchMovies(e, isChecked);
+    if (keyword.length > 0 || keyword !== undefined || keyword !== null) {
+      if (location.pathname === '/movies') {
+        localStorage.setItem('moviesSearchQuery', keyword);
+        searchMovies(e, isChecked);
+      }
+
+      if (location.pathname === '/saved-movies') {
+        localStorage.setItem('savedMoviesSearchQuery', keyword);
+        searchMovies(e, isChecked);
+      }
     }
-    if (location.pathname === '/saved-movies') {
-      localStorage.setItem('savedMoviesSearchQuery', keyword);
-      searchMovies(e, isChecked);
+    else {
+      setSearchError('Пожалуйста, введите ключевое слово для поиска.')
     }
   }
 
