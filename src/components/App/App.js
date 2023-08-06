@@ -67,6 +67,7 @@ function App() {
         handleLogin(e, data);
       })
       .catch((err) => {
+        console.log(err);
         setSubmitError(err.message);
         console.log(submitError);
       })
