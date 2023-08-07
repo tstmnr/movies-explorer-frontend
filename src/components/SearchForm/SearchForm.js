@@ -23,15 +23,16 @@ function SearchForm({
   }
 
   function handleSubmit(e) {
+    e.preventDefault();
     if (keyword.length > 0) {
       if (location.pathname === '/movies') {
         localStorage.setItem('moviesSearchQuery', keyword);
-        searchMovies(e);
+        searchMovies();
       }
 
       if (location.pathname === '/saved-movies') {
         localStorage.setItem('savedMoviesSearchQuery', keyword);
-        searchMovies(e);
+        searchMovies();
       }
     }
   }

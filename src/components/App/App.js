@@ -130,12 +130,13 @@ function App() {
   }
 
   //функция поиска и фильтрации сохраненных фильмов
-  function handleSearchMovies(e) {
-    e.preventDefault();
+  function handleSearchMovies() {
     setPreloaderClass(true)
     setSearchMoviesError('');
     setFilteredMovies([]);
     const keyword = localStorage.getItem('moviesSearchQuery');
+    console.log(keyword);
+    console.log(isMoviesShort);
     let filtered = [];
 
     if (initialMoviesList.length === 0) {
@@ -165,8 +166,7 @@ function App() {
   }
 
   //функция фильтрации сохраненных фильмов
-  function handleSearchSavedMovies(e) {
-    e.preventDefault();
+  function handleSearchSavedMovies() {
     setPreloaderClass(true)
     setSearchSavedMoviesError('');
     setFilteredMovies([]);
