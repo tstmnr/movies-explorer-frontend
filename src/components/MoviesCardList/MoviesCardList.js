@@ -39,6 +39,7 @@ function MoviesCardList({
 
   const moviesArray = savedMoviesRoute ? filteredSavedMovies : filteredMovies;
 
+    console.log('moviesArray из Movies', moviesArray)
   const handleMoreCards = () => {
     setNumberOfDisplayedCards(numberOfDisplayedCards + numberOfAddedCards);
   };
@@ -67,6 +68,7 @@ function MoviesCardList({
   useEffect(() => {
     setDisplayedCards(moviesArray.slice(0, numberOfDisplayedCards));
   }, [moviesArray, numberOfDisplayedCards]);
+  console.log('displayedCards из Movies', displayedCards)
 
   return (
     <>

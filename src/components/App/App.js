@@ -37,7 +37,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState({}); // устанавливаем значения для текущего пользователя
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false); //проверяем открыто ли бургер-меню
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
-  const [initialMoviesList, setInitialMoviesList] = useState(JSON.parse(localStorage.getItem('movies')) || []); // список всех фильмов с api beatfilms
+  const [initialMoviesList, setInitialMoviesList] = useState([]); // список всех фильмов с api beatfilms
   const [savedMoviesList, setSavedMoviesList] = useState(JSON.parse(localStorage.getItem('saved-movies')) || []); // список сохраненных фильмов
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem('filteredMovies')) || []);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState(savedMoviesList);
@@ -143,6 +143,7 @@ function App() {
       moviesApi.getMoviesCards()
         .then((movies) => {
           if (movies) {
+            console.log('запрос к beatfilms movies', movies);
             setInitialMoviesList(movies);
             filtered = filterMoviesByKeyword(movies, keyword, isMoviesShort);
           }
@@ -156,12 +157,14 @@ function App() {
     } else {
       filtered = filterMoviesByKeyword(initialMoviesList, keyword, isMoviesShort);
     }
+    console.log('присвоили поиск фильмов к филтеред', filtered);
 
     if (filtered.length === 0) {
       setSearchMoviesError(MOVIES_NOT_FOUND);
     } else {
       localStorage.setItem('filteredMovies', JSON.stringify(filtered));
       setFilteredMovies(filtered);
+      console.log('выводим стейт фитеред', filteredMovies)
     }
   }
 
