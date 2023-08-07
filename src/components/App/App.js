@@ -33,7 +33,7 @@ import {
 } from '../../utils/constants';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.setItem('isLogged')) || false); //проверяет залогинен пользователь или нет
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.getItem('isLogged')) || false); //проверяет залогинен пользователь или нет
   const [currentUser, setCurrentUser] = useState({}); // устанавливаем значения для текущего пользователя
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false); //проверяем открыто ли бургер-меню
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
