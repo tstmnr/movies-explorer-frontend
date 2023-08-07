@@ -65,13 +65,7 @@ function MoviesCardList({
   }, [windowSize]);
 
   useEffect(() => {
-    if (location.pathname === '/movies') {
-      setDisplayedCards(moviesList.slice(0, numberOfDisplayedCards));
-    }
-  }, [moviesList, numberOfDisplayedCards, location.pathname]);
-
-  useEffect(() => {
-    setDisplayedMovies(moviesArray.slice(0, numberOfDisplayedCards));
+    setDisplayedCards(moviesArray.slice(0, numberOfDisplayedCards));
   }, [moviesArray, numberOfDisplayedCards]);
 
   return (
