@@ -173,6 +173,8 @@ function App() {
         setFilteredMovies(filtered);
         console.log('выводим стейт фитеред', filteredMovies)
       }
+
+      setPreloaderClass(false)
     }
     console.log('initialMoviesList after', initialMoviesList)
   }
