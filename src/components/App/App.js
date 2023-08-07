@@ -137,7 +137,6 @@ function App() {
     const keyword = localStorage.getItem('moviesSearchQuery');
     console.log(keyword);
     console.log(isMoviesShort);
-    let filtered = [];
 
     console.log('initialMoviesList', initialMoviesList)
 
@@ -148,6 +147,14 @@ function App() {
             console.log('запрос к beatfilms movies', movies);
             setInitialMoviesList(movies);
             filtered = filterMoviesByKeyword(movies, keyword, isMoviesShort);
+
+            if (filtered.length === 0) {
+              setSearchMoviesError(MOVIES_NOT_FOUND);
+            } else {
+              localStorage.setItem('filteredMovies', JSON.stringify(filtered));
+              setFilteredMovies(filtered);
+              console.log('выводим стейт фитеред', filteredMovies)
+            }
           }
         })
         .catch(() => {
@@ -158,18 +165,17 @@ function App() {
         })
     } else {
       filtered = filterMoviesByKeyword(initialMoviesList, keyword, isMoviesShort);
-    }
 
+      if (filtered.length === 0) {
+        setSearchMoviesError(MOVIES_NOT_FOUND);
+      } else {
+        localStorage.setItem('filteredMovies', JSON.stringify(filtered));
+        setFilteredMovies(filtered);
+        console.log('выводим стейт фитеред', filteredMovies)
+      }
+    }
     console.log('initialMoviesList after', initialMoviesList)
     console.log('присвоили поиск фильмов к филтеред', filtered);
-
-    if (filtered.length === 0) {
-      setSearchMoviesError(MOVIES_NOT_FOUND);
-    } else {
-      localStorage.setItem('filteredMovies', JSON.stringify(filtered));
-      setFilteredMovies(filtered);
-      console.log('выводим стейт фитеред', filteredMovies)
-    }
   }
 
   //функция фильтрации сохраненных фильмов
