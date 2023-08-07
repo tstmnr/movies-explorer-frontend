@@ -175,7 +175,6 @@ function App() {
       }
     }
     console.log('initialMoviesList after', initialMoviesList)
-    console.log('присвоили поиск фильмов к филтеред', filtered);
   }
 
   //функция фильтрации сохраненных фильмов
