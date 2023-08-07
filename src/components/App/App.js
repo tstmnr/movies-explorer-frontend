@@ -146,7 +146,7 @@ function App() {
           if (movies) {
             console.log('запрос к beatfilms movies', movies);
             setInitialMoviesList(movies);
-            filtered = filterMoviesByKeyword(movies, keyword, isMoviesShort);
+            let filtered = filterMoviesByKeyword(movies, keyword, isMoviesShort);
 
             if (filtered.length === 0) {
               setSearchMoviesError(MOVIES_NOT_FOUND);
@@ -164,7 +164,7 @@ function App() {
           setPreloaderClass(false)
         })
     } else {
-      filtered = filterMoviesByKeyword(initialMoviesList, keyword, isMoviesShort);
+      let filtered = filterMoviesByKeyword(initialMoviesList, keyword, isMoviesShort);
 
       if (filtered.length === 0) {
         setSearchMoviesError(MOVIES_NOT_FOUND);
