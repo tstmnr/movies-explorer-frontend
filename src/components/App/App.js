@@ -139,6 +139,8 @@ function App() {
     console.log(isMoviesShort);
     let filtered = [];
 
+    console.log('initialMoviesList', initialMoviesList)
+
     if (initialMoviesList.length === 0) {
       moviesApi.getMoviesCards()
         .then((movies) => {
@@ -157,6 +159,8 @@ function App() {
     } else {
       filtered = filterMoviesByKeyword(initialMoviesList, keyword, isMoviesShort);
     }
+
+    console.log('initialMoviesList after', initialMoviesList)
     console.log('присвоили поиск фильмов к филтеред', filtered);
 
     if (filtered.length === 0) {
