@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useLocation} from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import useResize from '../../hooks/useResize';
 
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import AddMoreCards from '../AddMoreCards/AddMoreCards';
-import useResize from '../../hooks/useResize';
+
 import {
   LAPTOP_SCREEN_WIDTH,
   TABLET_SCREEN_WIDTH,
@@ -19,7 +20,15 @@ import {
   ADDING_CARDS_ON_MOBILE
 } from '../../utils/constants'
 
-function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete, searchError }) {
+function MoviesCardList({
+  savedMoviesRoute,
+  filteredMovies,
+  savedMoviesList,
+  searchError,
+  filteredSavedMovies,
+  onCardLike,
+  onCardDelete,
+}) {
 
   const location = useLocation();
   const windowSize = useResize();
@@ -28,11 +37,13 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete,
   const [numberOfAddedCards, setNumberOfAddedCards] = useState(0);
   const [displayedCards, setDisplayedCards] = useState([]);
 
+  const moviesArray = savedMoviesRoute ? filteredSavedMovies : filteredMovies;
+
   const handleMoreCards = () => {
     setNumberOfDisplayedCards(numberOfDisplayedCards + numberOfAddedCards);
   };
 
-  const addMoreCardsButtonClass = `add-more ${moviesList?.length <= numberOfDisplayedCards && 'add-more__button_hidden'}`;
+  const addMoreCardsButtonClass = `add-more ${moviesArray?.length <= numberOfDisplayedCards && 'add-more__button_hidden'}`;
 
   useEffect(() => {
     const countMoviesOnDisplay = () => {
@@ -59,33 +70,43 @@ function MoviesCardList({ moviesList, savedMoviesList, onCardLike, onCardDelete,
     }
   }, [moviesList, numberOfDisplayedCards, location.pathname]);
 
+  useEffect(() => {
+    setDisplayedMovies(moviesArray.slice(0, numberOfDisplayedCards));
+  }, [moviesArray, numberOfDisplayedCards]);
+
   return (
     <>
+      {searchError ? (
+          <p className='movies-list__error'>{searchError}</p>
+        ) : (
         <ul className='movies-list'>
           {
             (location.pathname === '/movies') &&
-            displayedCards?.map((movie) => (
+            displayedCards.map((movie) => (
                 <MoviesCard
                   key={movie.id}
                   card={movie}
-                  onCardLike={onCardLike}
+                  savedMoviesRoute={savedMoviesRoute}
                   savedMoviesList={savedMoviesList}
+                  onCardLike={onCardLike}
+                  onCardDelete={onCardDelete}
                 />
               ))
           }
           {
             (location.pathname === '/saved-movies') &&
-            savedMoviesList?.map((savedMovie) => (
+            displayedCards.map((savedMovie) => (
                 <MoviesCard
                   key={savedMovie.id}
                   card={savedMovie}
-                  savedMoviesRoute={true}
+                  savedMoviesRoute={savedMoviesRoute}
                   savedMoviesList={savedMoviesList}
                   onCardDelete={onCardDelete}
                 />
               ))
           }
         </ul>
+        )}
         {
           (location.pathname === '/movies') &&
           <AddMoreCards

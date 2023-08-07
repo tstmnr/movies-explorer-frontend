@@ -28,12 +28,13 @@ const USER_BAD_DATA_MESSAGE = 'Переданны некоретные данн�
 const UPDATE_DEFAULT_ERROR = 'При обновлении профиля произошла ошибка'; //
 const AUTH_MESSAGE = 'Необходима авторизация';
 const TOKEN_MESSAGE = 'Неверный токен';
+const SERVER_ERROR = 'На сервере произошла ошибка. Пожалуйста, повторите попытку позже';
 
 function filterMoviesByKeyword(moviesArray, keyword, isChecked) {
   if (isChecked) {
-    return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).includes(keyword) && (movie.duration < 40)));
+    return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toLowerCase()) && (movie.duration < 40)));
   } else {
-    return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).includes(keyword));
+    return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toLowerCase()));
   }
 }
 
@@ -64,4 +65,5 @@ export {
   UPDATE_DEFAULT_ERROR,
   AUTH_MESSAGE,
   TOKEN_MESSAGE,
+  SERVER_ERROR
 }

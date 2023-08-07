@@ -1,20 +1,9 @@
-import { useLocation } from 'react-router-dom';
-
 import './FilterCheckbox.css';
 
 function FilterCheckbox({ isChecked, setIsChecked }) {
 
-  const location = useLocation();
-
   function handleChangeCheckbox() {
-    if (location.pathname === '/movies') {
-      localStorage.setItem('isMoviesShort', !isChecked);
-      setIsChecked(!isChecked);
-    }
-    if (location.pathname === '/saved-movies') {
-      localStorage.setItem('isSavedMoviesShort', !isChecked);
-      setIsChecked(!isChecked);
-    }
+    setIsChecked();
   }
 
   return (

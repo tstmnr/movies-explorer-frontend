@@ -4,7 +4,11 @@ import { useLocation } from 'react-router-dom';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({ searchMovies, isChecked, setIsChecked }) {
+function SearchForm({
+  searchMovies,
+  isShortsChecked,
+  onShortsCheck,
+}) {
 
   const location = useLocation();
 
@@ -19,15 +23,15 @@ function SearchForm({ searchMovies, isChecked, setIsChecked }) {
   }
 
   function handleSubmit(e) {
-    if (keyword.length > 0 || keyword !== undefined || keyword !== null) {
+    if (keyword.length > 0) {
       if (location.pathname === '/movies') {
         localStorage.setItem('moviesSearchQuery', keyword);
-        searchMovies(e, isChecked);
+        searchMovies(e);
       }
 
       if (location.pathname === '/saved-movies') {
         localStorage.setItem('savedMoviesSearchQuery', keyword);
-        searchMovies(e, isChecked);
+        searchMovies(e);
       }
     }
   }
@@ -47,8 +51,8 @@ function SearchForm({ searchMovies, isChecked, setIsChecked }) {
       <button className='search-form__button' type='submit'></button>
       <div className='search-form__line'></div>
       <FilterCheckbox
-        isChecked={isChecked}
-        setIsChecked={setIsChecked}
+        isShortsChecked={isShortsChecked}
+        onShortsCheck={onShortsCheck}
       />
     </form>
   );

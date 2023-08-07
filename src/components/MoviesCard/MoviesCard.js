@@ -3,7 +3,13 @@ import { useLocation} from 'react-router-dom';
 
 import './MoviesCard.css';
 
-function MoviesCard({ card, onCardLike, savedMoviesRoute, savedMoviesList, onCardDelete }) {
+function MoviesCard({
+  card,
+  onCardLike,
+  savedMoviesRoute,
+  savedMoviesList,
+  onCardDelete
+}) {
 
   const location = useLocation();
 
@@ -21,8 +27,8 @@ function MoviesCard({ card, onCardLike, savedMoviesRoute, savedMoviesList, onCar
     );
   }, [card, savedMoviesList]);
 
-  function handleToggleLike() {
-    onCardLike(card, isSaved);
+  function handleLikeCard() {
+    onCardLike(card, isSaved, setIsSaved);
   }
 
   function handleDeleteCard() {
@@ -55,7 +61,7 @@ function MoviesCard({ card, onCardLike, savedMoviesRoute, savedMoviesList, onCar
           ?
           <button
             className={movieCardLikeButtonClassName}
-            onClick={handleToggleLike}
+            onClick={handleLikeCard}
             type='button'
             aria-label='Добавить в сохраненные фильмы'>
           </button>

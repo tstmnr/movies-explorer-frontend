@@ -29,7 +29,7 @@ function Login({ handleLogin, submitError }) {
       return setEmailError('Поле "E-mail" должно быть заполнено');
     }
 
-    const regExp = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i;
+    const regExp = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
     if(!regExp.test(String(e.target.value).toLowerCase())) {
       setEmailError('Поле "E-mail" некорректно заполнено');
     } else {
