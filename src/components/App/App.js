@@ -204,7 +204,7 @@ function App() {
             setIsSaved(true);
           }
         })
-        .catch(() => {
+        .catch((err) => {
           console.error(`${err}`);
         });
     }
