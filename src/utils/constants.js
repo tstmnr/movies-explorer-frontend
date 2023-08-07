@@ -27,7 +27,8 @@ const SIGNUP_DEFAULT_ERROR = 'При регистрации пользовате
 const USER_BAD_DATA_MESSAGE = 'Переданны некоретные данные для редактирования данных пользователя'; //
 const UPDATE_DEFAULT_ERROR = 'При обновлении профиля произошла ошибка'; //
 const AUTH_MESSAGE = 'Необходима авторизация';
-const TOKEN_MESSAGE = 'Неверный токен';
+const MOVIES_NOT_FOUND = 'По вашему запросу совпадений не найдено';
+const EMPTY_INPUT = 'Пожалуйста, введите ключевое слово поиска';
 const SERVER_ERROR = 'На сервере произошла ошибка. Пожалуйста, повторите попытку позже';
 
 function filterMoviesByKeyword(moviesArray, keyword, isChecked) {
@@ -64,6 +65,7 @@ export {
   USER_BAD_DATA_MESSAGE,
   UPDATE_DEFAULT_ERROR,
   AUTH_MESSAGE,
-  TOKEN_MESSAGE,
+  EMPTY_INPUT,
+  MOVIES_NOT_FOUND,
   SERVER_ERROR
 }

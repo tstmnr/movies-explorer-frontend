@@ -27,11 +27,13 @@ import {
   SIGNUP_BAD_DATA_MESSAGE,
   SIGNUP_DEFAULT_ERROR,
   UPDATE_DEFAULT_ERROR,
+  MOVIES_NOT_FOUND,
+  EMPTY_INPUT,
   SERVER_ERROR,
 } from '../../utils/constants';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false); //проверяет залогинен пользователь или нет
+  const [loggedIn, setLoggedIn] = useState(JSON.parse(localStorage.setItem('isLogged')) || false); //проверяет залогинен пользователь или нет
   const [currentUser, setCurrentUser] = useState({}); // устанавливаем значения для текущего пользователя
   const [isOpenHamburgerMenu, setIsOpenHamburgerMenu] = useState(false); //проверяем открыто ли бургер-меню
   const [isEditable, setIsEditable] = useState(false); //проверяет можно ли редактировать данные пользователя
@@ -60,27 +62,29 @@ function App() {
   function getSavedMovies() {
     mainApi.getMovies()
       .then((savedMovies) => {
-        //localStorage.setItem('saved-movies', JSON.stringify(savedMovies));
-        setSavedMoviesList(savedMovies);
+        if (savedMovies) {
+          localStorage.setItem('saved-movies', JSON.stringify(savedMovies));
+          setSavedMoviesList(savedMovies);
+        }
       })
       .catch(() => {
-        //setSearchSavedMoviesError('На сервере произошла ошибка. Пожалуйста, повторите попытку позже.')
+        setSearchSavedMoviesError(SERVER_ERROR);
       })
   }
 
   function getUserInfo() {
     mainApi.getUserInfo()
     .then((userData) => {
-      setCurrentUser(userData);
-      console.log(userData);
-      console.log(currentUser);
-      setLoggedIn(true);
-      setSearchMoviesError('');
-      setSearchSavedMoviesError('');
-      navigate(location.pathname);
+      if (userData) {
+        setCurrentUser(userData);
+        setLoggedIn(true);
+        setSearchMoviesError('');
+        setSearchSavedMoviesError('');
+        navigate(location.pathname);
+      }
     })
     .catch((err) => {
-      //console.error(`${err}`);
+      console.error(`${err}`);
     })
   }
 
@@ -93,7 +97,7 @@ function App() {
       setFilteredMovies(shorts);
 
       if (shorts.length === 0) {
-        setSearchMoviesError('По вашему запросу совпадений не найдено'); //вставить константу
+        setSearchMoviesError(MOVIES_NOT_FOUND);
       }
     } else if (!isMoviesShort && filteredMovies && filteredMovies.length !== 0) {
       handleSearchMovies();
@@ -110,7 +114,7 @@ function App() {
       setFilteredSavedMovies(savedShorts);
 
       if (savedShorts.length === 0) {
-        setSearchSavedMoviesError('По вашему запросу совпадений не найдено'); //вставить константу
+        setSearchSavedMoviesError(MOVIES_NOT_FOUND);
       }
     } else {
       setFilteredSavedMovies(previousSavedMovies);
@@ -119,37 +123,41 @@ function App() {
 
   function showSearchInputError() {
     if (location.pathname === '/movies') {
-      setSearchMoviesError('Пожалуйста, введите ключевое слово поиска'); // записать в конст
+      setSearchMoviesError(EMPTY_INPUT);
     } else if (location.pathname === '/saved-movies') {
-      setSearchSavedMoviesError('Пожалуйста, введите ключевое слово поиска'); // записать в конст
+      setSearchSavedMoviesError(EMPTY_INPUT);
     }
   }
 
   //функция поиска и фильтрации сохраненных фильмов
   function handleSearchMovies(e) {
     e.preventDefault();
+    setPreloaderClass(true)
     setSearchMoviesError('');
     setFilteredMovies([]);
     const keyword = localStorage.getItem('moviesSearchQuery');
-    let filtered = []; //отфильтрованные фильмы
+    let filtered = [];
 
     if (initialMoviesList.length === 0) {
       moviesApi.getMoviesCards()
         .then((movies) => {
-          //проверка movies на наличие if (movies) {}
-          setInitialMoviesList(movies);
-          filtered = filterMoviesByKeyword(movies, keyword, isMoviesShort);
+          if (movies) {
+            setInitialMoviesList(movies);
+            filtered = filterMoviesByKeyword(movies, keyword, isMoviesShort);
+          }
         })
-        .catch(() =>
-          setSearchMoviesError('Произошла непредвиденная ошибка. Это может быть вызвано работой сервера. Пожалуйста, повторите попытку позже.') //поставить ошибку из констант
-        )
-        .finally(() => setPreloaderClass(false)); // ставим отключение прелоадера после поиска
+        .catch(() => {
+          setSearchMoviesError(SERVER_ERROR)
+        })
+        .finally(() => {
+          setPreloaderClass(false)
+        })
     } else {
       filtered = filterMoviesByKeyword(initialMoviesList, keyword, isMoviesShort);
     }
 
     if (filtered.length === 0) {
-      setSearchMoviesError('По вашему запросу совпадений не найдено'); //поставить ошибку из констант
+      setSearchMoviesError(MOVIES_NOT_FOUND);
     } else {
       localStorage.setItem('filteredMovies', JSON.stringify(filtered));
       setFilteredMovies(filtered);
@@ -159,6 +167,7 @@ function App() {
   //функция фильтрации сохраненных фильмов
   function handleSearchSavedMovies(e) {
     e.preventDefault();
+    setPreloaderClass(true)
     setSearchSavedMoviesError('');
     setFilteredMovies([]);
     const keyword = localStorage.getItem('savedMoviesSearchQuery');
@@ -166,11 +175,13 @@ function App() {
     let filtered = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
 
     if (filtered.length === 0) {
-      setSearchSavedMoviesError('По вашему запросу совпадений не найдено'); //поставить ошибку из констант
+      setSearchSavedMoviesError(MOVIES_NOT_FOUND);
     } else {
       localStorage.setItem('filteredSavedMovies', JSON.stringify(filtered));
       setSearchSavedMoviesError(filtered);
     }
+
+    setPreloaderClass(false);
   }
 
   function handleShortsFilter() {
@@ -188,27 +199,29 @@ function App() {
     if (!isSaved) {
       mainApi.saveMovie(card)
         .then((savedMovie) => {
-          setSavedMoviesList([savedMovie, ...savedMoviesList]);
-          setIsSaved(true);
+          if (savedMovie) {
+            setSavedMoviesList([savedMovie, ...savedMoviesList]);
+            setIsSaved(true);
+          }
         })
         .catch(() => {
-          setSearchSavedMoviesError(
-            'Произошла непредвиденная ошибка. Это может быть вызвано работой сервера. Пожалуйста, повторите попытку позже.'
-          ); // заменить на константу
+          console.error(`${err}`);
         });
     }
   }
 
   function handleCardDelete(card) {
     mainApi.deleteMovie(card._id)
-      .then(() => {
-        setSavedMoviesList((state) =>
-          state.filter((movie) => movie._id !== card._id)
-        );
-        localStorage.setItem('saved-movies', JSON.stringify(savedMoviesList));
+      .then((res) => {
+        if (res) {
+          setSavedMoviesList((state) =>
+            state.filter((movie) => movie._id !== card._id)
+          );
+          localStorage.setItem('saved-movies', JSON.stringify(savedMoviesList));
+        }
       })
       .catch((err) => {
-        console.log(err);
+        console.error(`${err}`);
       });
   }
 
@@ -242,13 +255,15 @@ function App() {
     e.preventDefault();
     mainApi.authentication(data)
       .then((res) => {
-        localStorage.setItem('isLogged', true);
-        localStorage.setItem('isSavedMoviesShort', false);
-        localStorage.setItem('isMoviesShort', false);
-        localStorage.setItem('moviesSearchQuery', '');
-        localStorage.setItem('savedMoviesSearchQuery', '');
-        setLoggedIn(true);
-        navigate('/movies', { replace: true });
+        if (res) {
+          localStorage.setItem('isLogged', true);
+          localStorage.setItem('isSavedMoviesShort', false);
+          localStorage.setItem('isMoviesShort', false);
+          localStorage.setItem('moviesSearchQuery', '');
+          localStorage.setItem('savedMoviesSearchQuery', '');
+          setLoggedIn(true);
+          navigate('/movies', { replace: true });
+        }
       })
       .catch((err) => {
         if (err.status === 401) {
@@ -263,11 +278,11 @@ function App() {
     e.preventDefault();
     mainApi.updateUserData(data)
       .then((userData) => {
-        console.log(userData);
-        console.log(currentUser);
-        setCurrentUser(userData);
-        //вставить оповещение, что профиль изменен
-        setIsEditable(!isEditable);
+        if (userData) {
+          setCurrentUser(userData);
+          //вставить оповещение, что профиль изменен
+          setIsEditable(!isEditable);
+        }
       })
       .catch((err) => {
         if (err.status === 400) {
@@ -288,13 +303,15 @@ function App() {
 
   function handleLogout() {
     mainApi.logout()
-      .then(() => {
-        setLoggedIn(false);
-        navigate('/', { replace: true });
-        localStorage.clear();
+      .then((res) => {
+        if (res) {
+          setLoggedIn(false);
+          navigate('/', { replace: true });
+          localStorage.clear();
+        }
       })
       .catch((err) =>
-        console.log(err) //Что то пошло не так
+        console.log('Что-то пошло не так...')
       );
   }
 

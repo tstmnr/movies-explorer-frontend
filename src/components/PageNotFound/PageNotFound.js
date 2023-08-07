@@ -6,7 +6,7 @@ function PageNotFound () {
   const navigate = useNavigate();
 
   function goBack() {
-      navigate(-1); // поменять на -2 и -3 попробовать
+      navigate(-3);
       console.log('goBack');
   }
 

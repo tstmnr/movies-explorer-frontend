@@ -1,9 +1,9 @@
 import './FilterCheckbox.css';
 
-function FilterCheckbox({ isChecked, setIsChecked }) {
+function FilterCheckbox({ isShortsChecked, onShortsCheck }) {
 
   function handleChangeCheckbox() {
-    setIsChecked();
+    onShortsCheck();
   }
 
   return (
@@ -13,7 +13,7 @@ function FilterCheckbox({ isChecked, setIsChecked }) {
         name='slider'
         type='checkbox'
         placeholder='Чекбокс'
-        checked={isChecked}
+        checked={isShortsChecked}
         onChange={handleChangeCheckbox}
       />
       <span className='filter-checkbox__slider'></span>
