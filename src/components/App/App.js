@@ -100,26 +100,25 @@ function App() {
         setSearchMoviesError(MOVIES_NOT_FOUND);
       }
     } else if (!isMoviesShort && filteredMovies && filteredMovies.length !== 0) {
-      //handleSearchMovies();
-      setFilteredMovies(filteredMovies);
+      handleSearchMovies();
+      //setFilteredMovies(filteredMovies);
     }
   }, [isMoviesShort]);
 
   useEffect(() => {
     setSearchSavedMoviesError('');
+    const savedShorts = [];
 
     if (isSavedMoviesShort && savedMoviesList && savedMoviesList.length !== 0) {
       const keyword = localStorage.getItem('savedMoviesSearchQuery');
       const savedShorts = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
-      setPreviousSavedMovies(savedMoviesList);
       setFilteredSavedMovies(savedShorts);
 
       if (savedShorts.length === 0) {
         setSearchSavedMoviesError(MOVIES_NOT_FOUND);
       }
     } else {
-      //setFilteredSavedMovies(savedShorts);
-      setPreviousSavedMovies(savedMoviesList);
+      setFilteredSavedMovies(previousSavedMovies);
     }
   }, [isSavedMoviesShort]);
 
