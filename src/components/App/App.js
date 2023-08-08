@@ -41,7 +41,6 @@ function App() {
   const [savedMoviesList, setSavedMoviesList] = useState(JSON.parse(localStorage.getItem('saved-movies')) || []); // список сохраненных фильмов
   const [filteredMovies, setFilteredMovies] = useState(JSON.parse(localStorage.getItem('filteredMovies')) || []);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState(savedMoviesList);
-  const [previousSavedMovies, setPreviousSavedMovies] = useState(savedMoviesList || []);
   const [isPreloaderActive, setPreloaderClass] = useState(false); // вкл/выкл прелоадера
   const [searchMoviesError, setSearchMoviesError] = useState('');
   const [searchSavedMoviesError, setSearchSavedMoviesError] = useState('');
@@ -118,8 +117,6 @@ function App() {
       }
     } else if (!isSavedMoviesShort && savedMoviesList && savedMoviesList.length !== 0) {
       handleSearchSavedMovies();
-      //const savedNoShorts = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
-      //setFilteredSavedMovies(savedNoShorts);
     }
   }, [isSavedMoviesShort]);
 
@@ -347,10 +344,10 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === '/movies') {
-      handleSearchMovies();
+      setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies'), localStorage.getItem('moviesSearchQuery'), isMoviesShort));
     }
     if (location.pathname === '/saved-movies') {
-      handleSearchSavedMovies();
+      setFilteredSavedMovies(JSON.parse(localStorage.getItem('filteredSavedMovies'), localStorage.getItem('savedMoviesSearchQuery'), isSavedMoviesShort))
     }
   }, []);
 
