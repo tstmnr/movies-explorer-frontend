@@ -183,16 +183,16 @@ function App() {
   function handleSearchSavedMovies() {
     setPreloaderClass(true)
     setSearchSavedMoviesError('');
-    setFilteredMovies([]);
+    setFilteredSavedMovies([]);
     const keyword = localStorage.getItem('savedMoviesSearchQuery');
 
     let filtered = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
-
+    console.log(filtered);
     if (filtered.length === 0) {
       setSearchSavedMoviesError(MOVIES_NOT_FOUND);
     } else {
       localStorage.setItem('filteredSavedMovies', JSON.stringify(filtered));
-      setSearchSavedMoviesError(filtered);
+      setFilteredSavedMovies(filtered);
     }
 
     setPreloaderClass(false);
