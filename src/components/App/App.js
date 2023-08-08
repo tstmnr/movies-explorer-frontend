@@ -107,17 +107,17 @@ function App() {
 
   useEffect(() => {
     setSearchSavedMoviesError('');
-    const savedShorts = [];
 
     if (isSavedMoviesShort && savedMoviesList && savedMoviesList.length !== 0) {
       const keyword = localStorage.getItem('savedMoviesSearchQuery');
       const savedShorts = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
+      setPreviousSavedMovies(savedMoviesList);
       setFilteredSavedMovies(savedShorts);
 
       if (savedShorts.length === 0) {
         setSearchSavedMoviesError(MOVIES_NOT_FOUND);
       }
-    } else {
+    } else if (!isSavedMoviesShort && savedMoviesList && savedMoviesList.length !== 0) {
       setFilteredSavedMovies(previousSavedMovies);
     }
   }, [isSavedMoviesShort]);
