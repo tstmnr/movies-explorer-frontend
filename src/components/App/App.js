@@ -311,6 +311,7 @@ function App() {
 
   function handleEditProfile() {
     setIsEditable(!isEditable);
+    setSubmitError('');
   }
 
   function handleLogout() {

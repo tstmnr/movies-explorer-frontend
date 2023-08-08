@@ -124,6 +124,12 @@
   opacity: .8;
 }
 
+.profile__button_type_blocked {
+  cursor: none;
+  opacity: .3;
+  transition: none;
+}
+
 .profile__buttons {
   display: flex;
   flex-direction: column;

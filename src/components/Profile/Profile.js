@@ -17,7 +17,6 @@ function Profile({
 
   const [changeName, setChangeName] = useState(currentUser.name)
   const [changeEmail, setChangeEmail] = useState(currentUser.email)
-  const [buttonText, setButtonText] = useState('Сохранить');
   const [nameError, setNameError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [formValid, setFormValid] = useState(false);
@@ -34,6 +33,14 @@ function Profile({
       setFormValid(true);
     }
   }, [nameError, emailError]);
+
+  useEffect(() => {
+    if (changeName === currentUser.email || changeEmail === currentUser.email) {
+      setFormValid(false);
+    } else {
+      setFormValid(true)
+    }
+  }, [changeName, changeEmail])
 
   const handleChangeName = (e) => {
     setChangeName(e.target.value);
@@ -70,6 +77,7 @@ function Profile({
 
   const editProfile = () => {
     handleEditProfile();
+    setFormValid(false);
   }
 
   const submitForm = (e) => {
@@ -122,7 +130,7 @@ function Profile({
             </div>
             <span className={submitError === UPDATE_SUCCESS_MESSAGE ? 'profile__submit-success' : 'profile__submit-error'}>{submitError ? `${submitError}` : ''}</span>
             {isEditable &&
-              <button disabled={!formValid} className='profile__button' type='submit'>{buttonText}</button>
+              <button disabled={!formValid} className={formValid ? 'profile__button' : 'profile__button profile__button_type_blocked'} type='submit'>Сохранить</button>
             }
           </form>
         </div>
