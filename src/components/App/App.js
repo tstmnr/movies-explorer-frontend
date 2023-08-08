@@ -418,7 +418,6 @@ function App() {
                     handleChangeProfileData={handleChangeProfileData}
                     submitError={submitError}
                     setSubmitError={setSubmitError}
-                    updateProfileMessage={updateProfileMessage}
                   />
                 }
               />
