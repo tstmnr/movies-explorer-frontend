@@ -107,18 +107,18 @@ function App() {
 
   useEffect(() => {
     setSearchSavedMoviesError('');
+    const keyword = localStorage.getItem('savedMoviesSearchQuery');
 
     if (isSavedMoviesShort && savedMoviesList && savedMoviesList.length !== 0) {
-      const keyword = localStorage.getItem('savedMoviesSearchQuery');
       const savedShorts = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
-      setPreviousSavedMovies(savedMoviesList);
       setFilteredSavedMovies(savedShorts);
 
       if (savedShorts.length === 0) {
         setSearchSavedMoviesError(MOVIES_NOT_FOUND);
       }
     } else if (!isSavedMoviesShort && savedMoviesList && savedMoviesList.length !== 0) {
-      setFilteredSavedMovies(previousSavedMovies);
+      const savedNoShorts = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
+      setFilteredSavedMovies(savedNoShorts);
     }
   }, [isSavedMoviesShort]);
 
