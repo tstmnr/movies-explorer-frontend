@@ -135,7 +135,8 @@
   border-radius: 3px;
   height: 45px;
   padding: 0;
-  cursor: none;
+  cursor: auto;
+  opacity: .2;
 }
 
 .profile__buttons {
