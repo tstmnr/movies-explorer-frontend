@@ -67,7 +67,11 @@ function Login({ handleLogin, submitError }) {
     });
   }
 
-  return (
+  return loggedIn
+    ? (
+      <Navigate to='/' replace />
+    )
+    : (
     <section className='login'>
       <div className='login__content'>
         <div className='login__logo'>
@@ -116,7 +120,7 @@ function Login({ handleLogin, submitError }) {
         </p>
       </div>
     </section>
-  );
+  )
 }
 
 export default Login;

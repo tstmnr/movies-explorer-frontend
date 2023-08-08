@@ -429,6 +429,7 @@ function App() {
                 <Login
                   handleLogin={handleLogin}
                   submitError={submitError}
+                  loggedIn={loggedIn}
                 />
               }
             />
@@ -439,6 +440,7 @@ function App() {
                   handleRegister={handleRegister}
                   submitError={submitError}
                   setSubmitError={setSubmitError}
+                  loggedIn={loggedIn}
                 />
               }
             />

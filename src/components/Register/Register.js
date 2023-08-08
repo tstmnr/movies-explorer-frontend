@@ -1,10 +1,10 @@
 import { React, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 import './Register.css';
 import Logo from '../Logo/Logo';
 
-function Register({ handleRegister, submitError, setSubmitError }) {
+function Register({ handleRegister, submitError, setSubmitError, loggedIn }) {
 
   const [changeName, setChangeName] = useState('');
   const [changeEmail, setChangeEmail] = useState('');
@@ -88,7 +88,11 @@ function Register({ handleRegister, submitError, setSubmitError }) {
     });
   }
 
-  return (
+  return loggedIn
+    ? (
+      <Navigate to='/' replace />
+    )
+    : (
     <section className='register'>
       <div className='register__content'>
         <div className='register__logo'>
@@ -151,7 +155,7 @@ function Register({ handleRegister, submitError, setSubmitError }) {
         </p>
       </div>
     </section>
-  );
+    )
 }
 
 export default Register;
