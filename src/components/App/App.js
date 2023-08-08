@@ -134,8 +134,6 @@ function App() {
     setSearchMoviesError('');
     setFilteredMovies([]);
     const keyword = localStorage.getItem('moviesSearchQuery');
-    console.log(keyword);
-    console.log(isMoviesShort);
 
     console.log('initialMoviesList', initialMoviesList)
 
@@ -341,15 +339,6 @@ function App() {
   function handleCloseHamburgerMenu() {
     setIsOpenHamburgerMenu(false);
   }
-
-  useEffect(() => {
-    if (location.pathname === '/movies') {
-      setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies'), localStorage.getItem('moviesSearchQuery'), isMoviesShort));
-    }
-    if (location.pathname === '/saved-movies') {
-      setFilteredSavedMovies(JSON.parse(localStorage.getItem('filteredSavedMovies'), localStorage.getItem('savedMoviesSearchQuery'), isSavedMoviesShort))
-    }
-  }, []);
 
   return (
     <div className='page'>
