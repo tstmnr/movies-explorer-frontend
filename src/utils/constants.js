@@ -14,28 +14,25 @@ const ADDING_CARDS_ON_TABLET = 2;
 const INITIAL_NUMBER_OF_CARDS_DISPLAYED_ON_MOBILE = 5;
 const ADDING_CARDS_ON_MOBILE = 2;
 
-const MOVIE_BAD_DATA_MESSAGE = 'Переданы некоректные данные при создании карточки';
-const MOVIE_NOT_FOUND_MESSAGE = 'Фильм не найден';
-const MOVIE_FORBIDDEN_MESSAGE = 'Нельзя удалить фильм созданный не вами';
-const MOVIE_BAD_ID_MESSAGE = 'Передан некорректный ID фильма';
-const MOVIE_DELETE_NF_MESSAGE = 'Карточка с указанным ID не найдена';
-const SIGNIN_BAD_DATA_MESSAGE = 'Вы ввели неправильный email или пароль'; //
-const SIGNIN_DEFAULT_ERROR = 'При авторизации произошла ошибка'; //
-const SIGNUP_BAD_DATA_MESSAGE = 'Переданы некоректные данные при регистрации'; //
-const SIGNUP_CONFLICT_MESSAGE = 'Пользователь с указанным email уже зарегестрирован'; //
-const SIGNUP_DEFAULT_ERROR = 'При регистрации пользователя произошла ошибка'; //
+const SIGNIN_BAD_DATA_MESSAGE = 'Вы ввели неправильный email или пароль';
+const SIGNIN_DEFAULT_ERROR = 'При авторизации произошла ошибка';
+const SIGNUP_BAD_DATA_MESSAGE = 'Переданы некоректные данные при регистрации';
+const SIGNUP_CONFLICT_MESSAGE = 'Пользователь с указанным email уже зарегестрирован';
+const SIGNUP_DEFAULT_ERROR = 'При регистрации пользователя произошла ошибка';
 const USER_BAD_DATA_MESSAGE = 'Переданны некоретные данные для редактирования данных пользователя'; //
-const UPDATE_DEFAULT_ERROR = 'При обновлении профиля произошла ошибка'; //
-const AUTH_MESSAGE = 'Необходима авторизация';
+const UPDATE_DEFAULT_ERROR = 'При обновлении профиля произошла ошибка';
+const UPDATE_SUCCESS_MESSAGE = 'Данные профиля успешно обновлены';
 const MOVIES_NOT_FOUND = 'По вашему запросу совпадений не найдено';
 const EMPTY_INPUT = 'Пожалуйста, введите ключевое слово поиска';
 const SERVER_ERROR = 'На сервере произошла ошибка. Пожалуйста, повторите попытку позже';
 
+const SHORT_MOVIE_DURATION = 40;
+
 function filterMoviesByKeyword(moviesArray, keyword, isChecked) {
   if (isChecked) {
-    return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toString().toLowerCase()) && (movie.duration < 40)));
+    return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toLowerCase()) && (movie.duration < SHORT_MOVIE_DURATION)));
   } else {
-    return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toString().toLowerCase()));
+    return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toLowerCase()));
   }
 }
 

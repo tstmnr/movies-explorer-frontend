@@ -1,9 +1,17 @@
 import { React, useContext, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
+import { UPDATE_SUCCESS_MESSAGE } from '../../utils/constants';
+
 import './Profile.css';
 
-function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProfileData, submitError, setSubmitError }) {
+function Profile({
+  isEditable,
+  handleLogout,
+  handleEditProfile,
+  handleChangeProfileData,
+  submitError,
+  setSubmitError }) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -17,7 +25,6 @@ function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProf
   useEffect(() => {
     setChangeName(currentUser.name);
     setChangeEmail(currentUser.email);
-    setButtonText('Сохранить');
   }, [currentUser, isEditable]);
 
   useEffect(() => {
@@ -66,7 +73,6 @@ function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProf
   }
 
   const submitForm = (e) => {
-    setButtonText('Сохранение...');
     handleChangeProfileData(e, {
       name: changeName,
       email: changeEmail,
@@ -114,7 +120,7 @@ function Profile({ isEditable, handleLogout, handleEditProfile, handleChangeProf
               : ''
               }
             </div>
-            <span className='profile__submit-error'>{submitError ? `${submitError}` : ''}</span>
+            <span className={submitError === UPDATE_SUCCESS_MESSAGE ? 'profile__submit-success' : 'profile__submit-error'}>{submitError ? `${submitError}` : ''}</span>
             {isEditable &&
               <button disabled={!formValid} className='profile__button' type='submit'>{buttonText}</button>
             }

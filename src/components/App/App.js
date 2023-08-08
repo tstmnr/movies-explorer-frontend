@@ -29,6 +29,7 @@ import {
   UPDATE_DEFAULT_ERROR,
   MOVIES_NOT_FOUND,
   EMPTY_INPUT,
+  UPDATE_SUCCESS_MESSAGE,
   SERVER_ERROR,
 } from '../../utils/constants';
 
@@ -168,7 +169,7 @@ function App() {
       } else {
         localStorage.setItem('filteredMovies', JSON.stringify(filtered));
         setFilteredMovies(filtered);
-        console.log('выводим стейт фитеред', filteredMovies)
+
       }
 
       setPreloaderClass(false)
@@ -291,7 +292,7 @@ function App() {
       .then((userData) => {
         if (userData) {
           setCurrentUser(userData);
-          //вставить оповещение, что профиль изменен
+          setSubmitError(UPDATE_SUCCESS_MESSAGE)
           setIsEditable(!isEditable);
         }
       })
@@ -417,6 +418,7 @@ function App() {
                     handleChangeProfileData={handleChangeProfileData}
                     submitError={submitError}
                     setSubmitError={setSubmitError}
+                    updateProfileMessage={updateProfileMessage}
                   />
                 }
               />
