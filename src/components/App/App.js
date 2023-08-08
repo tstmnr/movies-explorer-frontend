@@ -118,7 +118,8 @@ function App() {
         setSearchSavedMoviesError(MOVIES_NOT_FOUND);
       }
     } else {
-      setFilteredSavedMovies(previousSavedMovies);
+      //setFilteredSavedMovies(savedShorts);
+      setPreviousSavedMovies(savedMoviesList);
     }
   }, [isSavedMoviesShort]);
 
