@@ -122,6 +122,10 @@ function App() {
     }
   }, [isSavedMoviesShort]);
 
+  useEffect(() => {
+    handleSearchSavedMovies();
+  }, []);
+
   function showSearchInputError() {
     if (location.pathname === '/movies') {
       setSearchMoviesError(EMPTY_INPUT);
