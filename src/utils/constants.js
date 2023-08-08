@@ -33,9 +33,9 @@ const SERVER_ERROR = 'На сервере произошла ошибка. По�
 
 function filterMoviesByKeyword(moviesArray, keyword, isChecked) {
   if (isChecked) {
-    return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toLowerCase()) && (movie.duration < 40)));
+    return moviesArray.filter((movie) => ((movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toString().toLowerCase()) && (movie.duration < 40)));
   } else {
-    return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toLowerCase()));
+    return moviesArray.filter((movie) => (movie.nameRU + movie.nameEN).toLowerCase().includes(keyword.toString().toLowerCase()));
   }
 }
 

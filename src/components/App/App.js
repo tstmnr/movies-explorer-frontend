@@ -101,7 +101,7 @@ function App() {
       }
     } else if (!isMoviesShort && filteredMovies && filteredMovies.length !== 0) {
       handleSearchMovies();
-      //setFilteredMovies(filteredMovies);
+
     }
   }, [isMoviesShort]);
 
@@ -117,14 +117,11 @@ function App() {
         setSearchSavedMoviesError(MOVIES_NOT_FOUND);
       }
     } else if (!isSavedMoviesShort && savedMoviesList && savedMoviesList.length !== 0) {
-      const savedNoShorts = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
-      setFilteredSavedMovies(savedNoShorts);
+      handleSearchSavedMovies();
+      //const savedNoShorts = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
+      //setFilteredSavedMovies(savedNoShorts);
     }
   }, [isSavedMoviesShort]);
-
-  useEffect(() => {
-    handleSearchSavedMovies();
-  }, []);
 
   function showSearchInputError() {
     if (location.pathname === '/movies') {
@@ -347,6 +344,15 @@ function App() {
   function handleCloseHamburgerMenu() {
     setIsOpenHamburgerMenu(false);
   }
+
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      handleSearchMovies();
+    }
+    if (location.pathname === '/saved-movies') {
+      handleSearchSavedMovies();
+    }
+  }, []);
 
   return (
     <div className='page'>
