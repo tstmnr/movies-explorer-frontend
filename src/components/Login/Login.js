@@ -1,10 +1,10 @@
 import { React, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Navigate, Link } from 'react-router-dom';
 
 import './Login.css';
 import Logo from '../Logo/Logo';
 
-function Login({ handleLogin, submitError }) {
+function Login({ handleLogin, submitError, loggedIn }) {
 
   const [changeEmail, setChangeEmail] = useState('');
   const [changePassword, setChangePassword] = useState('');
