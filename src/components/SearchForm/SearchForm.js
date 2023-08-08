@@ -8,6 +8,7 @@ function SearchForm({
   searchMovies,
   isShortsChecked,
   onShortsCheck,
+  emptyInput
 }) {
 
   const location = useLocation();
@@ -24,6 +25,12 @@ function SearchForm({
 
   function handleSubmit(e) {
     e.preventDefault();
+
+    if (keyword.trim() === '') {
+      emptyInput();
+      return;
+    }
+
     if (keyword.length > 0) {
       if (location.pathname === '/movies') {
         localStorage.setItem('moviesSearchQuery', keyword);

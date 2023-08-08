@@ -381,6 +381,7 @@ function App() {
                     searchError={searchMoviesError}
                     onCardLike={handleLikeCard}
                     onCardDelete={handleCardDelete}
+                    emptyInput={showSearchInputError}
                   />
                 }
               />
@@ -399,6 +400,7 @@ function App() {
                     onCardDelete={handleCardDelete}
                     searchError={searchSavedMoviesError}
                     searchMovies={handleSearchSavedMovies}
+                    emptyInput={showSearchInputError}
                   />
                 }
               />
