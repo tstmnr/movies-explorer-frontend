@@ -130,7 +130,7 @@ function Profile({
             </div>
             <span className={submitError === UPDATE_SUCCESS_MESSAGE ? 'profile__submit-success' : 'profile__submit-error'}>{submitError ? `${submitError}` : ''}</span>
             {isEditable &&
-              <button disabled={!formValid} className={formValid ? 'profile__button' : 'profile__button profile__button_type_blocked'} type='submit'>Сохранить</button>
+              <button disabled={!formValid} className={formValid ? 'profile__button' : 'profile__disabled-button'} type='submit'>Сохранить</button>
             }
           </form>
         </div>
