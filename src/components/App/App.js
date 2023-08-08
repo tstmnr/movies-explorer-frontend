@@ -100,7 +100,8 @@ function App() {
         setSearchMoviesError(MOVIES_NOT_FOUND);
       }
     } else if (!isMoviesShort && filteredMovies && filteredMovies.length !== 0) {
-      handleSearchMovies();
+      //handleSearchMovies();
+      setFilteredMovies(filteredMovies);
     }
   }, [isMoviesShort]);
 
