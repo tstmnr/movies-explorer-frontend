@@ -2,7 +2,7 @@
 
 [Ссылка на макет](https://disk.yandex.ru/d/QRU2jq2zwFQ_lg)
 
-[Ссылка на Pull Request](https://github.com/tstmnr/movies-explorer-frontend/pull/4)
+[Ссылка на Pull Request](https://github.com/tstmnr/movies-explorer-frontend/pull/5)
 
 [Ссылка на проект](https://tstmnr.diploma.nomoredomains.rocks)
 
