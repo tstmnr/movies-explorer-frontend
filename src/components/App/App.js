@@ -264,6 +264,9 @@ function App() {
           setSubmitError(SIGNUP_DEFAULT_ERROR);
         }
       })
+      .finally(() => {
+        setBlockedInputandSubmit(false);
+      })
   }
 
   function handleLogin(e, data) {
@@ -286,6 +289,9 @@ function App() {
         } else {
           setSubmitError(SIGNIN_DEFAULT_ERROR);
         }
+      })
+      .finally(() => {
+        setBlockedInputandSubmit(false);
       })
   }
 
