@@ -35,7 +35,7 @@ function Profile({
   }, [nameError, emailError]);
 
   useEffect(() => {
-    if (changeName === currentUser.email || changeEmail === currentUser.email) {
+    if (changeName === currentUser.name || changeEmail === currentUser.email) {
       setFormValid(false);
     } else {
       setFormValid(true)

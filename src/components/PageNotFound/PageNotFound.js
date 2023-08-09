@@ -2,12 +2,15 @@ import { useNavigate } from 'react-router-dom';
 
 import './PageNotFound.css';
 
-function PageNotFound () {
+function PageNotFound ({ loggedIn }) {
   const navigate = useNavigate();
 
   function goBack() {
-      navigate(-3);
-      console.log('goBack');
+    if (loggedIn) {
+      navigate(-2);
+    } else {
+      navigate(-1);
+    }
   }
 
   return (
