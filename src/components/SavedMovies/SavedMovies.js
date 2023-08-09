@@ -12,8 +12,7 @@ function SavedMovies({
   onCardDelete,
   searchError,
   searchMovies,
-  emptyInput,
-  blockedInputandSubmit
+  emptyInput
 }) {
 
   return (
@@ -24,7 +23,6 @@ function SavedMovies({
           isShortsChecked={isShortsChecked}
           onShortsCheck={onShortsCheck}
           emptyInput={emptyInput}
-          blockedInputandSubmit={blockedInputandSubmit}
         />
         <div className='saved-movies__line'></div>
         <MoviesCardList

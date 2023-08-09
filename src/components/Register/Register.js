@@ -4,7 +4,7 @@ import { Navigate, Link } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 
-function Register({ handleRegister, submitError, setSubmitError, loggedIn, blockedInputandSubmit }) {
+function Register({ handleRegister, submitError, setSubmitError, loggedIn }) {
 
   const [changeName, setChangeName] = useState('');
   const [changeEmail, setChangeEmail] = useState('');
@@ -111,7 +111,6 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn, block
                 value={changeName || ''}
                 onChange={handleChangeName}
                 placeholder='Имя'
-                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
@@ -126,7 +125,6 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn, block
                 value={changeEmail || ''}
                 onChange={handleChangeEmail}
                 placeholder='E-mail'
-                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
@@ -141,14 +139,13 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn, block
                 value={changePassword || ''}
                 onChange={handleChangePassword}
                 placeholder='Пароль'
-                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
             <span className={`register__error ${passwordDirty && passwordError ? 'register__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
           <span className='register__submit-error'>{submitError ? `${submitError}` : ''}</span>
-          <button disabled={!formValid || blockedInputandSubmit} className='register__button' type='submit'>Зарегистрироваться</button>
+          <button disabled={!formValid} className='register__button' type='submit'>Зарегистрироваться</button>
         </form>
         <p className='register__info'>
           Уже зарегистрированы?{' '}

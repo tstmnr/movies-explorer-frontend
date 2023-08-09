@@ -48,7 +48,6 @@ function App() {
   const [submitError, setSubmitError] = useState('');
   const [isMoviesShort, setIsMoviesShort] = useState(JSON.parse(localStorage.getItem('isMoviesShort')) || false);
   const [isSavedMoviesShort, setIsSavedMoviesShort] = useState(JSON.parse(localStorage.getItem('isSavedMoviesShort')) || false);
-  const [blockedInputandSubmit, setBlockedInputandSubmit] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -132,7 +131,6 @@ function App() {
 
   //функция поиска и фильтрации сохраненных фильмов
   function handleSearchMovies() {
-    setBlockedInputandSubmit(true);
     setPreloaderClass(true)
     setSearchMoviesError('');
     setFilteredMovies([]);
@@ -169,14 +167,12 @@ function App() {
         setFilteredMovies(filtered);
 
       }
-      setBlockedInputandSubmit(false);
       setPreloaderClass(false)
     }
   }
 
   //функция фильтрации сохраненных фильмов
   function handleSearchSavedMovies() {
-    setBlockedInputandSubmit(true);
     setPreloaderClass(true)
     setSearchSavedMoviesError('');
     setFilteredSavedMovies([]);
@@ -191,22 +187,17 @@ function App() {
       setFilteredSavedMovies(filtered);
     }
 
-    setBlockedInputandSubmit(false);
     setPreloaderClass(false);
   }
 
   function handleShortsFilter() {
-    setBlockedInputandSubmit(true);
     localStorage.setItem('isMoviesShort', JSON.stringify(!isMoviesShort));
     setIsMoviesShort(!isMoviesShort);
-    setBlockedInputandSubmit(false);
   }
 
   function handleSavedShortsFilter() {
-    setBlockedInputandSubmit(true);
     localStorage.setItem('isSavedMoviesShort', JSON.stringify(!isSavedMoviesShort));
     setIsSavedMoviesShort(!isSavedMoviesShort);
-    setBlockedInputandSubmit(false);
   }
 
   // функция лайка карточки
@@ -264,9 +255,6 @@ function App() {
           setSubmitError(SIGNUP_DEFAULT_ERROR);
         }
       })
-      .finally(() => {
-        setBlockedInputandSubmit(false);
-      })
   }
 
   function handleLogin(e, data) {
@@ -289,9 +277,6 @@ function App() {
         } else {
           setSubmitError(SIGNIN_DEFAULT_ERROR);
         }
-      })
-      .finally(() => {
-        setBlockedInputandSubmit(false);
       })
   }
 
@@ -393,7 +378,6 @@ function App() {
                     onCardLike={handleLikeCard}
                     onCardDelete={handleCardDelete}
                     emptyInput={showSearchInputError}
-                    blockedInputandSubmit={blockedInputandSubmit}
                   />
                 }
               />
@@ -413,7 +397,6 @@ function App() {
                     searchError={searchSavedMoviesError}
                     searchMovies={handleSearchSavedMovies}
                     emptyInput={showSearchInputError}
-                    blockedInputandSubmit={blockedInputandSubmit}
                   />
                 }
               />
@@ -442,7 +425,6 @@ function App() {
                   handleLogin={handleLogin}
                   submitError={submitError}
                   loggedIn={loggedIn}
-                  blockedInputandSubmit={blockedInputandSubmit}
                 />
               }
             />
@@ -454,7 +436,6 @@ function App() {
                   submitError={submitError}
                   setSubmitError={setSubmitError}
                   loggedIn={loggedIn}
-                  blockedInputandSubmit={blockedInputandSubmit}
                 />
               }
             />

@@ -12,8 +12,7 @@ function Movies({
   searchError,
   onCardLike,
   onCardDelete,
-  emptyInput,
-  blockedInputandSubmit
+  emptyInput
 }) {
 
   return (
@@ -24,7 +23,6 @@ function Movies({
           isShortsChecked={isShortsChecked}
           onShortsCheck={onShortsCheck}
           emptyInput={emptyInput}
-          blockedInputandSubmit={blockedInputandSubmit}
         />
         <div className='movies__line'></div>
         <MoviesCardList

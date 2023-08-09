@@ -4,7 +4,7 @@ import { Navigate, Link } from 'react-router-dom';
 import './Login.css';
 import Logo from '../Logo/Logo';
 
-function Login({ handleLogin, submitError, loggedIn, blockedInputandSubmit }) {
+function Login({ handleLogin, submitError, loggedIn }) {
 
   const [changeEmail, setChangeEmail] = useState('');
   const [changePassword, setChangePassword] = useState('');
@@ -90,7 +90,6 @@ function Login({ handleLogin, submitError, loggedIn, blockedInputandSubmit }) {
                 value={changeEmail || ''}
                 onChange={handleChangeEmail}
                 placeholder='E-mail'
-                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
@@ -105,14 +104,13 @@ function Login({ handleLogin, submitError, loggedIn, blockedInputandSubmit }) {
                 value={changePassword || ''}
                 onChange={handleChangePassword}
                 placeholder='Пароль'
-                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
             <span className={`login__error ${passwordDirty && passwordError ? 'login__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
           <span className='login__submit-error'>{submitError ? `${submitError}` : ''}</span>
-          <button disabled={!formValid || blockedInputandSubmit} className='login__button' type='submit'>Войти</button>
+          <button disabled={!formValid} className='login__button' type='submit'>Войти</button>
         </form>
         <p className='login__info'>
           Ещё не зарегистрированы?{' '}
