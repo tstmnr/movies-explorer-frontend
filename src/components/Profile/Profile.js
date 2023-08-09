@@ -11,7 +11,9 @@ function Profile({
   handleEditProfile,
   handleChangeProfileData,
   submitError,
-  setSubmitError }) {
+  setSubmitError,
+  setIsEditable
+}) {
 
   const currentUser = useContext(CurrentUserContext);
 
@@ -25,6 +27,10 @@ function Profile({
     setChangeName(currentUser.name);
     setChangeEmail(currentUser.email);
   }, [currentUser, isEditable]);
+
+  useEffect(() => {
+    setIsEditable(!isEditable)
+  }, [])
 
   useEffect(() => {
     if (nameError || emailError ) {

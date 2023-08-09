@@ -419,6 +419,7 @@ function App() {
                     handleChangeProfileData={handleChangeProfileData}
                     submitError={submitError}
                     setSubmitError={setSubmitError}
+                    setIsEditable={setIsEditable}
                   />
                 }
               />
