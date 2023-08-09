@@ -4,7 +4,7 @@ import { Navigate, Link } from 'react-router-dom';
 import './Register.css';
 import Logo from '../Logo/Logo';
 
-function Register({ handleRegister, submitError, setSubmitError, loggedIn }) {
+function Register({ handleRegister, submitError, setSubmitError, loggedIn, blockedInputandSubmit }) {
 
   const [changeName, setChangeName] = useState('');
   const [changeEmail, setChangeEmail] = useState('');
@@ -81,6 +81,7 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn }) {
   }
 
   const handleSubmit = (e) => {
+    setFormValid(false);
     handleRegister(e, {
       name: changeName,
       email: changeEmail,
@@ -111,6 +112,7 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn }) {
                 value={changeName || ''}
                 onChange={handleChangeName}
                 placeholder='Имя'
+                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
@@ -125,6 +127,7 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn }) {
                 value={changeEmail || ''}
                 onChange={handleChangeEmail}
                 placeholder='E-mail'
+                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
@@ -139,6 +142,7 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn }) {
                 value={changePassword || ''}
                 onChange={handleChangePassword}
                 placeholder='Пароль'
+                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>

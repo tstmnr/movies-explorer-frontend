@@ -4,7 +4,7 @@ import { Navigate, Link } from 'react-router-dom';
 import './Login.css';
 import Logo from '../Logo/Logo';
 
-function Login({ handleLogin, submitError, loggedIn }) {
+function Login({ handleLogin, submitError, loggedIn, blockedInputandSubmit }) {
 
   const [changeEmail, setChangeEmail] = useState('');
   const [changePassword, setChangePassword] = useState('');
@@ -61,6 +61,7 @@ function Login({ handleLogin, submitError, loggedIn }) {
   }
 
   const handleSubmit = (e) => {
+    setFormValid(false);
     handleLogin(e, {
       email: changeEmail,
       password: changePassword,
@@ -90,6 +91,7 @@ function Login({ handleLogin, submitError, loggedIn }) {
                 value={changeEmail || ''}
                 onChange={handleChangeEmail}
                 placeholder='E-mail'
+                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>
@@ -104,6 +106,7 @@ function Login({ handleLogin, submitError, loggedIn }) {
                 value={changePassword || ''}
                 onChange={handleChangePassword}
                 placeholder='Пароль'
+                disabled={blockedInputandSubmit}
                 onBlur={(e) => blurHandler(e)}
               />
             </label>

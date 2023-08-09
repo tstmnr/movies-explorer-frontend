@@ -8,7 +8,8 @@ function SearchForm({
   searchMovies,
   isShortsChecked,
   onShortsCheck,
-  emptyInput
+  emptyInput,
+  blockedInputandSubmit
 }) {
 
   const location = useLocation();
@@ -54,13 +55,15 @@ function SearchForm({
         name='title'
         placeholder='Фильм'
         value={keyword || ''}
+        disabled={blockedInputandSubmit}
         onChange={(e) => handleChangeKeyword(e)}
       />
-      <button className='search-form__button' type='submit'></button>
+      <button className='search-form__button' type='submit' disabled={blockedInputandSubmit}></button>
       <div className='search-form__line'></div>
       <FilterCheckbox
         isShortsChecked={isShortsChecked}
         onShortsCheck={onShortsCheck}
+        blockedInputandSubmit={blockedInputandSubmit}
       />
     </form>
   );

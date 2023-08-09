@@ -29,10 +29,6 @@ function Profile({
   }, [currentUser, isEditable]);
 
   useEffect(() => {
-    setIsEditable(!isEditable)
-  }, [])
-
-  useEffect(() => {
     if (nameError || emailError ) {
       setFormValid(false);
     } else {
@@ -92,6 +88,10 @@ function Profile({
       email: changeEmail,
     });
   }
+
+  useEffect(() => {
+    setIsEditable(false);
+  }, [])
 
   return (
     <main className='profile'>
