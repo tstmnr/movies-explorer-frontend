@@ -136,13 +136,10 @@ function App() {
     setFilteredMovies([]);
     const keyword = localStorage.getItem('moviesSearchQuery');
 
-    console.log('initialMoviesList', initialMoviesList)
-
     if (initialMoviesList.length === 0) {
       moviesApi.getMoviesCards()
         .then((movies) => {
           if (movies) {
-            console.log('запрос к beatfilms movies', movies);
             setInitialMoviesList(movies);
             let filtered = filterMoviesByKeyword(movies, keyword, isMoviesShort);
 
@@ -151,7 +148,6 @@ function App() {
             } else {
               localStorage.setItem('filteredMovies', JSON.stringify(filtered));
               setFilteredMovies(filtered);
-              console.log('выводим стейт фитеред', filteredMovies)
             }
           }
         })
@@ -174,7 +170,6 @@ function App() {
 
       setPreloaderClass(false)
     }
-    console.log('initialMoviesList after', initialMoviesList)
   }
 
   //функция фильтрации сохраненных фильмов
@@ -185,7 +180,7 @@ function App() {
     const keyword = localStorage.getItem('savedMoviesSearchQuery');
 
     let filtered = filterMoviesByKeyword(savedMoviesList, keyword, isSavedMoviesShort);
-    console.log(filtered);
+
     if (filtered.length === 0) {
       setSearchSavedMoviesError(MOVIES_NOT_FOUND);
     } else {
@@ -448,7 +443,9 @@ function App() {
             <Route
               path='*'
               element={
-                <PageNotFound />
+                <PageNotFound
+                  loggedIn={loggedIn}
+                />
               }
             />
           </Routes>
