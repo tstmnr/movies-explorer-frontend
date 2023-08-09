@@ -449,7 +449,6 @@ function App() {
               element={
                 <PageNotFound />
               }
-              loggedIn={loggedIn}
             />
           </Routes>
           <HamburgerMenu
