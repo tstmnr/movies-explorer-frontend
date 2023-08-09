@@ -61,7 +61,6 @@ function Login({ handleLogin, submitError, loggedIn, blockedInputandSubmit }) {
   }
 
   const handleSubmit = (e) => {
-    setFormValid(false);
     handleLogin(e, {
       email: changeEmail,
       password: changePassword,
@@ -113,7 +112,7 @@ function Login({ handleLogin, submitError, loggedIn, blockedInputandSubmit }) {
             <span className={`login__error ${passwordDirty && passwordError ? 'login__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
           <span className='login__submit-error'>{submitError ? `${submitError}` : ''}</span>
-          <button disabled={!formValid} className='login__button' type='submit'>Войти</button>
+          <button disabled={!formValid || blockedInputandSubmit} className='login__button' type='submit'>Войти</button>
         </form>
         <p className='login__info'>
           Ещё не зарегистрированы?{' '}

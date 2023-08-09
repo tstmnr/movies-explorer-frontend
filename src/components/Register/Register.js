@@ -81,7 +81,6 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn, block
   }
 
   const handleSubmit = (e) => {
-    setFormValid(false);
     handleRegister(e, {
       name: changeName,
       email: changeEmail,
@@ -149,7 +148,7 @@ function Register({ handleRegister, submitError, setSubmitError, loggedIn, block
             <span className={`register__error ${passwordDirty && passwordError ? 'register__error_active' : ''}`}>{`${passwordDirty && passwordError ? passwordError : ''}`}</span>
           </div>
           <span className='register__submit-error'>{submitError ? `${submitError}` : ''}</span>
-          <button disabled={!formValid} className='register__button' type='submit'>Зарегистрироваться</button>
+          <button disabled={!formValid || blockedInputandSubmit} className='register__button' type='submit'>Зарегистрироваться</button>
         </form>
         <p className='register__info'>
           Уже зарегистрированы?{' '}
